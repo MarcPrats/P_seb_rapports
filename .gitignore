@@ -1,0 +1,50 @@
+#
+#  gitignore
+#  various git config file
+#                   
+#  Created by Mathias de Cacqueray Valmenier on 09/06/2014.
+#  Copyright (c) 2014 Mathias de Cacqueray Valmenier. All rights reserved.
+
+
+
+# Executables #
+
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Compressed Sources #
+
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and Databases #
+
+*.log
+*.sql
+*.sqlite
+
+# LaTeX Generated Files #
+*.aux
+*.pdf
+*.toc
+
+
+# MAC OS X and Windows generated files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
