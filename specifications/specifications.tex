@@ -1,0 +1,143 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{enumitem}
+%\frenchbsetup{StandardLists=true}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{moreverb}
+\usepackage{epsfig}
+\usepackage{textcomp}
+
+
+    \usepackage{xcolor}
+      %%%%%%%%%%%%%%%%  inclure la source %%%%%%%%%%%%%%%%%%%%
+  \newcommand*\styleC{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+  \newcommand*\styleD{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+
+      \makeatletter
+      % on fixe le langage utilisé
+      \lstset{language=matlab, breaklines=true}
+      \edef\Motscle{emph={\lst@keywords}}
+      \expandafter\lstset\expandafter{%
+       \Motscle}
+      \makeatother
+
+
+      \definecolor{Vvert}{rgb}{0.133,0.545,0.133}
+
+      \lstset{emphstyle=\color{blue}, % les mots réservés de matlab en bleu
+      basicstyle=\styleC,
+      keywordstyle=\cmtt,
+      commentstyle=\color{Vvert}\styleD, % commentaire en gris
+      numberstyle=\tiny\color{red},
+      numbers=left,
+      numbersep=10pt,
+      lineskip=0.7pt,
+      showstringspaces=false}
+      %  % inclure le fichier source
+      \newcommand{\FSource}[1]{%
+      \lstinputlisting[texcl=true]{#1}
+      }
+
+\setlength{\textwidth}{16cm} % Largeur du texte
+\setlength{\textheight}{24cm} % Hauteur du texte
+\setlength{\evensidemargin}{-0.2cm} % Taille des marges pour les pages paires
+\setlength{\oddsidemargin}{-0.2cm} % Taille des marges pour les pages impaires
+\setlength{\topmargin}{-1.5cm} % Taille de l'ent\^ete
+
+\title{Cours PR307 : Formation Projet S9}
+\author{Mathias de Cacqueray-Valmenier }
+
+
+\begin{document}
+
+\maketitle
+
+\begin{figure}[ht]
+\begin{center}
+\noindent \includegraphics[scale = 0.3]{../../../Logo_ENSEIRB.pdf}
+\end{center}
+\end{figure}
+
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Planning projet}
+\textbf{Liste de tâches}
+\begin{itemize}
+\item Début
+\item Fin
+\item Durée
+\item Ressources
+\item Couts
+\item Séquencement
+\item Jalons données d'entrée / données de sortie
+\item La marge !
+\item Métrique d'avancement /réalisation
+\end{itemize}
+\textbf{Revues régulières}
+\begin{itemize}
+\item au bon rythme
+\item au bon niveau de détails
+\end{itemize}
+\textbf{Mise en place d'outils de gestion}
+\begin{itemize}
+\item Indicateurs
+\item Métriques
+\end{itemize}
+Permettre d'avoir rapidement un état représentatif fiable de l'avancement.\\
+Détecter au plus tôt les dérives de couts, de temps, d'activité.\\
+\textbf{Le plus tôt possible, pour anticiper / réagir}
+\section{Gérer les aléas et les risques, saisir les opportunités}
+\begin{itemize}
+\item Aléas : l'imprévu, il faut identifier de la marge.
+\item Risques : prévisibles
+\begin{itemize}
+\item Identifier les risques lors de la phase offre
+\item Mettre à jour la base des risques régulières.
+\item Identifier les actions permettant de limiter l'occurrence des risques.
+\item  Mettre en place un plan d'action pour limiter ces risques si le jeu en vaut la chandelle.
+\item L'expérience est l'élément clé pour l'identification et la gestion des risques (experts, retour d'expérience...)
+\end{itemize}
+\item Opportunités : Il faut les saisir
+\begin{itemize}
+\item Comme les risques : identifier, MaJ, plan d'action
+\item Chercher les conditions qui permettent de les saisir !
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item Faire un avancement régulier à la bonne fréquence
+\item Se garder de la marge pour réagir
+\item Découper les taches en taches pilotables
+\begin{itemize}
+\item durée, ni trop courte, ni trop longue
+\item nombre d'intervenants humainement contrôlable
+\end{itemize}
+\item Identifier des jalons répartis régulièrement
+\item Mettre en place les plans d'actions au plus tôt
+\begin{itemize}
+\item Négo client
+\item Plan B
+\end{itemize}
+\end{itemize}
+\end{document}
+
+
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[scale = 0.4]{./fig/fig1.jpg}
+%\caption{figure}
+%\label{Figure}
+%\end{center}
+%\end{figure}
