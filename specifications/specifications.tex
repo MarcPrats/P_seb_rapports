@@ -52,8 +52,15 @@
 \setlength{\oddsidemargin}{-0.2cm} % Taille des marges pour les pages impaires
 \setlength{\topmargin}{-1.5cm} % Taille de l'ent\^ete
 
-\title{Cours PR307 : Formation Projet S9}
-\author{Mathias de Cacqueray-Valmenier }
+\title{PR307 Smart-EcoBox : \\
+Spécifications}
+\author{LETURC Xavier <xleturc@enseirb-matmeca.fr> \\
+DE CACQUERAY VALMENIER Mathias <mdecacquerayvalmenie@enseirb-matmeca.fr> \\
+BOUCHAIN Antoine <abouchain@enseirb-matmeca.fr> \\
+RAMBAUD Benjamin <brambaud@enseirb-matmeca.fr> \\
+PRATS ESCRIBANO Marc <mpratsescribano@enseirb-matmeca.fr> \\
+TOUFIQUE Karim <ktoufique@enseirb-matmeca.fr> \\
+GOZLAN Melinda <mgozlan@enseirb-matmeca.fr> }
 
 
 \begin{document}
@@ -73,64 +80,43 @@
 
 \newpage
 
-\section{Planning projet}
-\textbf{Liste de tâches}
+\section{Organisation}
+Mathias de Cacqueray-Valmenier est chef de projet, il est secondé pour la partie informatique par Marc Prats Escribano.
+\subsection{Partie Informatique}
+La partie informatique de ce projet comporte 3 axes :\\
+\textbf{Axe 1 :} Trouver une solution technique concernant le stockage des données récupérées depuis les capteurs. Ces
+données peuvent être volumineuses.
 \begin{itemize}
-\item Début
-\item Fin
-\item Durée
-\item Ressources
-\item Couts
-\item Séquencement
-\item Jalons données d'entrée / données de sortie
-\item La marge !
-\item Métrique d'avancement /réalisation
+\item JP
 \end{itemize}
-\textbf{Revues régulières}
+\textbf{Axe 2 :} Développer des vues qui permettent de visualiser les données stockées de façon intelligible.
 \begin{itemize}
-\item au bon rythme
-\item au bon niveau de détails
+\item JP
 \end{itemize}
-\textbf{Mise en place d'outils de gestion}
+\textbf{Axe 3 :} Permettre aux utilisateurs de configurer l’outil : changer les noms des appareils éléctriques, configurer la
+façon dont les données sont affichées, ...
 \begin{itemize}
-\item Indicateurs
-\item Métriques
+\item JP
 \end{itemize}
-Permettre d'avoir rapidement un état représentatif fiable de l'avancement.\\
-Détecter au plus tôt les dérives de couts, de temps, d'activité.\\
-\textbf{Le plus tôt possible, pour anticiper / réagir}
-\section{Gérer les aléas et les risques, saisir les opportunités}
+\subsection{Partie Signal}
+La partie signal/communications numériques de ce projet comporte 3 axes :\\
+\textbf{Axe 1 :} Etude bibliographique et implémentations matlab des méthodes/algorithmes permettant l’identification
+d’appareils électriques via l’analyse des signaux qu’ils génèrent sur le réseau électrique lors de leur allumage,
 \begin{itemize}
-\item Aléas : l'imprévu, il faut identifier de la marge.
-\item Risques : prévisibles
+\item Antoine Bouchain
+\item Xavier Leturn
+\end{itemize}
+\textbf{Axe 2 :} Propositions de couches physiques (box + capteurs) fiable, efficace et cohérente avec des communications
+dans la bande ISM 433MHz. La faisabilité de ces propostions devra être montrée par simulation Matlab.
 \begin{itemize}
-\item Identifier les risques lors de la phase offre
-\item Mettre à jour la base des risques régulières.
-\item Identifier les actions permettant de limiter l'occurrence des risques.
-\item  Mettre en place un plan d'action pour limiter ces risques si le jeu en vaut la chandelle.
-\item L'expérience est l'élément clé pour l'identification et la gestion des risques (experts, retour d'expérience...)
+\item Mélinda Gozlan
+\item Mathias de Cacqueray-Valmenier
 \end{itemize}
-\item Opportunités : Il faut les saisir
-\begin{itemize}
-\item Comme les risques : identifier, MaJ, plan d'action
-\item Chercher les conditions qui permettent de les saisir !
-\end{itemize}
-\end{itemize}
-\begin{itemize}
-\item Faire un avancement régulier à la bonne fréquence
-\item Se garder de la marge pour réagir
-\item Découper les taches en taches pilotables
-\begin{itemize}
-\item durée, ni trop courte, ni trop longue
-\item nombre d'intervenants humainement contrôlable
-\end{itemize}
-\item Identifier des jalons répartis régulièrement
-\item Mettre en place les plans d'actions au plus tôt
-\begin{itemize}
-\item Négo client
-\item Plan B
-\end{itemize}
-\end{itemize}
+\textbf{Axe 3 :} Réalisation d’un démonstrateur avec des capteurs du commerce dont les rétro-ingénieries sont maitrisées.
+Ce démonstrateur permettra notamment d’interfacer votre travail avec celui des GLRT. Pour cette partie il sera
+nécessaire de coder en C++. Noter que pour cet axe une partie du travail a été réalisé en projet S8 et elle vous sera
+fourni.\\
+Toute l'équipe
 \end{document}
 
 
