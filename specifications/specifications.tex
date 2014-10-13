@@ -104,7 +104,7 @@ La partie signal/communications numériques de ce projet comporte 3 axes :\\
 d’appareils électriques via l’analyse des signaux qu’ils génèrent sur le réseau électrique lors de leur allumage,
 \begin{itemize}
 \item Antoine Bouchain
-\item Xavier Leturn
+\item Xavier Leturc
 \end{itemize}
 \textbf{Axe 2 :} Propositions de couches physiques (box + capteurs) fiable, efficace et cohérente avec des communications
 dans la bande ISM 433MHz. La faisabilité de ces propostions devra être montrée par simulation Matlab.
@@ -114,9 +114,47 @@ dans la bande ISM 433MHz. La faisabilité de ces propostions devra être montré
 \end{itemize}
 \textbf{Axe 3 :} Réalisation d’un démonstrateur avec des capteurs du commerce dont les rétro-ingénieries sont maitrisées.
 Ce démonstrateur permettra notamment d’interfacer votre travail avec celui des GLRT. Pour cette partie il sera
-nécessaire de coder en C++. Noter que pour cet axe une partie du travail a été réalisé en projet S8 et elle vous sera
-fourni.\\
+nécessaire de coder en C++. \\
 Toute l'équipe
+\newpage
+\section{Specifications}
+Réalisation :
+\subsection{Nouvelle norme}
+Proposer une nouvelle norme de communications entre capteurs et box.
+\subsection{Différenciation des appareils électriques}
+Capacité à différencier des catégories d'appareils électriques.
+
+\subsection{Box Fonctionnelle}
+\begin{itemize}
+  \item Période d'initialisation avec enregistrement des capteurs à écouter.
+  \item Écoute des capteurs enregistrés et envoi de chaque mesure (température, hygrométrie, consommation électrique, consommation d'eau) à la partie info + détection de mise sous tension ou arrêt d'appareil électrique.
+  \item Stabilité des algorithmes de la Box.
+\end{itemize}
+
+\section{Informatique}
+Réalisation :
+\subsection{Box Fonctionnelle}
+\begin{itemize}
+  \item Validation des capteurs détectés par l'utilisateur.
+  \item Validation par l'utilisateur des appareils mis sous tension dans le cas d'ambiguïté.
+  \item Enregistrement des données reçues dans une base de donnée.
+  \item L'utilisateur est censé pouvoir corriger une fausse affectation.
+  \item Différents affichages pour l'utilisateur :
+  \begin{itemize}
+    \item Bilan de consommation électrique sur un jour, une semaine, un mois, un an avec étiquette d'allumage et d'arrêt des périphériques électriques.
+    \item Vue avec la consommation d'un appareil.
+    \item Vue avec la consommation globale, suivi des consommations de tout les périphériques. Possibilité de restreindre cette vue aux courbes de quelques périphériques.
+    \item Vue avec l'impact de chaque appareil sur la consommation électrique par jour, semaine, mois ,an.
+    \item Vue avec le temps d'allumage de chaque appareil par jour, semaine, mois ,an.
+    \item Affichage des courbes température, hygrométrie, consommation d'eau, consommation électrique.
+  \end{itemize}
+\end{itemize}
+\subsection{Proposition de technologie}
+\begin{itemize}
+\item Partie signal en C++
+\item Partie serveur info en PHP et Node.js
+\item Partie client en HTML, CSS, Javascript (AngularJS, Bootstrap, Foundation)
+\end{itemize}
 \end{document}
 
 

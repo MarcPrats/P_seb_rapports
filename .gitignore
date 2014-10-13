@@ -37,7 +37,8 @@
 *.aux
 *.pdf
 *.toc
-
+*.fls
+*.fdb_latexmk
 
 # MAC OS X and Windows generated files #
 .DS_Store
