@@ -145,7 +145,7 @@ Voici notre nouvelle proposition avec 4 serveurs :
 \begin{itemize}
   \item \textbf{Un serveur signal "récupération des données capteurs"} :\\
   permet la conversion des trames reçus en données à mettre dans la BDD. Schéma proposé : (id\_capteur,type\_donnée,valeur). Envoie des trames uniquement sur modification de valeur à la BDD ainsi qu'un serveur signal interprétation. Génére les graphes de consommation par équipement (à la demande du serveur Web)
-  \item \textbf{Un serveur signal "interprétation des données capteurs"} :\\
+  \item \textbf{Un serveur signal "interprétation des données capteurs"} :
   \begin{itemize}
     \item  activé sur réception d'information du serveur signal "récupération des données".
     \item Réalise toute la partie probabilité, et capable de lire des informations dans la BDD si nécessaire.
@@ -159,7 +159,7 @@ Voici notre nouvelle proposition avec 4 serveurs :
 \subsubsection{Bilan}
 \textbf{Avantages} nouvelle proposition sur originale :
 \begin{itemize}
-  \item Code plus propre en signal et en info, plus léger, meilleur gestion des accés BDD, meilleur gestion des compétences.
+  \item Code plus propre en signal et en info, plus léger, meilleur gestion des accés BDD, meilleur gestion des compétences (évite de l'interprétation sur l'allumage/l'arrét d'équipement dans la partie Web).
   \item Evite de séparer l'intépretation sur la partie Web et sur la partie signal, toute l'interprétation ce fait sur le serveur d'interprétation.
   \item Les informations sont stockés uniquement dans la BDD, pas de nécessité de doublons dans la partie serveur.
   \item Meilleur fiabilité dans la gestion des trames : évite des temps de traitement trop long dans la partie signal réception des trames.
@@ -169,88 +169,71 @@ Voici notre nouvelle proposition avec 4 serveurs :
   \item euh
 \end{itemize}
 
-\subsection{Box Fonctionnelle}
-\begin{itemize}
-  \item Période d'initialisation avec enregistrement des capteurs à écouter.
-  \item Écoute des capteurs enregistrés et envoi de chaque mesure (température, hygrométrie, consommation électrique, consommation d'eau) à la partie info + détection de mise sous tension ou arrêt d'appareil électrique.
-  \item Stabilité des algorithmes de la Box.
-\end{itemize}
-
 \subsection{Mise en place des serveurs}
 
 Création de 4 serveurs:
 
 \begin{itemize}
-\item Server gestion base de donnée
-\begin{itemize}
-\item Qu'est-ce qu'on stocke ? (Stocker uniquement les modifications de valeurs)
-\item Comment? léger (SQLlite ?)
-\item accés en READ-ONLY par le serveur signal d'interprétation et le serveur Web.
-\end{itemize}
-\end{itemize}
-
-\begin{itemize}
-\item Server Web
-\begin{itemize}
-\item L'utilisateur est censé pouvoir corriger une fausse affectation.
-\item Différents affichages pour l'utilisateur :
-\begin{itemize}
-  \item Bilan de consommation électrique sur un jour, une semaine, un mois, un an avec étiquette d'allumage et d'arrêt des périphériques électriques.
-  \item Vue avec la consommation d'un appareil.
-  \item Vue avec la consommation globale, suivi des consommations de tout les périphériques. Possibilité de restreindre cette vue aux courbes de quelques périphériques.
-  \item Vue avec l'impact de chaque appareil sur la consommation électrique par jour, semaine, mois ,an.
-  \item Vue avec le temps d'allumage de chaque appareil par jour, semaine, mois ,an.
-  \item Affichage des courbes température, hygrométrie, consommation d'eau, consommation électrique.
-\end{itemize}
-\end{itemize}
+  \item Serveur gestion base de donnée
+  \begin{itemize}
+    \item Qu'est-ce qu'on stocke ? (Stocker uniquement les modifications de valeurs => garantie par le serveur signal de récupération)
+    \item Comment? léger (SQLlite ?)
+    \item accés en READ-ONLY par le serveur signal d'interprétation et le serveur Web.
+  \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-\item Serveur signal "récupération des trames"
-\begin{itemize}
-\item Décodage trame
-\item Qu'est-ce qu'on envoie? Détection de modification sur la valeur d'un capteur.
-\item info envoyé type : (Az23as,T,30) (Id\_capteur,Type d'info (T: température,P : puissance...),Valeur)
-\item Output en terminal des trames reçus / envoyés.
+  \item Serveur Web
+  \begin{itemize}
+    \item Validation des capteurs détectés par l'utilisateur.
+    \item Validation par l'utilisateur des appareils mis sous tension dans le cas d'ambiguïté.
+    \item Enregistrement des données reçues dans une base de donnée.
+    \item L'utilisateur est censé pouvoir corriger une fausse affectation.
+    \item Différents affichages pour l'utilisateur :
+    \begin{itemize}
+      \item Bilan de consommation électrique sur un jour, une semaine, un mois, un an avec étiquette d'allumage et d'arrêt des périphériques électriques.
+      \item Vue avec la consommation d'un appareil.
+      \item Vue avec la consommation globale, suivi des consommations de tout les périphériques. Possibilité de restreindre cette vue aux courbes de quelques périphériques.
+      \item Vue avec l'impact de chaque appareil sur la consommation électrique par jour, semaine, mois ,an.
+      \item Vue avec le temps d'allumage de chaque appareil par jour, semaine, mois ,an.
+      \item Affichage des courbes température, hygrométrie, consommation d'eau, consommation électrique.
+    \end{itemize}
+  \end{itemize}
 \end{itemize}
+
+\begin{itemize}
+  \item Serveur signal "récupération des trames"
+  \begin{itemize}
+    \item Décodage trame
+    \item Qu'est-ce qu'on envoie? Détection de modification sur la valeur d'un capteur.
+    \item info envoyé type : (Az23as,T,30) (Id\_capteur,Type d'info (T: température,P : puissance...),Valeur)
+    \item Output en terminal des trames reçus / envoyés.
+  \end{itemize}
 \end{itemize}
 
 \begin{itemize}
 \item Serveur interprétation
 \end{itemize}
 
-\section{Informatique}
-Réalisation :
-\subsection{Box Fonctionnelle}
+\section{Proposition de technologie}
 \begin{itemize}
-  \item Validation des capteurs détectés par l'utilisateur.
-  \item Validation par l'utilisateur des appareils mis sous tension dans le cas d'ambiguïté.
-  \item Enregistrement des données reçues dans une base de donnée.
-  \item L'utilisateur est censé pouvoir corriger une fausse affectation.
-  \item Différents affichages pour l'utilisateur :
-  \begin{itemize}
-    \item Bilan de consommation électrique sur un jour, une semaine, un mois, un an avec étiquette d'allumage et d'arrêt des périphériques électriques.
-    \item Vue avec la consommation d'un appareil.
-    \item Vue avec la consommation globale, suivi des consommations de tout les périphériques. Possibilité de restreindre cette vue aux courbes de quelques périphériques.
-    \item Vue avec l'impact de chaque appareil sur la consommation électrique par jour, semaine, mois ,an.
-    \item Vue avec le temps d'allumage de chaque appareil par jour, semaine, mois ,an.
-    \item Affichage des courbes température, hygrométrie, consommation d'eau, consommation électrique.
-  \end{itemize}
-\end{itemize}
-\subsection{Proposition de technologie}
-\begin{itemize}
-\item Partie signal en C++
-\item Partie serveur info en PHP et Node.js
+\item Parties signals en C++
+\item Parties serveurs info en PHP et Node.js
 \item Partie client en HTML, CSS, Javascript (AngularJS, Bootstrap, Foundation)
 \end{itemize}
 
-\section{Scénario}
-Dans une maison de capteurs, le capteur a2sI1q détecte 120W de consommation.
-Le serveur signal reçoit ensuite une différence de + 60 W par rapport à la dernière trame \"sauvegardées" sur le serveur signal
-(a2sI1q;P;120).
-Le serveur signal envoie au serveur info la trame qui sera stockée dans la BDD info. De même, le serveur interprétation sera actif et pourra vérifier son interprétation avec la BDD info.
-Suite à l'interprétation (ex: Mise en route du frigo), un message est envoyé sur l'interface utilisateur.(id\_event,timestamp,ON)
-Serveur info met à jour les courbes de consommation.
+\section{Exemple : Scénario}
+\begin{itemize}
+  \item Dans une maison de capteurs, le capteur a2sI1q détecte 120W de consommation.
+  \item Le serveur signal reçoit ensuite une différence de + 60 W par rapport à la dernière trame \"sauvegardées" sur le serveur signal (a2sI1q;P;120).
+  \item Le serveur signal envoie au serveur info la trame qui sera stockée dans la BDD info. De même, le serveur interprétation sera actif et pourra vérifier son interprétation avec la BDD info.
+  \item Suite à l'interprétation (ex: Mise en route du frigo), un message est envoyé sur l'interface utilisateur.(id\_event,timestamp,ON)
+  \item Serveur info met à jour les courbes de consommation.
+\end{itemize}
+
+
+
+
 
 \section{Planning}
 \subsection{Recherche elec}
@@ -267,9 +250,9 @@ Lundi 20 octobre
 \subsection{Serveur Interprétation}
 Décembre
 \subsection{Serveur BDD}
-Vendredi 31 BDD ébauche
+Vendredi 31 octobre BDD ébauche
 \subsection{Serveur Web}
-Vendredi 24 maquette
+Vendredi 24 octobre maquette
 \end{document}
 
 
