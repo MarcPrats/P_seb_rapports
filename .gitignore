@@ -15,6 +15,7 @@
 *.exe
 *.o
 *.so
+*.dvi
 
 # Compressed Sources #
 

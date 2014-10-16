@@ -131,6 +131,40 @@ Capacité à différencier des catégories d'appareils électriques.
   \item Stabilité des algorithmes de la Box.
 \end{itemize}
 
+\subsection{Mise en place des serveurs}
+
+Création de 4 serveurs virtuels:
+
+\begin{itemize}
+\item Serveur base de donnée
+\begin{itemize}
+\item Qu'est-ce qu'on stocke ? (Stocker les fronts montants
+\item Comment? 
+\item Pourquoi?
+\end{itemize} léger (SQLlite)
+\end{itemize}
+
+\begin{itemize}
+\item Serveur Web/Info
+\begin{itemize}
+\item affichage seulement: Somme sur les étiquettes ON/OFF des appareils et/ou vue restreinte de quelques périphéries
+\item Correction user: différentes échelles de temps
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item Serveur signal
+\begin{itemize}
+\item Décodage trame
+\item Qu'est-ce qu'on envoie? Détection dernière occurrence (ID capteurs)
+\item Output en terminal	
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item Serveur interprétation
+\end{itemize}
+
 \section{Informatique}
 Réalisation :
 \subsection{Box Fonctionnelle}
