@@ -118,10 +118,16 @@ nécessaire de coder en C++. \\
 Toute l'équipe
 \newpage
 \section{Specifications}
-A la suite de plusieurs brainstorming, nous souhaitons vous proposer une architecture différente de celle présente actuellement et de celle proposé initialement.\\
+\subsection{Nouvelle norme}
+Proposer une nouvelle norme de communications entre capteurs et box.
+\subsection{Différenciation des appareils électriques}
+Capacité à différencier des catégories d'appareils électriques.
+\subsection{Architecture du projet}
+A la suite de plusieurs brainstorming, nous souhaitons vous proposer une architecture différente de celle présente actuellement.
+\subsubsection{Architecture initiale}
 Pour rappel, voici le mode de fonctionnement initialement envisagé.
 \begin{itemize}
-  \item Un serveur signal :
+  \item \textbf{Un serveur signal} :
   \begin{itemize}
     \item récupère les trames des capteurs, les converties en données utilisables (30°C sur le capteur \#2, 240 W sur le capteur \#3...).
     \item interprètes les trames : recherche d'allumage d'équipement, d'arrêt d'équipement.
@@ -131,31 +137,37 @@ Pour rappel, voici le mode de fonctionnement initialement envisagé.
       \item Lors de la détection d'un évenement (allumage, arrêt équipement).
     \end{itemize}
   \end{itemize}
-  \item BDD : stocke les évenements ainsi que les données capteurs
-  \item Un serveur Web : gère l'affichage des informations de la BDD, ainsi que les erreurs commises par la partie signal sur les évenements. Doit être capable de traiter des faux positifs de la partie signal. Exemple : erreur réalisé par la partie signal : une lampe et un PC qui s'allume ont le même ID, nécessité de séparation de ces élements.
+  \item \textbf{BDD} : stocke les évenements ainsi que les données capteurs
+  \item \textbf{Un serveur Web} : gère l'affichage des informations de la BDD, ainsi que les erreurs commises par la partie signal sur les évenements. Doit être capable de traiter des faux positifs de la partie signal. Exemple : erreur réalisé par la partie signal : une lampe et un PC qui s'allume ont le même ID, nécessité de séparation de ces élements.
 \end{itemize}
+\subsubsection{Architecture Proposé}
 Voici notre nouvelle proposition avec 4 serveurs :
 \begin{itemize}
-  \item Un serveur signal "récupération des données capteurs" : permet la conversion des trames reçus en données à mettre dans la BDD. Schéma proposé : (id\_capteur,type\_donnée,valeur). Envoie des trames uniquement sur modification de valeur à la BDD ainsi qu'un serveur signal interprétation. Génére les graphes de consommation par équipement (à la demande du serveur Web)
-  \item Un serveur signal "interprétation des données capteurs" : activé sur réception d'information du serveur signal récupération des données. Réalise toute la partie probabilité, et capable de lire des informations sur la BDD.
-  \item Un serveur info BDD : reçois les trames des serveurs signal, les ajoutes dans la BDD, manage la BDD.
-  \item Un serveur info Web : Gère l'affichage Web. Permet de signaler une erreur sur un périphérique, fait remonter l'info au serveur "interprétation des données capteurs".
+  \item \textbf{Un serveur signal "récupération des données capteurs"} :\\
+  permet la conversion des trames reçus en données à mettre dans la BDD. Schéma proposé : (id\_capteur,type\_donnée,valeur). Envoie des trames uniquement sur modification de valeur à la BDD ainsi qu'un serveur signal interprétation. Génére les graphes de consommation par équipement (à la demande du serveur Web)
+  \item \textbf{Un serveur signal "interprétation des données capteurs"} :\\
+  \begin{itemize}
+    \item  activé sur réception d'information du serveur signal "récupération des données".
+    \item Réalise toute la partie probabilité, et capable de lire des informations dans la BDD si nécessaire.
+    \item Si validation d'un évenement allumage, arrêt, mauvais fonctionnement d'un équipement, envoie une trame du type : (id\_event,timestamp,value) au serveur info BDD.
+  \end{itemize}
+  \item \textbf{Un serveur info BDD} : \\
+  reçois les trames des serveurs signal, les ajoutes dans la BDD, manage la BDD.
+  \item \textbf{Un serveur info Web} :\\
+  Gère l'affichage Web. Permet de signaler une erreur sur un périphérique, fait remonter l'info au serveur "interprétation des données capteurs".
 \end{itemize}
-Avantages nouvelle proposition sur originale :
+\subsubsection{Bilan}
+\textbf{Avantages} nouvelle proposition sur originale :
 \begin{itemize}
-  \item Code plus propre en signal et en info, meilleur gestion des accés BDD.
+  \item Code plus propre en signal et en info, plus léger, meilleur gestion des accés BDD, meilleur gestion des compétences.
   \item Evite de séparer l'intépretation sur la partie Web et sur la partie signal, toute l'interprétation ce fait sur le serveur d'interprétation.
+  \item Les informations sont stockés uniquement dans la BDD, pas de nécessité de doublons dans la partie serveur.
   \item Meilleur fiabilité dans la gestion des trames : évite des temps de traitement trop long dans la partie signal réception des trames.
 \end{itemize}
-Inconvénients
+\textbf{Inconvénients}
 \begin{itemize}
   \item euh
 \end{itemize}
-
-\subsection{Nouvelle norme}
-Proposer une nouvelle norme de communications entre capteurs et box.
-\subsection{Différenciation des appareils électriques}
-Capacité à différencier des catégories d'appareils électriques.
 
 \subsection{Box Fonctionnelle}
 \begin{itemize}
