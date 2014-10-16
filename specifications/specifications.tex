@@ -131,7 +131,7 @@ Pour rappel, voici le mode de fonctionnement initialement envisagé.
   \begin{itemize}
     \item récupère les trames des capteurs, les converties en données utilisables (30°C sur le capteur \#2, 240 W sur le capteur \#3...).
     \item interprètes les trames : recherche d'allumage d'équipement, d'arrêt d'équipement.
-    \item envoie les données dans une BDD de :
+    \item envoie les données dans une base de données (BDD) de :
     \begin{itemize}
       \item Lors de la réception d'une donnée capteur.
       \item Lors de la détection d'un évenement (allumage, arrêt équipement).
@@ -140,100 +140,103 @@ Pour rappel, voici le mode de fonctionnement initialement envisagé.
   \item \textbf{BDD} : stocke les évenements ainsi que les données capteurs
   \item \textbf{Un serveur Web} : gère l'affichage des informations de la BDD, ainsi que les erreurs commises par la partie signal sur les évenements. Doit être capable de traiter des faux positifs de la partie signal. Exemple : erreur réalisé par la partie signal : une lampe et un PC qui s'allume ont le même ID, nécessité de séparation de ces élements.
 \end{itemize}
-\subsubsection{Architecture Proposé}
+\subsubsection{Architecture Proposée}
 Voici notre nouvelle proposition avec 4 serveurs :
 \begin{itemize}
-  \item \textbf{Un serveur signal "récupération des données capteurs"} :\\
-  permet la conversion des trames reçus en données à mettre dans la BDD. Schéma proposé : (id\_capteur,type\_donnée,valeur). Envoie des trames uniquement sur modification de valeur à la BDD ainsi qu'un serveur signal interprétation. Génére les graphes de consommation par équipement (à la demande du serveur Web)
-  \item \textbf{Un serveur signal "interprétation des données capteurs"} :
+  \item \textbf{Un serveur signal récepteur des données des capteurs"} :\\
+  permet la conversion des trames reçues en données à mettre dans la BDD. Schéma proposé : (id\_capteur,type\_donnée,valeur). Envoi des trames à la BDD et au serveur interprète, décrit ci-dessous, uniquement lorsqu'une donnée des capteurs est modifiée. Ce serveur permettra la génération des graphes de consommation par équipement (à la demande du serveur Web).
+  \item \textbf{Un serveur signal interprète des données capteurs} :
   \begin{itemize}
-    \item  activé sur réception d'information du serveur signal "récupération des données".
-    \item Réalise toute la partie probabilité, et capable de lire des informations dans la BDD si nécessaire.
-    \item Si validation d'un évenement allumage, arrêt, mauvais fonctionnement d'un équipement, envoie une trame du type : (id\_event,timestamp,value) au serveur info BDD.
+    \item  activé à la réception d'information du serveur signal récepteur des données des capteurs".
+    \item Réalise toute la partie probabilité, et lit des informations dans la BDD si nécessaire.
+    \item Si un évenement allumage, arrêt, mauvais fonctionnement d'un équipement est valide alors ce serveur envoit une trame du type : (id\_event,timestamp,value) à la BDD.
   \end{itemize}
-  \item \textbf{Un serveur info BDD} : \\
-  reçois les trames des serveurs signal, les ajoutes dans la BDD, manage la BDD.
+  \item \textbf{la BDD} : \\
+  reçoit les trames des serveurs signal et permet au serveur info Web de traiter les données.
   \item \textbf{Un serveur info Web} :\\
-  Gère l'affichage Web. Permet de signaler une erreur sur un périphérique, fait remonter l'info au serveur "interprétation des données capteurs".
+  Permet de signaler une erreur sur un périphérique et de faire remonter l'information au serveur interprète des données des capteurs. Il permet notamment d'envoyer les données au client web pour l'affichage des graphes.
+  \item \textbf{Le client info Web} :\\
+  Affiche tous les graphes et les notifications essentielles pour l'utilisateur.
 \end{itemize}
 \subsubsection{Bilan}
 \textbf{Avantages} nouvelle proposition sur originale :
 \begin{itemize}
-  \item Code plus propre en signal et en info, plus léger, meilleur gestion des accés BDD, meilleur gestion des compétences (évite de l'interprétation sur l'allumage/l'arrét d'équipement dans la partie Web).
-  \item Evite de séparer l'intépretation sur la partie Web et sur la partie signal, toute l'interprétation ce fait sur le serveur d'interprétation.
-  \item Les informations sont stockés uniquement dans la BDD, pas de nécessité de doublons dans la partie serveur.
-  \item Meilleur fiabilité dans la gestion des trames : évite des temps de traitement trop long dans la partie signal réception des trames.
+  \item Le code est plus optimisé pour la partie signal. Concernant la partie informatique, les technologies seront plus légères et permettront une meilleure gestion des accès à la BDD ainsi qu'une meilleure gestion des compétences (évite de l'interprétation sur l'allumage/l'arrét d'équipement dans la partie Web).
+  \item Evite de séparer l'intépretation sur la partie Web et sur la partie signal, toute l'interprétation se fait sur le serveur interprète.
+  \item Les informations sont stockées uniquement dans la BDD, pas de nécessité de doublons dans les serveurs de la partie signal.
+  \item Meilleure fiabilité dans la gestion des trames : évite des temps de traitement trop long dans la partie signal à la réception des trames.
 \end{itemize}
 \textbf{Inconvénients}
 \begin{itemize}
-  \item euh
+  \item Il est nécessaire que la solution proposée apportant trois serveurs différents ne consomme pas plus que l'énergie qui peut être économisée.
 \end{itemize}
 
 \subsection{Mise en place des serveurs}
 
-Création de 4 serveurs:
+Création de 3 serveurs et de la base de données:
 
 \begin{itemize}
-  \item Serveur gestion base de donnée
+  \item La base de données :
   \begin{itemize}
-    \item Qu'est-ce qu'on stocke ? (Stocker uniquement les modifications de valeurs => garantie par le serveur signal de récupération)
-    \item Comment? léger (SQLlite ?)
-    \item accés en READ-ONLY par le serveur signal d'interprétation et le serveur Web.
+    \item Déterminer la nature des objets stockés.
+    \item Stocker uniquement les modifications de valeurs => garantie par le serveur signal de récupération
+    \item Utilisation d'une technologie légère.
+    \item Accès en lecture seule par le serveur signal interprète et le client Web. Ecriture réalisée par le serveur Web uniquement.
   \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-  \item Serveur Web
+  \item Serveur Web :
   \begin{itemize}
     \item Validation des capteurs détectés par l'utilisateur.
     \item Validation par l'utilisateur des appareils mis sous tension dans le cas d'ambiguïté.
-    \item Enregistrement des données reçues dans une base de donnée.
-    \item L'utilisateur est censé pouvoir corriger une fausse affectation.
+    \item Enregistrement des données reçues dans une base de données.
+    \item L'utilisateur doit pouvoir corriger une fausse affectation.
     \item Différents affichages pour l'utilisateur :
     \begin{itemize}
-      \item Bilan de consommation électrique sur un jour, une semaine, un mois, un an avec étiquette d'allumage et d'arrêt des périphériques électriques.
-      \item Vue avec la consommation d'un appareil.
-      \item Vue avec la consommation globale, suivi des consommations de tout les périphériques. Possibilité de restreindre cette vue aux courbes de quelques périphériques.
-      \item Vue avec l'impact de chaque appareil sur la consommation électrique par jour, semaine, mois ,an.
-      \item Vue avec le temps d'allumage de chaque appareil par jour, semaine, mois ,an.
-      \item Affichage des courbes température, hygrométrie, consommation d'eau, consommation électrique.
+      \item Bilan de consommation électrique sur un jour, une semaine, un mois, un an avec une étiquette d'allumage et d'arrêt des périphériques électriques.
+      \item Vue représentant la consommation électrique d'un appareil.
+      \item Vue représentant la consommation globale, suivi des consommations de tous les périphériques. Possibilité de restreindre cette vue aux courbes de quelques périphériques.
+      \item Vue représentant l'impact de chaque appareil sur la consommation électrique pendant une durée de temps finie.
+      \item Vue représentant le temps de mise en marche de chaque appareil pendant une durée de temps finie.
+      \item Affichage des courbes de température, d'hygrométrie, de consommation d'eau et de consommation électrique.
     \end{itemize}
   \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-  \item Serveur signal "récupération des trames"
+  \item Serveur signal récepteur des trames :
   \begin{itemize}
-    \item Décodage trame
-    \item Qu'est-ce qu'on envoie? Détection de modification sur la valeur d'un capteur.
-    \item info envoyé type : (Az23as,T,30) (Id\_capteur,Type d'info (T: température,P : puissance...),Valeur)
-    \item Output en terminal des trames reçus / envoyés.
+    \item Décodage trame.
+    \item Détermination la structure de l'objet envoyé. Détection de modification sur la valeur d'un capteur.
+    \item Information envoyée type : (Az23as,T,30) (Id\_capteur,Type d'info (T: température,P : puissance...),Valeur).
+    \item Output en terminal des trames reçues / envoyées.
   \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-\item Serveur interprétation
+\item Serveur interprète
 \begin{itemize}
-  \item Capacité d'envoie de trame sur le doute entre plusieurs périphériques pour une détection (vers le serveur Web), ou sur l'absence d'idée pour un périphérique.
-  \item Les informations utilisé par le serveurs sont toutes stockés dans la BDD.
-  \item réexamine la probabilité d'évenement a chaque modification d'une valeur d'un des capteurs.
+  \item Capacité d'envoi de trame vers le serveur Web en cas de doute de détection entre plusieurs périphériques, ou lors d'un manque d'information par rapport un périphérique.
+  \item Les informations utilisées par le serveur sont toutes stockées dans la BDD.
+  \item Calcul de la probabilité d'événement répété à chaque modification d'une valeur d'un des capteurs.
 \end{itemize}
 \end{itemize}
 
 \section{Proposition de technologie}
 \begin{itemize}
-\item Parties signals en C++
-\item Parties serveurs info en PHP et Node.js
-\item Partie client en HTML, CSS, Javascript (AngularJS, Bootstrap, Foundation)
+\item Parties signals en C++.
+\item Serveurs web codés en PHP ou .NET1.
+\item Partie client en HTML, CSS, Javascript (AngularJS, Bootstrap, Foundation).
 \end{itemize}
 
 \section{Exemple : Scénario}
 \begin{itemize}
   \item Dans une maison de capteurs, le capteur a2sI1q détecte 120W de consommation.
-  \item Le serveur signal reçoit ensuite une différence de + 60 W par rapport à la dernière trame \"sauvegardées" sur le serveur signal (a2sI1q;P;120).
-  \item Le serveur signal envoie au serveur info la trame qui sera stockée dans la BDD info. De même, le serveur interprétation sera actif et pourra vérifier son interprétation avec la BDD info.
-  \item Suite à l'interprétation (ex: Mise en route du frigo), un message est envoyé sur l'interface utilisateur.(id\_event,timestamp,ON)
-  \item Serveur info met à jour les courbes de consommation.
+  \item Le serveur signal reçoit ensuite une différence de + 60 W par rapport à la dernière trame \"sauvegardée" sur le serveur signal (a2sI1q;P;120).
+  \item Le serveur signal envoie au serveur web la trame qui sera stockée dans la BDD info. De même, le serveur interprète sera actif et pourra vérifier son interprétation avec la BDD info.
+  \item Suite à l'interprétation (ex: Mise en route du frigo), un message est envoyé au serveur web qui sera ensuite affiché sur l'interface utilisateur.(id\_event,timestamp,ON)
+  \item Enfin, le serveur web met à jour les courbes de consommation.
 \end{itemize}
 
 
@@ -244,20 +247,20 @@ Création de 4 serveurs:
 \subsection{Recherche elec}
 \begin{itemize}
 	\item Présentation des résultats des recherches bibliographique : Lundi 27 octobre
-	\item Présentation du premier algo : Lundi 3 novembre
+	\item Présentation du premier algorithme : Lundi 3 novembre
 \end{itemize}
-\subsection{Recherche couche phy}
+\subsection{Recherche couche physique}
 \begin{itemize}
-	\item Présentation Recherches : Lundi 20 octobre
+	\item Présentation des recherches : Lundi 20 octobre
 \end{itemize}
 \subsection{Serveur Signal}
 Lundi 20 octobre
 \subsection{Serveur Interprétation}
 Décembre
-\subsection{Serveur BDD}
-Vendredi 31 octobre BDD ébauche
-\subsection{Serveur Web}
-Vendredi 24 octobre maquette
+\subsection{Serveur web et BDD}
+Première ébauche: Vendredi 31 octobre BDD 
+\subsection{Interface Client Web}
+Maquette: Vendredi 24 octobre 
 \end{document}
 
 
