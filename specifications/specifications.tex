@@ -189,6 +189,16 @@ Réalisation :
 \item Partie serveur info en PHP et Node.js
 \item Partie client en HTML, CSS, Javascript (AngularJS, Bootstrap, Foundation)
 \end{itemize}
+
+\section{Scénario}
+
+Dans une maison de capteurs, le capteur PXX_123 détecte 120W de consommation.
+Le serveur signal reçoit ensuite une différence de + 60 W par rapport à la dernière trame \"sauvegardées" sur le serveur signal
+(PXX_123;P;120).
+Le serveur signal envoie au serveur info la trame qui sera stockée dans la BDD info. De même, le serveur interprétation sera actif et pourra vérifier son interprétation avec la BDD info.
+Suite à l'interprétation (ex: Mise en route du frigo), un message est envoyé sur l'interface utilisateur.(id_event,timestamp,ON)
+Serveur info met à jour les courbes de consommation.
+
 \end{document}
 
 
