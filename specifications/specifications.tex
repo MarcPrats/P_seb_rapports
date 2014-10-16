@@ -118,7 +118,40 @@ nécessaire de coder en C++. \\
 Toute l'équipe
 \newpage
 \section{Specifications}
-Réalisation :
+A la suite de plusieurs brainstorming, nous souhaitons vous proposer une architecture différente de celle présente actuellement et de celle proposé initialement.\\
+Pour rappel, voici le mode de fonctionnement initialement envisagé.
+\begin{itemize}
+  \item Un serveur signal :
+  \begin{itemize}
+    \item récupère les trames des capteurs, les converties en données utilisables (30°C sur le capteur \#2, 240 W sur le capteur \#3...).
+    \item interprètes les trames : recherche d'allumage d'équipement, d'arrêt d'équipement.
+    \item envoie les données dans une BDD de :
+    \begin{itemize}
+      \item Lors de la réception d'une donnée capteur.
+      \item Lors de la détection d'un évenement (allumage, arrêt équipement).
+    \end{itemize}
+  \end{itemize}
+  \item BDD : stocke les évenements ainsi que les données capteurs
+  \item Un serveur Web : gère l'affichage des informations de la BDD, ainsi que les erreurs commises par la partie signal sur les évenements. Doit être capable de traiter des faux positifs de la partie signal. Exemple : erreur réalisé par la partie signal : une lampe et un PC qui s'allume ont le même ID, nécessité de séparation de ces élements.
+\end{itemize}
+Voici notre nouvelle proposition avec 4 serveurs :
+\begin{itemize}
+  \item Un serveur signal "récupération des données capteurs" : permet la conversion des trames reçus en données à mettre dans la BDD. Schéma proposé : (id\_capteur,type\_donnée,valeur). Envoie des trames uniquement sur modification de valeur à la BDD ainsi qu'un serveur signal interprétation. Génére les graphes de consommation par équipement (à la demande du serveur Web)
+  \item Un serveur signal "interprétation des données capteurs" : activé sur réception d'information du serveur signal récupération des données. Réalise toute la partie probabilité, et capable de lire des informations sur la BDD.
+  \item Un serveur info BDD : reçois les trames des serveurs signal, les ajoutes dans la BDD, manage la BDD.
+  \item Un serveur info Web : Gère l'affichage Web. Permet de signaler une erreur sur un périphérique, fait remonter l'info au serveur "interprétation des données capteurs".
+\end{itemize}
+Avantages nouvelle proposition sur originale :
+\begin{itemize}
+  \item Code plus propre en signal et en info, meilleur gestion des accés BDD.
+  \item Evite de séparer l'intépretation sur la partie Web et sur la partie signal, toute l'interprétation ce fait sur le serveur d'interprétation.
+  \item Meilleur fiabilité dans la gestion des trames : évite des temps de traitement trop long dans la partie signal réception des trames.
+\end{itemize}
+Inconvénients
+\begin{itemize}
+  \item euh
+\end{itemize}
+
 \subsection{Nouvelle norme}
 Proposer une nouvelle norme de communications entre capteurs et box.
 \subsection{Différenciation des appareils électriques}
@@ -133,31 +166,40 @@ Capacité à différencier des catégories d'appareils électriques.
 
 \subsection{Mise en place des serveurs}
 
-Création de 4 serveurs virtuels:
+Création de 4 serveurs:
 
 \begin{itemize}
-\item Serveur base de donnée
+\item Server gestion base de donnée
 \begin{itemize}
-\item Qu'est-ce qu'on stocke ? (Stocker les fronts montants
-\item Comment? 
-\item Pourquoi?
-\end{itemize} léger (SQLlite)
-\end{itemize}
-
-\begin{itemize}
-\item Serveur Web/Info
-\begin{itemize}
-\item affichage seulement: Somme sur les étiquettes ON/OFF des appareils et/ou vue restreinte de quelques périphéries
-\item Correction user: différentes échelles de temps
+\item Qu'est-ce qu'on stocke ? (Stocker uniquement les modifications de valeurs)
+\item Comment? léger (SQLlite ?)
+\item accés en READ-ONLY par le serveur signal d'interprétation et le serveur Web.
 \end{itemize}
 \end{itemize}
 
 \begin{itemize}
-\item Serveur signal
+\item Server Web
+\begin{itemize}
+\item L'utilisateur est censé pouvoir corriger une fausse affectation.
+\item Différents affichages pour l'utilisateur :
+\begin{itemize}
+  \item Bilan de consommation électrique sur un jour, une semaine, un mois, un an avec étiquette d'allumage et d'arrêt des périphériques électriques.
+  \item Vue avec la consommation d'un appareil.
+  \item Vue avec la consommation globale, suivi des consommations de tout les périphériques. Possibilité de restreindre cette vue aux courbes de quelques périphériques.
+  \item Vue avec l'impact de chaque appareil sur la consommation électrique par jour, semaine, mois ,an.
+  \item Vue avec le temps d'allumage de chaque appareil par jour, semaine, mois ,an.
+  \item Affichage des courbes température, hygrométrie, consommation d'eau, consommation électrique.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item Serveur signal "récupération des trames"
 \begin{itemize}
 \item Décodage trame
-\item Qu'est-ce qu'on envoie? Détection dernière occurrence (ID capteurs)
-\item Output en terminal	
+\item Qu'est-ce qu'on envoie? Détection de modification sur la valeur d'un capteur.
+\item info envoyé type : (Az23as,T,30) (Id\_capteur,Type d'info (T: température,P : puissance...),Valeur)
+\item Output en terminal des trames reçus / envoyés.
 \end{itemize}
 \end{itemize}
 
@@ -191,9 +233,9 @@ Réalisation :
 \end{itemize}
 
 \section{Scénario}
-Dans une maison de capteurs, le capteur PXX\_123 détecte 120W de consommation.
+Dans une maison de capteurs, le capteur a2sI1q détecte 120W de consommation.
 Le serveur signal reçoit ensuite une différence de + 60 W par rapport à la dernière trame \"sauvegardées" sur le serveur signal
-(PXX\_123;P;120).
+(a2sI1q;P;120).
 Le serveur signal envoie au serveur info la trame qui sera stockée dans la BDD info. De même, le serveur interprétation sera actif et pourra vérifier son interprétation avec la BDD info.
 Suite à l'interprétation (ex: Mise en route du frigo), un message est envoyé sur l'interface utilisateur.(id\_event,timestamp,ON)
 Serveur info met à jour les courbes de consommation.
