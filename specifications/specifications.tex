@@ -145,12 +145,12 @@ Pour rappel, voici le mode de fonctionnement initialement envisagé.
 Voici notre nouvelle proposition avec 4 serveurs :
 \begin{itemize}
   \item \textbf{Un serveur signal récepteur des données des capteurs} :\\
-  permet la conversion des trames reçues en données à mettre dans la BDD. Schéma proposé : (id\_capteur,type\_donnée,valeur). Envoi des trames à la BDD et au serveur interprète, décrit ci-dessous, uniquement lorsqu'une donnée des capteurs est modifiée. Ce serveur permettra la génération des graphes de consommation par équipement (à la demande du serveur Web).
+  permet la conversion des trames reçues en données à mettre dans la BDD. Schéma proposé : (id\_capteur, timestamp, type\_donnée, valeur). Envoi des trames à la BDD et au serveur interprète, décrit ci-dessous, uniquement lorsqu'une donnée des capteurs est modifiée. Ce serveur permettra la génération des graphes de consommation par équipement (à la demande du serveur Web).
   \item \textbf{Un serveur signal interprète des données capteurs} :
   \begin{itemize}
     \item Activé à la réception d'information du \textit{serveur signal récepteur des données des capteurs}.
     \item Calcule les probabilités d'évènement, et lit des informations dans la BDD si nécessaire.
-    \item Si un évènement est valide alors ce serveur envoit une trame du type : (id\_appareil,timestamp,value) à la BDD.
+    \item Si un évènement est valide alors ce serveur envoit une trame du type : (id\_appareil, timestamp, value) à la BDD.
   \end{itemize}
   \item \textbf{la BDD} : \\
   reçoit les informations des serveurs signal et permet au serveur info Web de traiter les données.
