@@ -1,0 +1,124 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{enumitem}
+%\frenchbsetup{StandardLists=true}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{moreverb}
+\usepackage{epsfig}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{xcolor}
+      %%%%%%%%%%%%%%%%  inclure la source %%%%%%%%%%%%%%%%%%%%
+  \newcommand*\styleC{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+  \newcommand*\styleD{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+
+      \makeatletter
+      % on fixe le langage utilisé
+      \lstset{language=matlab, breaklines=true}
+      \edef\Motscle{emph={\lst@keywords}}
+      \expandafter\lstset\expandafter{%
+       \Motscle}
+      \makeatother
+
+
+      \definecolor{Vvert}{rgb}{0.133,0.545,0.133}
+
+      \lstset{emphstyle=\color{blue}, % les mots réservés de matlab en bleu
+      basicstyle=\styleC,
+      keywordstyle=\cmtt,
+      commentstyle=\color{Vvert}\styleD, % commentaire en gris
+      numberstyle=\tiny\color{red},
+      numbers=left,
+      numbersep=10pt,
+      lineskip=0.7pt,
+      showstringspaces=false}
+      %  % inclure le fichier source
+      \newcommand{\FSource}[1]{%
+      \lstinputlisting[texcl=true]{#1}
+      }
+
+\setlength{\textwidth}{16cm} % Largeur du texte
+\setlength{\textheight}{24cm} % Hauteur du texte
+\setlength{\evensidemargin}{-0.2cm} % Taille des marges pour les pages paires
+\setlength{\oddsidemargin}{-0.2cm} % Taille des marges pour les pages impaires
+\setlength{\topmargin}{-1.5cm} % Taille de l'ent\^ete
+
+\title{PR307 Smart-EcoBox : \\
+Recherche Couche Physique}
+\author{
+DE CACQUERAY VALMENIER Mathias <mdecacquerayvalmenie@enseirb-matmeca.fr> \\
+GOZLAN Melinda <mgozlan@enseirb-matmeca.fr>\\}
+
+
+\begin{document}
+\maketitle
+
+\begin{figure}[ht]
+\begin{center}
+\noindent \includegraphics[scale = 0.25]{../../Logo_ENSEIRB.pdf}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\noindent \includegraphics[scale = 0.25]{../../smartee_logo.pdf}
+\end{center}
+\end{figure}
+
+
+\newpage
+
+\tableofcontents
+
+\newpage
+\begin{abstract}
+Ce rapport à pour objectif de proposer la meilleur solution pour dialoguer entre capteurs et BOX en sans fils.
+\end{abstract}
+
+\section{Zi-Wave}
+Technologie permettant la communication entre les périphériques et un serveur. Très complexe. Voici un résumé :
+\begin{itemize}
+\item Modulation du signal de type 2-FSK
+\item Réseau maillé dont la gestion des capteurs se fait par un contrôleur
+\item Réseau sécurisé car le contrôleur attribut un identifiant unique à chaque capteur
+\item Possibilité de joindre un élément éloigné spatialement grâce à la structure en maillage
+\item Protocole radio bidirectionnel
+\item Interopérabilité du système domotique
+\end{itemize}
+\textbf{Inconvénients :}
+\begin{itemize}
+\item La communication bidirectionnelle n’est pas nécessaire dans le cadre des objectifs qui ont été fixé; seule la partie transmission nous est utile. 
+\end{itemize}
+\section{HomeEasy}
+HomeEasy est le protocole utilisé par Chacon, DI-O.
+\begin{itemize}
+\item Communication uni-directionnelle
+\item Bande 868 MHz
+\item Facile à mettre en œuvre.
+\end{itemize}
+
+\section{Proposition de capteur HomeEasy}
+\subsection{Température}
+N'importe qu'elle capteur DIO fait l'affaire. Voici un exemple :\\
+Capteur TX35IT+.\\
+\url{http://www.conrad.fr/ce/fr/product/094466/Capteur-thermomtre-La-Crosse-Technology-TX35IT?queryFromSuggest=true}
+\subsection{Débit D'eau}
+Nous avons trouvé cette solution, qui à l'avantage d'être simple à mettre en oeuvre et d'être peut couteuse. Elle convient pour l'utilisation requise.\\
+\url{http://www.poulpy.com/2011/11/releve-de-consommation-deau-low-cost-en-rf/}
+\end{document}
+
+
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[scale = 0.4]{./fig/fig1.jpg}
+%\caption{figure}
+%\label{Figure}
+%\end{center}
+%\end{figure}

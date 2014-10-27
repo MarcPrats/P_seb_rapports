@@ -4,7 +4,7 @@
 #                   
 #  Created by Mathias de Cacqueray Valmenier on 09/06/2014.
 #  Copyright (c) 2014 Mathias de Cacqueray Valmenier. All rights reserved.
-
+#  Updated on 21/10/2014
 
 
 # Executables #
@@ -15,7 +15,6 @@
 *.exe
 *.o
 *.so
-*.dvi
 
 # Compressed Sources #
 
@@ -40,6 +39,14 @@
 *.toc
 *.fls
 *.fdb_latexmk
+*.out
+*.nav
+*.snm
+*.vrb
+
+# Matlab Generated Files #
+*.mat
+*.asv
 
 # MAC OS X and Windows generated files #
 .DS_Store
@@ -49,4 +56,3 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
