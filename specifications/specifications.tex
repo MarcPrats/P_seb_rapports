@@ -237,8 +237,43 @@ Ainsi le serveur interprète sera actif et pourra vérifier son interprétation 
 Suite à l'interprétation (ex: Mise en route du frigo), un message est envoyé au serveur web qui sera ensuite affiché sur l'interface utilisateur (id\_appareil,timestamp,ON). L'utilisateur pourra alors modifier l'interprétation depuis le client Web.
 Enfin, le serveur web met à jour les courbes de consommation.
 
-
-
+\section{Formalisation des tables BDD}
+\textbf{Nom}
+\begin{table}[!h]
+\begin{tabular}{|l|l|l|}
+\hline
+id\_capteurs,id\_evt, id\_evt\_doute & localistion Capteur/Nom Matériel & Type\_data(T,P,D,evt) \\ \hline
+ &  &  \\
+ &  & 
+\end{tabular}
+\end{table}\\
+\textbf{Data Capteurs}
+\begin{table}[!h]
+\begin{tabular}{|l|l|l|}
+\hline
+id\_capteurs,id\_evt & TimeStamp & Valeur \\ \hline
+ &  &  \\
+ &  & 
+\end{tabular}
+\end{table}\\
+\textbf{Doute}
+\begin{table}[!h]
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+id\_evt\_doute & $id_1$ & $P_1$ & $id_2$ & $P_2$ & $id_3$ & $P_3$  \\ \hline
+ &  & &  & &  &  \\
+ &  &  &  & &  &
+\end{tabular}
+\end{table}\\
+\textbf{Événement}
+\begin{table}[!h]
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+id\_evt & $POI_1$ & $POI_2$ & $POI_3$ & $P0I_4$ & $POI_5$   \\ \hline
+ &  & &  & &  \\
+ &  &  &  & &
+\end{tabular}
+\end{table}
 
 
 
@@ -252,7 +287,7 @@ Enfin, le serveur web met à jour les courbes de consommation.
 \begin{itemize}
 	\item Présentation des recherches : Lundi 20 octobre
 \end{itemize}
-\subsection{Serveur Signal}
+\subsection{Serveur Récupération}
 Lundi 20 octobre
 \subsection{Serveur Interprétation}
 Décembre
