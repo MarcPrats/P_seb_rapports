@@ -230,57 +230,61 @@ Création de 3 serveurs et de la base de données:
 \item Partie client en HTML, CSS, Javascript (AngularJS, Bootstrap, Foundation).
 \end{itemize}
 
+\newpage
 \section{Exemple : Scénario}
 
-On vient de tout brancher, la box s'allume (père):
+On vient de tout brancher, la box s'allume (récupération sans-fils):
 \begin{enumerate}
-
-\item Lecture de la BDD (noms capteurs)
-\item Récupère la trame T°, Débit sans fil
-
-\begin{itemize}
-\item Si \textbf{ID connu} \fbox{id cpt1, cpt1, 20°C}
-\begin{itemize}
-\item Envoi de la trame à la BDD \fbox{id, ts,val}
-\end{itemize} 
-\end{itemize}
-
-\begin{itemize}
-\item Si \textbf{ID inconnu}
-\begin{itemize}
-\item Création nom "cpt2"
-\item Envoi de la trame à la BDD \fbox{id, cpt2,val} 
-\item Envoi de la trame à la BDD \fbox{id, ts,val}
-\end{itemize}
-\end{itemize}
-
-\item Fork (fils1)
-\item Trame P\_USB sous échantillonnage pour écrire dans la BDD
-\item Fork (fils2)
-\item Reçoit P et fils1
-\item Algo interprétation
-
-\begin{itemize}
-\item Si \textbf{Doute} 
-\begin{itemize}
-\item Lecture BDD(T,P)
-\item Si la BDD ne permet pas d'aider à différencier -> motif: proposer un éventail possible d'appareils
-\item Ecriture BDD doute \fbox{P1,id doute 1, P2, id doute 2, P3,id doute 3,val}
-\end{itemize} 
-\end{itemize}
-\begin{itemize}
-\item Si \textbf{Pas de doute} 
-\begin{itemize}
-\item Ecriture BDD event "Allumage R1, P1"
-\end{itemize} 
-\item Si le client aide: écriture dans la BDD et interprétation
-\end{itemize}
-
+	\item Lecture de la BDD Noms : \fbox{id\_capteurs, nom\_capteurs}
+	\item Fork (récupération USB)
+	\item Fork (interprétation) 
+\end{enumerate}
+\begin{enumerate}
+	\item Récupération sans-fils : Récupère la trame T°, Débit ou Consommation électrique des capteurs sans fil.
+	\begin{itemize}
+		\item Si \textbf{ID connu} \fbox{id\_cpt1, nom\_cpt1, 20°C} 
+		\begin{itemize}
+			\item Envoi de la trame à la BDD Data \fbox{id\_cpt1,TimeStamp,valeur} 	
+		\end{itemize} 
+	\end{itemize}
+	\begin{itemize}
+		\item Si \textbf{ID inconnu}
+		\begin{itemize}
+			\item Création nom "cpt2"
+			\item Envoi de la trame à la BDD Nom \fbox{id\_cpt2, nom\_cpt2\_default}
+			\item Envoi de la trame à la BDD Data \fbox{id\_cpt2,TimeStamp,val}
+		\end{itemize}
+	\end{itemize}
+	\item Récupération USB : 
+	\begin{itemize}
+		\item Trame Puissance sous échantillonné pour écrire dans la BDD  \textit{Événements Sauvegardés}
+	\end{itemize}
+	\item Interprétation : 
+	\begin{itemize}
+		\item Reçoit donné puissance brute de \textit{récupération USB}
+	\end{itemize}	 
+	\item Algorithmes d'interprétation : détection d'un événement
+	\begin{itemize}		
+		\item Lecture BDD  \textit{Événements Sauvegardés} pour recherche correspondance.
+		\item Si \textbf{Pas de doute} sur l'événement
+		\begin{itemize}
+			\item Ecriture BDD event "Allumage R1, P1" : \fbox{id\_evt,TimeStamp,valeur=allumge}
+		\end{itemize} 
+		\item Si \textbf{Doute} sur l'événement
+		\begin{itemize}
+			\item Lecture BDD 
+			\item Si la BDD ne permet pas d'aider à différencier \\
+			-> proposer un éventail possible d'appareils
+			\item proposer les 3 possibilités les plus probables.
+			\item Ecriture BDD doute \fbox{id\_evt\_doute,P1,id doute 1, P2, id doute 2, P3,id doute 3}
+			\item Sauvegarde des points d'intéret de l'événement non reconnu dans la BDD  \textit{Événements Sauvegardés} : \fbox{id\_evt\_doute,$POI_1$,$POI_2$,$POI_3$,$P0I_4$,$POI_5$}
+		\end{itemize} 
+	\end{itemize}
 \end{enumerate}
 
-
+\newpage
 \section{Formalisation des tables BDD}
-\textbf{Nom}
+\textbf{Nom} : fait uniquement un rapprochement entre l'id unique d'un capteur, d'un événement ou d'un événement en doute et le nom associé.
 \begin{table}[!h]
 \begin{tabular}{|l|l|l|}
 \hline
@@ -289,7 +293,7 @@ id\_capteurs,id\_evt, id\_evt\_doute & localistion Capteur/Nom Matériel & Type\
  &  & 
 \end{tabular}
 \end{table}\\
-\textbf{Data Capteurs}
+\textbf{Data Capteurs / Événements} : Enregistre les données des capteurs et des événements ou il n'y pas de doute.
 \begin{table}[!h]
 \begin{tabular}{|l|l|l|}
 \hline
@@ -298,7 +302,7 @@ id\_capteurs,id\_evt & TimeStamp & Valeur \\ \hline
  &  & 
 \end{tabular}
 \end{table}\\
-\textbf{Doute}
+\textbf{Doute} : Dans le cas d'un doute on donne les probabilités des trois événements les plus probable. Un nouvelle id est associé a cette événement.
 \begin{table}[!h]
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
@@ -307,7 +311,7 @@ id\_evt\_doute & $id_1$ & $P_1$ & $id_2$ & $P_2$ & $id_3$ & $P_3$  \\ \hline
  &  &  &  & &  &
 \end{tabular}
 \end{table}\\
-\textbf{Événement}
+\textbf{Événements Sauvegardés} : Base de données des connaissances des points d'intèrets pour interprétation, ajout de données dans le cas d'un événement en doute.
 \begin{table}[!h]
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -318,7 +322,7 @@ id\_evt & $POI_1$ & $POI_2$ & $POI_3$ & $P0I_4$ & $POI_5$   \\ \hline
 \end{table}
 
 
-
+\newpage
 \section{Planning}
 \subsection{Recherche elec}
 \begin{itemize}
