@@ -43,6 +43,7 @@
 *.nav
 *.snm
 *.vrb
+*.dvi
 
 # Matlab Generated Files #
 *.mat
