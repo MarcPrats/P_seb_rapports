@@ -231,11 +231,53 @@ Création de 3 serveurs et de la base de données:
 \end{itemize}
 
 \section{Exemple : Scénario}
-Dans une maison possédant des capteurs. Le capteur a2sI1q détecte 120W de consommation.
-Le serveur signal reçoit la trame, la décode et vérifie si il y a eu une modification de valeur pour le capteur en question. En cas de différence, le serveur envoie la trame (a2sI1q;P;120) au serveur interprétation ainsi qu'au serveur Web qui la stocke dans la BDD.
-Ainsi le serveur interprète sera actif et pourra vérifier son interprétation avec la BDD.
-Suite à l'interprétation (ex: Mise en route du frigo), un message est envoyé au serveur web qui sera ensuite affiché sur l'interface utilisateur (id\_appareil,timestamp,ON). L'utilisateur pourra alors modifier l'interprétation depuis le client Web.
-Enfin, le serveur web met à jour les courbes de consommation.
+
+On vient de tout brancher, la box s'allume (père):
+\begin{enumerate}
+
+\item Lecture de la BDD (noms capteurs)
+\item Récupère la trame T°, Débit sans fil
+
+\begin{itemize}
+\item Si \textbf{ID connu} \fbox{id cpt1, cpt1, 20°C}
+\begin{itemize}
+\item Envoi de la trame à la BDD \fbox{id, ts,val}
+\end{itemize} 
+\end{itemize}
+
+\begin{itemize}
+\item Si \textbf{ID inconnu}
+\begin{itemize}
+\item Création nom "cpt2"
+\item Envoi de la trame à la BDD \fbox{id, cpt2,val} 
+\item Envoi de la trame à la BDD \fbox{id, ts,val}
+\end{itemize}
+\end{itemize}
+
+\item Fork (fils1)
+\item Trame P\_USB sous échantillonnage pour écrire dans la BDD
+\item Fork (fils2)
+\item Reçoit P et fils1
+\item Algo interprétation
+
+\begin{itemize}
+\item Si \textbf{Doute} 
+\begin{itemize}
+\item Lecture BDD(T,P)
+\item Si la BDD ne permet pas d'aider à différencier -> motif: proposer un éventail possible d'appareils
+\item Ecriture BDD doute \fbox{P1,id doute 1, P2, id doute 2, P3,id doute 3,val}
+\end{itemize} 
+\end{itemize}
+\begin{itemize}
+\item Si \textbf{Pas de doute} 
+\begin{itemize}
+\item Ecriture BDD event "Allumage R1, P1"
+\end{itemize} 
+\item Si le client aide: écriture dans la BDD et interprétation
+\end{itemize}
+
+\end{enumerate}
+
 
 \section{Formalisation des tables BDD}
 \textbf{Nom}
