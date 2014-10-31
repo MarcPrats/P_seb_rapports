@@ -1,0 +1,201 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{enumitem}
+%\frenchbsetup{StandardLists=true}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{moreverb}
+\usepackage{epsfig}
+\usepackage{textcomp}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{booktabs}
+
+    \usepackage{xcolor}
+      %%%%%%%%%%%%%%%%  inclure la source %%%%%%%%%%%%%%%%%%%%
+  \newcommand*\styleC{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+  \newcommand*\styleD{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+
+      \makeatletter
+      % on fixe le langage utilisé
+      \lstset{language=matlab, breaklines=true}
+      \edef\Motscle{emph={\lst@keywords}}
+      \expandafter\lstset\expandafter{%
+       \Motscle}
+      \makeatother
+
+
+      \definecolor{Vvert}{rgb}{0.133,0.545,0.133}
+
+      \lstset{emphstyle=\color{blue}, % les mots réservés de matlab en bleu
+      basicstyle=\styleC,
+      keywordstyle=\cmtt,
+      commentstyle=\color{Vvert}\styleD, % commentaire en gris
+      numberstyle=\tiny\color{red},
+      numbers=left,
+      numbersep=10pt,
+      lineskip=0.7pt,
+      showstringspaces=false}
+      %  % inclure le fichier source
+      \newcommand{\FSource}[1]{%
+      \lstinputlisting[texcl=true]{#1}
+      }
+
+\setlength{\textwidth}{16cm} % Largeur du texte
+\setlength{\textheight}{24cm} % Hauteur du texte
+\setlength{\evensidemargin}{-0.2cm} % Taille des marges pour les pages paires
+\setlength{\oddsidemargin}{-0.2cm} % Taille des marges pour les pages impaires
+\setlength{\topmargin}{-1.5cm} % Taille de l'ent\^ete
+
+\title{PR307 Smart-EcoBox : \\ Réunion}
+
+\usepackage{natbib}
+%\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section {Structure du projet}
+\textbf{BDD :} Base de données
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{structure_projet}
+\caption{schéma de l'architecture du projet}
+\label{fig:my_label}
+\end{figure}
+
+\section{Organisation Table des données}
+
+On cherche à séparer les données des capteurs des données liées aux types d'appareil utilisés.
+\begin{enumerate}
+\item \textbf{Identification des capteurs :} Cette table regroupe tous les capteurs connectés au système. Elle enregistre chaque nouveau capteur sous la forme (string Id, string Localisation, char Type\_de\_données ) -> ("ae485","cuisine","Temperature").
+\item \textbf{Valeurs des capteurs :} Cette table regroupe les différentes valeurs enregistrées au cours 
+du temps par les capteurs présents dans la table d'identification : (string Id , integer Timestamp, float Value ) -> ("ae485",1818461,22.3)
+\item \textbf{États des types d'appareils : } Cette table regroupe les différents états des types d'appareils au cours du temps : (integer Id\_type\_appareil, integer Timestamp, boolean État) -> (42,1845471,1)
+\item \textbf{Identification/interprétation des types d'appareils :} 
+(integer Id\_type\_appareil, string Nom\_type\_appareil, integer POI1, integer POI2, integer POI3, integer POI4, integer POI5,) \textsc{¿ Sur/PasSur et AliasPourSur=0?}
+\end{enumerate}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    string Id & string Localisation & char Type\_de\_données \\ \hline
+    j46nc4    & cuisine             & T                      \\ \hline
+    465hjs    & garage              & W                      \\ \hline
+    hfh765    & garage              & D                      \\ \hline
+              &                     &                       
+    \end{tabular}
+    \caption{Identification des capteurs}
+\end{table}
+
+\begin{table}[h!]
+\centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    string Id & integer Timestamp & integer Value \\ \hline
+    j46nc4    & 1456786           & 20            \\ \hline
+    465hjs    & 1456787           & 220           \\ \hline
+    hfh765    & 1456788           & 10            \\ \hline
+    j46nc4    & 1456790           & 18            \\ \hline
+    j46nc4    & 1456792           & 24            \\ \hline
+    hfh765    & 1456795           & 11            \\ \hline
+    hfh765    & 1456798           & 12            \\ \hline
+              &                   &              
+    \end{tabular}
+    \caption{Valeurs des capteurs}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}integer \\ Id\_type\_appareils\end{tabular} & string Nom\_type\_appareils & integer POI1 & integer POI2 & integer POI3 & integer POI4 & integer POI5 \\ \hline
+hfh584                                                                 & chauffage                   & 10           & 50           & 221          & 45           & 242          \\ \hline
+hrs456                                                                 & unknown                     & 42           & 55           & 633          & 55           & 122          \\ \hline
+kjn9h4                                                                 & frigo                       & 58           & 15           & 6            & 6841         & 187          \\ \hline
+153gdj                                                                 & cuisinière                  & 7            & 6            & 68           & 71           & 6845         \\ \hline
+846ghd                                                                 & unknown                     & 75           & 13           & 1364         & 145          & 165          \\ \hline
+                                                                       &                             &              &              &              &              &             
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+boolean Checked & integer Alias & integer Numero\_type\_appareils1 & integer Proba1 & integer Numero\_type\_appareils2 & integer Proba2 & integer Numero\_type\_appareils3 & integer Proba3 \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+0               & -1            & kjn9h4                           & 33             & hfh584                           & 27             & 153gdj                           & 25             \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+0               & hfh584        & hfh584                           & 33             & kjn9h4                           & 31             & 153gdj                           & 30             \\ \hline
+                &               &                                  &                &                                  &                &                                  &               
+\end{tabular}
+}\caption{Identification/interprétation des types d'appareils}
+\end{table}
+
+\begin{table}[h!]
+\centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    integer Id\_type\_appareils & integer Timestamp & boolean State \\ \hline
+    846ghd                               & 1456786           & 1             \\ \hline
+    hfh584                               & 1456787           & 0             \\ \hline
+    hfh584                               & 1456788           & 1             \\ \hline
+    kjn9h4                               & 1456790           & 1             \\ \hline
+    hrs456                               & 1456792           & 0             \\ \hline
+    hfh584                               & 1456795           & 0             \\ \hline
+    153gdj                               & 1456798           & 1             \\ \hline
+                                    &                   &              
+    \end{tabular}
+    \caption{États des appareils}
+\end{table}
+
+\section{Scénario}
+TABLES VIDES\\
+Au démarrage de la Box la base de donnée est vide. La Box s'initialise en détectant les capteurs environnants, ce qui remplie la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{valeurs des capteurs}. Parallélement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les type d'appareil déjà connu par nos recherches. \\
+TABLES CAPTEURS  INTERP PREMIER ELEMENTS\\
+L'interprétation des valeurs capteurs peut alors démarrer. Les premiers évenements d'appareils sont enregistrés dans la table \textit{États des appareil} et dans la table \textit{{Identification/interprétation des types d'appareils} le champ \textbf{Cheked} de ces appareils passent à 1. \\
+TABLES IDENTIFICATIONS PREMIER ELEMENTS\\
+L'interprétation est indécise sur le type d'un appareil. En effet elle hésite entre un chauffage $30pourcent$, un four $31pourcent$ et la voiture plug-in qui charge $33pourcent$
+
+
+
+\section{Choix des technologies}
+Nos contraintes pour les données sont les suivantes :
+\begin{itemize}
+\item La transmission des données est synchrone (les données vont être transmises successivement) ;
+\item Les données sont triées, opérations de jointures sur les tables -> Besoin de base de données relationnelles ;
+\item Les tecnhologies doivent consommer le moins de ressources possibles pour fonctionner sur un dispositif tel qu'un Rasperry Pi ;
+\end{itemize}   
+\textbf{Propositions de technologie}:
+\begin{itemize}
+\item \textbf{Base de données SQLite : }Cette technologie légère et relationnelle peut être contenue dans un seul fichier. 
+\item \textbf{Serveur Nginx ou lighttpd : }Ces serveurs demandent peu de resources et s'adaptent aux bases relationnelles.
+\item \textbf{Langages PHP, J2EE, Ruby : }Ces langages natifs sont les plus adaptés aux serveurs énoncés précédemment.
+\end{itemize}
+\section{Organisation GLRT}
+\begin{itemize}
+\item Lien entre le récepteur/interprète et la base de données
+\item Lien entre la base de données et le client web via le serveur
+\item Client Web : Vues + C 
+\end{itemize}
+
+
+
+\end{document}
