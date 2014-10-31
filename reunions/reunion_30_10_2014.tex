@@ -69,8 +69,8 @@ Si la trame est un évènement issu du serveur interprète, le format sera : (id
 \item \textbf{Table d'identification}: Table où les identifiants non existants dans la table des valeurs sont stockés.\\ 
 Si la trame provient d'un capteur, le format sera : (id\_capteur, localisation, type de grandeur physique). ("A45","cuisine","Watt")\\
 Si la trame est un évènement issu du serveur interprète, le format sera : (id\_evt, type\_d'appareil, marqueur\_evt).Ex :("B487E","lampe","evt").
-\item \textbf{Table d'incertitude} : Table contenant les évènements que le serveur interprète n'a pas pu identifier. Ils seront soumis à des algorithmes de probabilités.
-\item \textbf{Table POI}: Table des points d'intérêts utilisée par le serveur interprète. 
+\item \textbf{Table d'incertitude} : (Existe uniquement sur le logiciel "interaction avec le client"). Table contenant les évènements que le serveur interprète n'a pas pu identifier. Elle contient pour un évènement, n probabilités de détection de n types d'appareils. Le client est censé lire ses notifications de "doute" pour qu'on puisse régulièrement vider cette table et mettre à jour la table des valeurs.
+\item \textbf{Table POI}: Table des points d'intérêts d'une courbe de charge d'un type d'appareil, utilisée par le serveur interprète. \\
 Remarques : les deux dernières tables sont à retraiter.
 \end{itemize}
 
