@@ -1,6 +1,6 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+%\usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{enumitem}
 %\frenchbsetup{StandardLists=true}
@@ -165,15 +165,282 @@ boolean Checked & integer Alias & integer Numero\_type\_appareils1 & integer Pro
     \end{tabular}
     \caption{États des appareils}
 \end{table}
-
+\newpage
+Voici les tables.
+\newpage
 \section{Scénario}
-TABLES VIDES\\
-Au démarrage de la Box la base de donnée est vide. La Box s'initialise en détectant les capteurs environnants, ce qui remplie la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{valeurs des capteurs}. Parallélement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les type d'appareil déjà connu par nos recherches. \\
-TABLES CAPTEURS  INTERP PREMIER ELEMENTS\\
-L'interprétation des valeurs capteurs peut alors démarrer. Les premiers évenements d'appareils sont enregistrés dans la table \textit{États des appareil} et dans la table \textit{{Identification/interprétation des types d'appareils} le champ \textbf{Cheked} de ces appareils passent à 1. \\
-TABLES IDENTIFICATIONS PREMIER ELEMENTS\\
-L'interprétation est indécise sur le type d'un appareil. En effet elle hésite entre un chauffage $30pourcent$, un four $31pourcent$ et la voiture plug-in qui charge $33pourcent$
+Au démarrage de la Box la base de donnée est vide. La Box se met en route en détectant les capteurs environnants, ce qui remplie la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{ valeurs des capteurs}. Parallèlement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les type d'appareil déjà connu par nos recherches, le champ \textbf{Checked} est à 0. \\
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    string Id & string Localisation & char Type\_de\_données \\ \hline
+              &                     &                       
+    \end{tabular}
+    \caption{Identification des capteurs}
+\end{table}
 
+\begin{table}[h!]
+\centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    string Id & integer Timestamp & integer Value \\ \hline
+              &                   &              
+    \end{tabular}
+    \caption{Valeurs des capteurs}
+\end{table}
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}integer \\ Id\_type\_appareils\end{tabular} & string Nom\_type\_appareils & integer POI1 & integer POI2 & integer POI3 & integer POI4 & integer POI5 \\ \hline
+hfh584                                                                 & chauffage                   & 10           & 50           & 221          & 45           & 242          \\ \hline
+kjn9h4                                                                 & frigo                       & 58           & 15           & 6            & 6841         & 187          \\ \hline
+153gdj                                                                 & cuisinière                  & 7            & 6            & 68           & 71           & 6845         \\ \hline
+                                                                 &                      &            &            &          &           &           \\ \hline
+                                                                       &                             &              &              &              &              &     \\ \hline        
+                                                                 &                      &            &            &           &            &           
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+boolean Checked & integer Alias & integer Numero\_type\_appareils1 & integer Proba1 & integer Numero\_type\_appareils2 & integer Proba2 & integer Numero\_type\_appareils3 & integer Proba3 \\ \hline
+0               &               &                                  &                &                                  &                &                                  &                \\ \hline
+0               &             &                            &              &                            &              &                            &              \\ \hline
+0               &               &                                  &                &                                  &                &                                  &                \\ \hline
+              &               &                                  &                &                                  &                &                                  &                \\ \hline
+               &         &                            &              &                            &              &                            &              \\ \hline
+                &               &                                  &                &                                  &                &                                  &               
+\end{tabular}
+}\caption{Identification/interprétation des types d'appareils}
+\end{table}
+
+\newpage
+L'interprétation des valeurs capteurs peut alors démarrer. Les premiers événements d'appareils sont enregistrés dans la table \textit{États des appareil} et dans la table \textit{Identification/interprétation des types d'appareils} le champ \textbf{Checked} de ces appareils passent à 1. \\
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    string Id & string Localisation & char Type\_de\_données \\ \hline
+    j46nc4    & cuisine             & T                      \\ \hline
+    465hjs    & garage              & W                      \\ \hline
+    hfh765    & garage              & D                      \\ \hline
+              &                     &                       
+    \end{tabular}
+    \caption{Identification des capteurs}
+\end{table}
+
+\begin{table}[h!]
+\centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    string Id & integer Timestamp & integer Value \\ \hline
+    j46nc4    & 1456786           & 20            \\ \hline
+    465hjs    & 1456787           & 220           \\ \hline
+    hfh765    & 1456788           & 10            \\ \hline
+    j46nc4    & 1456790           & 18            \\ \hline
+    j46nc4    & 1456792           & 24            \\ \hline
+    hfh765    & 1456795           & 11            \\ \hline
+    hfh765    & 1456798           & 12            \\ \hline
+              &                   &              
+    \end{tabular}
+    \caption{Valeurs des capteurs}
+\end{table}
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}integer \\ Id\_type\_appareils\end{tabular} & string Nom\_type\_appareils & integer POI1 & integer POI2 & integer POI3 & integer POI4 & integer POI5 \\ \hline
+hfh584                                                                 & chauffage                   & 10           & 50           & 221          & 45           & 242          \\ \hline
+kjn9h4                                                                 & frigo                       & 58           & 15           & 6            & 6841         & 187          \\ \hline
+153gdj                                                                 & cuisinière                  & 7            & 6            & 68           & 71           & 6845         \\ \hline
+                                                                 &                      &            &            &          &           &           \\ \hline
+                                                                       &                             &              &              &              &              &     \\ \hline        
+                                                                 &                      &            &            &           &            &           
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+boolean Checked & integer Alias & integer Numero\_type\_appareils1 & integer Proba1 & integer Numero\_type\_appareils2 & integer Proba2 & integer Numero\_type\_appareils3 & integer Proba3 \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               &             &                            &              &                            &              &                            &              \\ \hline
+0               &               &                                  &                &                                  &                &                                  &                \\ \hline
+              &               &                                  &                &                                  &                &                                  &                \\ \hline
+               &         &                            &              &                            &              &                            &              \\ \hline
+                &               &                                  &                &                                  &                &                                  &               
+\end{tabular}
+}\caption{Identification/interprétation des types d'appareils}
+\end{table}
+\begin{table}[h!]
+\centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    integer Id\_type\_appareils & integer Timestamp & boolean State \\ \hline
+    hfh584                               & 1456787           & 0             \\ \hline
+    hfh584                               & 1456788           & 1             \\ \hline
+    kjn9h4                               & 1456790           & 1             \\ \hline
+    hfh584                               & 1456795           & 0             \\ \hline
+    153gdj                               & 1456798           & 1             \\ \hline	 &                   &              
+    \end{tabular}
+    \caption{États des appareils}
+\end{table}
+
+\newpage
+L'interprétation est indécise sur le type d'un appareil. En effet elle hésite entre un chauffage $30\%$, un four $31\%$ et la voiture plug-in qui charge $33\%$. On va donc présenter à l'utilisateur ces trois probabilités sur son interface et lui permettre de résoudre le doute. Dans les tables de la base de données cela s'apparentera à ceci :\\
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}integer \\ Id\_type\_appareils\end{tabular} & string Nom\_type\_appareils & integer POI1 & integer POI2 & integer POI3 & integer POI4 & integer POI5 \\ \hline
+hfh584                                                                 & chauffage                   & 10           & 50           & 221          & 45           & 242          \\ \hline
+hrs456                                                                 & unknown                     & 42           & 55           & 633          & 55           & 122          \\ \hline
+kjn9h4                                                                 & frigo                       & 58           & 15           & 6            & 6841         & 187          \\ \hline
+153gdj                                                                 & cuisinière                  & 7            & 6            & 68           & 71           & 6845         \\ \hline
+                                                                 &                      &            &            &          &           &           \\ \hline
+                                                                       &                             &              &              &              &              &             
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+boolean Checked & integer Alias & integer Numero\_type\_appareils1 & integer Proba1 & integer Numero\_type\_appareils2 & integer Proba2 & integer Numero\_type\_appareils3 & integer Proba3 \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               & -1            & kjn9h4                           & 33             & hfh584                           & 27             & 153gdj                           & 25             \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+               &         &                            &              &                            &              &                            &              \\ \hline
+                &               &                                  &                &                                  &                &                                  &               
+\end{tabular}
+}\caption{Identification/interprétation des types d'appareils}
+\end{table}
+\newpage
+L'utilisateur va résoudre le conflit en associant cet appareil inconnu à un chauffage. On va alors placer le champ alias de l'appareil inconnu de $-1$ à hfh584. Cet appareil inconnu sera désormais apparenté à un chauffage.\\
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}integer \\ Id\_type\_appareils\end{tabular} & string Nom\_type\_appareils & integer POI1 & integer POI2 & integer POI3 & integer POI4 & integer POI5 \\ \hline
+hfh584                                                                 & chauffage                   & 10           & 50           & 221          & 45           & 242          \\ \hline
+hrs456                                                                 & unknown                     & 42           & 55           & 633          & 55           & 122          \\ \hline
+kjn9h4                                                                 & frigo                       & 58           & 15           & 6            & 6841         & 187          \\ \hline
+153gdj                                                                 & cuisinière                  & 7            & 6            & 68           & 71           & 6845         \\ \hline
+                                                                 &                      &            &            &          &           &           \\ \hline
+                                                                       &                             &              &              &              &              &             
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+boolean Checked & integer Alias & integer Numero\_type\_appareils1 & integer Proba1 & integer Numero\_type\_appareils2 & integer Proba2 & integer Numero\_type\_appareils3 & integer Proba3 \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               & hfh584            & kjn9h4                           & 33             & hfh584                           & 27             & 153gdj                           & 25             \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+               &         &                            &              &                            &              &                            &              \\ \hline
+                &               &                                  &                &                                  &                &                                  &               
+\end{tabular}
+}\caption{Identification/interprétation des types d'appareils}
+\end{table}
+
+\newpage
+L'interprétation est indécise sur le type d'un appareil. En effet elle hésite entre un chauffage $28\%$, un four $29\%$ et la voiture plug-in qui charge $30\%$. On va donc à nouveau présenter à l'utilisateur ces trois probabilités sur son interface et lui permettre de résoudre le doute. Dans les tables de la base de données cela s'apparentera à ceci :\\
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}integer \\ Id\_type\_appareils\end{tabular} & string Nom\_type\_appareils & integer POI1 & integer POI2 & integer POI3 & integer POI4 & integer POI5 \\ \hline
+hfh584                                                                 & chauffage                   & 10           & 50           & 221          & 45           & 242          \\ \hline
+hrs456                                                                 & unknown                     & 42           & 55           & 633          & 55           & 122          \\ \hline
+kjn9h4                                                                 & frigo                       & 58           & 15           & 6            & 6841         & 187          \\ \hline
+153gdj                                                                 & cuisinière                  & 7            & 6            & 68           & 71           & 6845         \\ \hline
+846ghd                                                                 & unknown                     & 75           & 13           & 1364         & 145          & 165          \\ \hline
+                                                                       &                             &              &              &              &              &             
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+boolean Checked & integer Alias & integer Numero\_type\_appareils1 & integer Proba1 & integer Numero\_type\_appareils2 & integer Proba2 & integer Numero\_type\_appareils3 & integer Proba3 \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               & hfh584            & kjn9h4                           & 33             & hfh584                           & 27             & 153gdj                           & 25             \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               & -1        & hfh584                           & 33             & kjn9h4                           & 31             & 153gdj                           & 30             \\ \hline
+                &               &                                  &                &                                  &                &                                  &               
+\end{tabular}
+}\caption{Identification/interprétation des types d'appareils}
+\end{table}
+
+\newpage
+L'utilisateur va résoudre le conflit en associant cet appareil inconnu à un nouvel appareil non référencé : TV. On va alors placer le champ alias de l'appareil inconnu de $-1$ à $0$, changer le nom à TV.  
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}l@{}}integer \\ Id\_type\_appareils\end{tabular} & string Nom\_type\_appareils & integer POI1 & integer POI2 & integer POI3 & integer POI4 & integer POI5 \\ \hline
+hfh584                                                                 & chauffage                   & 10           & 50           & 221          & 45           & 242          \\ \hline
+hrs456                                                                 & unknown                     & 42           & 55           & 633          & 55           & 122          \\ \hline
+kjn9h4                                                                 & frigo                       & 58           & 15           & 6            & 6841         & 187          \\ \hline
+153gdj                                                                 & cuisinière                  & 7            & 6            & 68           & 71           & 6845         \\ \hline
+846ghd                                                                 & TV                     & 75           & 13           & 1364         & 145          & 165          \\ \hline
+                                                                       &                             &              &              &              &              &             
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+boolean Checked & integer Alias & integer Numero\_type\_appareils1 & integer Proba1 & integer Numero\_type\_appareils2 & integer Proba2 & integer Numero\_type\_appareils3 & integer Proba3 \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               & hfh584            & kjn9h4                           & 33             & hfh584                           & 27             & 153gdj                           & 25             \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               &               &                                  &                &                                  &                &                                  &                \\ \hline
+1               & 0        & hfh584                           & 33             & kjn9h4                           & 31             & 153gdj                           & 30             \\ \hline
+                &               &                                  &                &                                  &                &                                  &               
+\end{tabular}
+}\caption{Identification/interprétation des types d'appareils}
+\end{table}
 
 
 \section{Choix des technologies}
@@ -193,7 +460,7 @@ Nos contraintes pour les données sont les suivantes :
 \begin{itemize}
 \item Lien entre le récepteur/interprète et la base de données
 \item Lien entre la base de données et le client web via le serveur
-\item Client Web : Vues + C 
+\item Client Web : Vues + Calculs
 \end{itemize}
 
 
