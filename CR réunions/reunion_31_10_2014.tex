@@ -76,12 +76,12 @@
 
 On cherche à séparer les données des capteurs des données liées aux types d'appareil utilisés.
 \begin{enumerate}
-\item \textbf{Identification des capteurs :} Cette table regroupe tous les capteurs connectés au système. Elle enregistre chaque nouveau capteur sous la forme (string Id, string Localisation, char Type\_de\_données ) -> ("ae485","cuisine","Temperature").
+\item \textbf{Identification des capteurs :} Cette table regroupe tous les capteurs connectés au système. Elle enregistre chaque nouveau capteur sous la forme (string Id, string Localisation, char Type\_de\_données ) -> ("ae4j85","cuisine","Temperature").
 \item \textbf{Valeurs des capteurs :} Cette table regroupe les différentes valeurs enregistrées au cours 
-du temps par les capteurs présents dans la table d'identification : (string Id , integer Timestamp, float Value ) -> ("ae485",1818461,22.3)
+du temps par les capteurs présents dans la table d'identification : (string Id , integer Timestamp, float Value ) -> ("ae4j85",1818461,22.3)
 \item \textbf{États des types d'appareils : } Cette table regroupe les différents états des types d'appareils au cours du temps : (integer Id\_type\_appareil, integer Timestamp, boolean État) -> (42,1845471,1)
-\item \textbf{Identification/interprétation des types d'appareils :} 
-(integer Id\_type\_appareil, string Nom\_type\_appareil, integer POI1, integer POI2, integer POI3, integer POI4, integer POI5,) \textsc{¿ Sur/PasSur et AliasPourSur=0?}
+\item \textbf{Identification/interprétation des types d'appareils :} Cette table regroupe les différents types d'appareils identifiés, les points d'intérêt associés et les notions nécessaires à la gestion de l'incertitude des interprétations.
+%(integer Id\_type\_appareil, string Nom\_type\_appareil, integer POI1, integer POI2, integer POI3, integer POI4, integer POI5, boolean checked, integer Alias, integer Numero\_type\_appareil1, integer Proba1, integer Numero\_type\_appareil2, integer Proba2, integer Numero\_type\_appareil3, integer Proba3) 
 \end{enumerate}
 \newpage
 Voici les tables pour l'identification et les valeurs capteurs :
@@ -153,7 +153,7 @@ hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 0 & hfh584 & kjn9h4 & 30 & hf
 \end{table}
 \newpage
 \section{Scénario}
-Au démarrage de la Box la base de donnée est vide. La Box se met en route en détectant les capteurs environnants, ce qui remplie la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{ valeurs des capteurs}. Parallèlement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les type d'appareil déjà connu par nos recherches, le champ \textbf{Checked} est à 0. \\
+Au démarrage de la Box la base de donnée est vide. La Box se met en route en détectant les capteurs environnants, ce qui remplie la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{ valeurs des capteurs}. Parallèlement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les types d'appareils déjà connus par nos recherches, le champ \textbf{Checked} est à 0. \\
 \begin{table}[h!]
     \centering
     \begin{tabular}{|l|l|l|}
@@ -273,7 +273,7 @@ kjn9h4 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 &  &  &  &  &  &  &  \\ \hl
 \end{table}
 
 \newpage
-L'interprétation est indécise sur le type d'un appareil. En effet elle hésite entre un chauffage $27\%$, un cuisinière $25\%$ et un frigo $30\%$. On va donc présenter à l'utilisateur ces trois probabilités sur son interface et lui permettre de résoudre le doute. Dans les tables de la base de données cela s'apparentera à ceci :\\
+L'interprétation est indécise sur le type d'un appareil. En effet, elle hésite entre un chauffage $27\%$, un cuisinière $25\%$ et un frigo $30\%$. On va donc présenter à l'utilisateur ces trois probabilités sur son interface et lui permettre de résoudre le doute. Dans les tables de la base de données cela s'apparentera à ceci :\\
 \begin{table}[h]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -326,7 +326,7 @@ hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 1 & hfh584 & kjn9h4 & 30 & hf
 \end{table}
 
 \newpage
-L'interprétation est indécise sur le type d'un appareil. En effet elle hésite entre un chauffage $27\%$, un cuisinière $29\%$ et un frigo $22\%$. On va donc à nouveau présenter à l'utilisateur ces trois probabilités sur son interface et lui permettre de résoudre le doute. Dans les tables de la base de données cela s'apparentera à ceci :\\
+L'interprétation est encore indécise sur le type d'un appareil. En effet elle hésite entre un chauffage $27\%$, un cuisinière $29\%$ et un frigo $22\%$. On va donc à nouveau présenter à l'utilisateur ces trois probabilités sur son interface et lui permettre de résoudre le doute. Dans les tables de la base de données cela s'apparentera à ceci :\\
 
 Voici les tables pour l'identification et les valeurs capteurs :
 \begin{table}[h!]
