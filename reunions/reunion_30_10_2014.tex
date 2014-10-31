@@ -65,10 +65,10 @@
 \begin{itemize}
 \item \textbf{Table des valeurs}: Table où sont stockées les valeurs des capteurs et évènements connus par la table d'identification.\\
 Si la trame provient d'un capteur, le format sera : (id\_capteur, timestamp, valeur). Ex : ("A45",14742585,20)\\
-Si la trame est un évènement issu du serveur interprète, le format sera (id\_evt, type\_d'appareil, marqueur\_evt). Ex : ("B487E", 14742585, "ON").
+Si la trame est un évènement issu du serveur interprète, le format sera : (id\_evt, timestamp, valeur). Ex : ("B487E", 14742585, "ON").
 \item \textbf{Table d'identification}: Table où les identifiants non existants dans la table des valeurs sont stockés.\\ 
 Si la trame provient d'un capteur, le format sera : (id\_capteur, localisation, type de grandeur physique). ("A45","cuisine","Watt")\\
-Si la trame est un évènement issu du serveur interprète, le format sera (id\_evt, type\_d'appareil, marqueur\_evt).Ex :("B487E","lampe",evt).
+Si la trame est un évènement issu du serveur interprète, le format sera : (id\_evt, type\_d'appareil, marqueur\_evt).Ex :("B487E","lampe","evt").
 \item \textbf{Table d'incertitude} : Table contenant les évènements que le serveur interprète n'a pas pu identifier. Ils seront soumis à des algorithmes de probabilités.
 \item \textbf{Table POI}: Table des points d'intérêts utilisée par le serveur interprète. 
 Remarques : les deux dernières tables sont à retraiter.
@@ -81,7 +81,7 @@ Remarques : les deux dernières tables sont à retraiter.
 \item Les données sont traitées par le récepteur de trames.
 \item Une notification est envoyée au client web via le serveur pour le prévenir de la connexion du capteur.
 \item Etant donné que le capteur est nouveau pour le système, il est stocké dans la \textbf{table d'identification}. Ex : (4882,"cuisine","Temp")
-\item La capteur est maintenant enregistré dans la table d'identification. Les valeurs de température vont pouvoir être stockées dans la \textbf{table des valeurs}. Ex : (4882,84848181,20)
+\item La capteur est maintenant enregistré dans la table d'identification. Les valeurs de température vont pouvoir être stockées dans la \textbf{table des valeurs}. Ex : ("4882",84848181,20)
 \item Ces données vont être transférées au client via le serveur web qui permettront d'afficher les courbes de température.
 \end{enumerate}
 \subsection{Phase 2}
