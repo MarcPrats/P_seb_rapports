@@ -58,12 +58,27 @@
 \usepackage{natbib}
 %\usepackage{graphicx}
 
-\begin{document}
 
+\begin{document}
 \maketitle
 
+\begin{figure}[ht]
+\begin{center}
+\noindent \includegraphics[scale = 0.25]{../../Logo_ENSEIRB.pdf}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\noindent \includegraphics[scale = 0.25]{../../smartee_logo.pdf}
+\end{center}
+\end{figure}
+
+
+\newpage
+
+\tableofcontents
+\newpage
 \section {Structure du projet}
-\textbf{BDD :} Base de données
 
 \begin{figure}[h]
 \centering
@@ -72,6 +87,7 @@
 \label{fig:my_label}
 \end{figure}
 
+\textbf{BDD :} Base de données
 \section{Organisation Table des données}
 
 On cherche à séparer les données des capteurs des données liées aux types d'appareil utilisés.
@@ -122,12 +138,12 @@ Voici les tables d'identification et d'états des appareils :
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 \rowcolor[HTML]{EFEFEF} 
-\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero \\ type appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
-hfh584 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 &  &  &  &  &  &  &  \\ \hline
-kjn9h4 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 &  &  &  &  &  &  &  \\ \hline
-153gdj & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 &  &  &  &  &  &  &  \\ \hline
-hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 0 & hfh584 & kjn9h4 & 30 & hfh584 & 27 & 153gdj & 25 \\ \hline
-846ghd & unknown & 328 & 2 & 2487 & 23 & 427 & 0 & -1 & hfh584 & 29 & kjn9h4 & 28 & 153gdj & 24 \\ \hline
+\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
+1 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 & 0 &  &  &  &  &  &  \\ \hline
+2 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 & 0 &  &  &  &  &  &  \\ \hline
+3 & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 & 0  &  &  &  &  &  &  \\ \hline
+10000 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 0 & 1 & 2 & 30 & 1 & 27 & 3 & 25 \\ \hline
+10001 & TV & 328 & 2 & 2487 & 23 & 427 & 0 & 0 & 3 & 29 & 1 & 27 & 2 & 22 \\ \hline
  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \end{tabular}
 }
@@ -140,19 +156,20 @@ hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 0 & hfh584 & kjn9h4 & 30 & hf
     \hline
     \rowcolor[HTML]{EFEFEF} 
     integer Id\_type\_appareils & integer Timestamp & boolean State \\ \hline
-    846ghd       & 1456786           & 1             \\ \hline
-    hfh584       & 1456787           & 0             \\ \hline
-    hfh584       & 1456788           & 1             \\ \hline
-    kjn9h4       & 1456790           & 1             \\ \hline
-    hrs456       & 1456792           & 0             \\ \hline
-    hfh584       & 1456795           & 0             \\ \hline
-    153gdj       & 1456798           & 1             \\ \hline
+    1       & 1456787           & 0             \\ \hline
+    1       & 1456788           & 1             \\ \hline
+    2       & 1456790           & 1             \\ \hline
+    1       & 1456795           & 0             \\ \hline
+    3       & 1456798           & 1             \\ \hline
+    10000       & 1456799          & 0             \\ \hline
+    10001       & 1456800           & 1             \\ \hline
                  &                   &              
     \end{tabular}
     \caption{États des appareils}
-\end{table}
+\end{table} 
 \newpage
 \section{Scénario}
+\subsection{Initialisation}
 Au démarrage de la Box la base de donnée est vide. La Box se met en route en détectant les capteurs environnants, ce qui remplie la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{ valeurs des capteurs}. Parallèlement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les types d'appareils déjà connus par nos recherches, le champ \textbf{Checked} est à 0. \\
 \begin{table}[h!]
     \centering
@@ -191,10 +208,10 @@ Au démarrage de la Box la base de donnée est vide. La Box se met en route en d
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 \rowcolor[HTML]{EFEFEF} 
-\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero \\ type appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
-hfh584 & chauffage & 10 & 15 & 20 & 49 & 200 & 0 &  &  &  &  &  &  &  \\ \hline
-kjn9h4 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 0 &  &  &  &  &  &  &  \\ \hline
-153gdj & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 0 &  &  &  &  &  &  &  \\ \hline
+\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
+1 & chauffage & 10 & 15 & 20 & 49 & 200 & 0 & 0 &  &  &  &  &  &  \\ \hline
+2 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 0 & 0 &  &  &  &  &  &  \\ \hline
+3 & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 0 & 0  &  &  &  &  &  &  \\ \hline
  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \end{tabular}
 }
@@ -210,6 +227,7 @@ kjn9h4 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 0 &  &  &  &  &  &  &  \\ \hl
     \caption{États des appareils}
 \end{table}
 \newpage
+\subsection{Premiers changement d'état d'appareils}
 L'interprétation des valeurs capteurs peut alors démarrer. Les premiers événements d'appareils sont enregistrés dans la table \textit{États des appareil} et dans la table \textit{Identification/interprétation des types d'appareils} le champ \textbf{Checked} de ces appareils passent à 1. \\
 
 \begin{table}[h!]
@@ -248,10 +266,10 @@ L'interprétation des valeurs capteurs peut alors démarrer. Les premiers évén
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 \rowcolor[HTML]{EFEFEF} 
-\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero \\ type appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
-hfh584 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 &  &  &  &  &  &  &  \\ \hline
-kjn9h4 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 &  &  &  &  &  &  &  \\ \hline
-153gdj & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 &  &  &  &  &  &  &  \\ \hline
+\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
+1 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 & 0 &  &  &  &  &  &  \\ \hline
+2 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 & 0 &  &  &  &  &  &  \\ \hline
+3 & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 & 0  &  &  &  &  &  &  \\ \hline
  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \end{tabular}
 }
@@ -263,27 +281,30 @@ kjn9h4 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 &  &  &  &  &  &  &  \\ \hl
     \hline
     \rowcolor[HTML]{EFEFEF} 
     integer Id\_type\_appareils & integer Timestamp & boolean State \\ \hline
-    hfh584                               & 1456787           & 0             \\ \hline
-    hfh584                               & 1456788           & 1             \\ \hline
-    kjn9h4                               & 1456790           & 1             \\ \hline
-    hfh584                               & 1456795           & 0             \\ \hline
-    153gdj                               & 1456798           & 1             \\ \hline	 &                   &              
+    1       & 1456787           & 0             \\ \hline
+    1       & 1456788           & 1             \\ \hline
+    2       & 1456790           & 1             \\ \hline
+    1       & 1456795           & 0             \\ \hline
+    3       & 1456798           & 1             \\ \hline
+                 &                   &              
     \end{tabular}
     \caption{États des appareils}
-\end{table}
+\end{table} 
 
 \newpage
+\subsection{Appareil inconnu détecté}
+\subsubsection{Cas 1}
 L'interprétation est indécise sur le type d'un appareil. En effet, elle hésite entre un chauffage $27\%$, un cuisinière $25\%$ et un frigo $30\%$. On va donc présenter à l'utilisateur ces trois probabilités sur son interface et lui permettre de résoudre le doute. Dans les tables de la base de données cela s'apparentera à ceci :\\
 \begin{table}[h]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 \rowcolor[HTML]{EFEFEF} 
-\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero \\ type appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
-hfh584 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 &  &  &  &  &  &  &  \\ \hline
-kjn9h4 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 &  &  &  &  &  &  &  \\ \hline
-153gdj & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 &  &  &  &  &  &  &  \\ \hline
-hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 1 & -1 & kjn9h4 & 30 & hfh584 & 27 & 153gdj & 25 \\ \hline
+\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
+1 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 & 0 &  &  &  &  &  &  \\ \hline
+2 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 & 0 &  &  &  &  &  &  \\ \hline
+3 & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 & 0  &  &  &  &  &  &  \\ \hline
+10000 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 1 & -1 & 2 & 30 & 1 & 27 & 3 & 25 \\ \hline
  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \end{tabular}
 }
@@ -296,29 +317,29 @@ hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 1 & -1 & kjn9h4 & 30 & hfh584
     \hline
     \rowcolor[HTML]{EFEFEF} 
     integer Id\_type\_appareils & integer Timestamp & boolean State \\ \hline
-    hfh584       & 1456787           & 0             \\ \hline
-    hfh584       & 1456788           & 1             \\ \hline
-    kjn9h4       & 1456790           & 1             \\ \hline
-    hfh584       & 1456795           & 0             \\ \hline
-    153gdj       & 1456798           & 1             \\ \hline
-    hrs456       & 1456792           & 0             \\ \hline
+    1       & 1456787           & 0             \\ \hline
+    1       & 1456788           & 1             \\ \hline
+    2       & 1456790           & 1             \\ \hline
+    1       & 1456795           & 0             \\ \hline
+    3       & 1456798           & 1             \\ \hline
+    10000       & 1456799          & 0             \\ \hline
                  &                   &              
     \end{tabular}
     \caption{États des appareils}
 \end{table} 
-\newpage
-L'utilisateur va résoudre le conflit en associant cet appareil inconnu à un chauffage. On va alors placer le champ alias de l'appareil inconnu de $-1$ à hfh584. Cet appareil inconnu sera désormais apparenté à un chauffage.\\
+
+L'utilisateur va résoudre le conflit en associant cet appareil inconnu à un chauffage. On va alors placer le champ alias de l'appareil inconnu de $-1$ à 1. Cet appareil inconnu sera désormais apparenté à un chauffage.\\
 
 \begin{table}[h]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 \rowcolor[HTML]{EFEFEF} 
-\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero \\ type appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
-hfh584 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 &  &  &  &  &  &  &  \\ \hline
-kjn9h4 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 &  &  &  &  &  &  &  \\ \hline
-153gdj & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 &  &  &  &  &  &  &  \\ \hline
-hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 1 & hfh584 & kjn9h4 & 30 & hfh584 & 27 & 153gdj & 25 \\ \hline
+\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
+1 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 & 0 &  &  &  &  &  &  \\ \hline
+2 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 & 0 &  &  &  &  &  &  \\ \hline
+3 & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 & 0  &  &  &  &  &  &  \\ \hline
+10000 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 1 & 1 & 2 & 30 & 1 & 27 & 3 & 25 \\ \hline
  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \end{tabular}
 }
@@ -326,52 +347,21 @@ hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 1 & hfh584 & kjn9h4 & 30 & hf
 \end{table}
 
 \newpage
+\subsubsection{Cas 2}
 L'interprétation est encore indécise sur le type d'un appareil. En effet elle hésite entre un chauffage $27\%$, un cuisinière $29\%$ et un frigo $22\%$. On va donc à nouveau présenter à l'utilisateur ces trois probabilités sur son interface et lui permettre de résoudre le doute. Dans les tables de la base de données cela s'apparentera à ceci :\\
 
-Voici les tables pour l'identification et les valeurs capteurs :
-\begin{table}[h!]
-    \centering
-    \begin{tabular}{|l|l|l|}
-    \hline
-    \rowcolor[HTML]{EFEFEF} 
-    string Id & string Localisation & char Type\_de\_données \\ \hline
-    j46nc4    & cuisine             & T                      \\ \hline
-    465hjs    & garage              & W                      \\ \hline
-    hfh765    & garage              & D                      \\ \hline
-              &                     &                       
-    \end{tabular}
-    \caption{Identification des capteurs}
-\end{table}
-
-\begin{table}[h!]
-\centering
-    \begin{tabular}{|l|l|l|}
-    \hline
-    \rowcolor[HTML]{EFEFEF} 
-    string Id & integer Timestamp & integer Value \\ \hline
-    j46nc4    & 1456786           & 20            \\ \hline
-    465hjs    & 1456787           & 220           \\ \hline
-    hfh765    & 1456788           & 10            \\ \hline
-    j46nc4    & 1456790           & 18            \\ \hline
-    j46nc4    & 1456792           & 24            \\ \hline
-    hfh765    & 1456795           & 11            \\ \hline
-    hfh765    & 1456798           & 12            \\ \hline
-              &                   &              
-    \end{tabular}
-    \caption{Valeurs des capteurs}
-\end{table}
 Voici les tables d'identification et d'états des appareils :
 \begin{table}[h]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 \rowcolor[HTML]{EFEFEF} 
-\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero \\ type appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
-hfh584 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 &  &  &  &  &  &  &  \\ \hline
-kjn9h4 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 &  &  &  &  &  &  &  \\ \hline
-153gdj & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 &  &  &  &  &  &  &  \\ \hline
-hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 0 & hfh584 & kjn9h4 & 30 & hfh584 & 27 & 153gdj & 25 \\ \hline
-846ghd & unknown & 328 & 2 & 2487 & 23 & 427 & 0 & -1 & hfh584 & 29 & kjn9h4 & 28 & 153gdj & 24 \\ \hline
+\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
+1 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 & 0 &  &  &  &  &  &  \\ \hline
+2 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 & 0 &  &  &  &  &  &  \\ \hline
+3 & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 & 0  &  &  &  &  &  &  \\ \hline
+10000 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 1 & 1 & 2 & 30 & 1 & 27 & 3 & 25 \\ \hline
+10001 & unknown & 328 & 2 & 2487 & 23 & 427 & 1 & -1 & 3 & 29 & 1 & 27 & 2 & 22 \\ \hline
  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \end{tabular}
 }
@@ -384,19 +374,34 @@ hrs456 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 0 & hfh584 & kjn9h4 & 30 & hf
     \hline
     \rowcolor[HTML]{EFEFEF} 
     integer Id\_type\_appareils & integer Timestamp & boolean State \\ \hline
-    846ghd       & 1456786           & 1             \\ \hline
-    hfh584       & 1456787           & 0             \\ \hline
-    hfh584       & 1456788           & 1             \\ \hline
-    kjn9h4       & 1456790           & 1             \\ \hline
-    hrs456       & 1456792           & 0             \\ \hline
-    hfh584       & 1456795           & 0             \\ \hline
-    153gdj       & 1456798           & 1             \\ \hline
+    1       & 1456787           & 0             \\ \hline
+    1       & 1456788           & 1             \\ \hline
+    2       & 1456790           & 1             \\ \hline
+    1       & 1456795           & 0             \\ \hline
+    3       & 1456798           & 1             \\ \hline
+    10000       & 1456799          & 0             \\ \hline
+    10001       & 1456800           & 1             \\ \hline
                  &                   &              
     \end{tabular}
     \caption{États des appareils}
 \end{table} 
-\newpage
 L'utilisateur va résoudre le conflit en associant cet appareil inconnu à un nouvel appareil non référencé : TV. On va alors placer le champ alias de l'appareil inconnu de $-1$ à $0$, changer le nom à TV.  
+\begin{table}[h]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
+1 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 & 0 &  &  &  &  &  &  \\ \hline
+2 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 & 0 &  &  &  &  &  &  \\ \hline
+3 & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 & 0  &  &  &  &  &  &  \\ \hline
+10000 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 1 & 1 & 2 & 30 & 1 & 27 & 3 & 25 \\ \hline
+10001 & TV & 328 & 2 & 2487 & 23 & 427 & 1 & 0 & 3 & 29 & 1 & 27 & 2 & 22 \\ \hline
+ &  &  &  &  &  &  &  &  &  &  &  &  &  & 
+\end{tabular}
+}
+\caption{Identification/interprétation des types d'appareils}
+\end{table}
 
 \newpage
 \section{Choix des technologies}
