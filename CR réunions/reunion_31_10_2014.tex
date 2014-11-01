@@ -92,15 +92,7 @@
 
 On cherche à séparer les données des capteurs des données liées aux types d'appareil utilisés.
 \begin{enumerate}
-\item \textbf{Identification des capteurs :} Cette table regroupe tous les capteurs connectés au système. Elle enregistre chaque nouveau capteur sous la forme (string Id, string Localisation, char Type\_de\_données ) -> ("ae4j85","cuisine","T").
-\item \textbf{Valeurs des capteurs :} Cette table regroupe les différentes valeurs enregistrées au cours 
-du temps par les capteurs présents dans la table d'identification : (string Id , integer Timestamp, float Value ) -> ("ae4j85",1818461,22.3)
-\item \textbf{États des types d'appareils : } Cette table regroupe les différents états des types d'appareils au cours du temps : (integer Id\_type\_appareil, integer Timestamp, boolean État) -> (42,1845471,1)
-\item \textbf{Identification/interprétation des types d'appareils :} Cette table regroupe les différents types d'appareils identifiés, les points d'intérêt associés et les notions nécessaires à la gestion de l'incertitude des interprétations.
-%(integer Id\_type\_appareil, string Nom\_type\_appareil, integer POI1, integer POI2, integer POI3, integer POI4, integer POI5, boolean checked, integer Alias, integer Numero\_type\_appareil1, integer Proba1, integer Numero\_type\_appareil2, integer Proba2, integer Numero\_type\_appareil3, integer Proba3) 
-\end{enumerate}
-\newpage
-Voici les tables pour l'identification et les valeurs capteurs :
+\item \textbf{Identification des capteurs :} Cette table regroupe tous les capteurs connectés au système. Elle enregistre chaque nouveau capteur.
 \begin{table}[h!]
     \centering
     \begin{tabular}{|l|l|l|}
@@ -114,7 +106,14 @@ Voici les tables pour l'identification et les valeurs capteurs :
     \end{tabular}
     \caption{Identification des capteurs}
 \end{table}
-
+\\
+\begin{itemize}
+\item \textbf{Id} : unique lié à chaque capteur.
+\item \textbf{Localisation} : Permet à l'utilisateur de renseigné une "Localisation" du capteur.
+\item \textbf{Type de données} : Permet de définir si le capteur renvoie une température (T), une puissance (W) ou un débit d'eau (D).
+\end{itemize}
+\newpage
+\item \textbf{Valeurs des capteurs :} Cette table regroupe les différentes valeurs enregistrées au cours du temps par les capteurs présents dans la table d'identification.
 \begin{table}[h!]
 \centering
     \begin{tabular}{|l|l|l|}
@@ -132,23 +131,12 @@ Voici les tables pour l'identification et les valeurs capteurs :
     \end{tabular}
     \caption{Valeurs des capteurs}
 \end{table}
-Voici les tables d'identification et d'états des appareils :
-\begin{table}[h]
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline
-\rowcolor[HTML]{EFEFEF} 
-\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
-1 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 & 0 &  &  &  &  &  &  \\ \hline
-2 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 & 0 &  &  &  &  &  &  \\ \hline
-3 & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 & 0  &  &  &  &  &  &  \\ \hline
-10000 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 0 & 1 & 2 & 30 & 1 & 27 & 3 & 25 \\ \hline
-10001 & TV & 328 & 2 & 2487 & 23 & 427 & 0 & 0 & 3 & 29 & 1 & 27 & 2 & 22 \\ \hline
- &  &  &  &  &  &  &  &  &  &  &  &  &  & 
-\end{tabular}
-}
-\caption{Identification/interprétation des types d'appareils}
-\end{table}
+\begin{itemize}
+\item \textbf{Id} : unique lié à chaque capteur.
+\item \textbf{Timestamp} : Horodatage de chaque valeur stocké
+\item \textbf{Valeur} : Stocke les valeurs, l'unité est donné par correspondance avec la table \textbf{identification des capteurs}
+\end{itemize}
+\item \textbf{États des types d'appareils : } Cette table regroupe les différents états des types d'appareils au cours du temps.\\
 
 \begin{table}[h!]
 \centering
@@ -165,8 +153,39 @@ Voici les tables d'identification et d'états des appareils :
     10001       & 1456800           & 1             \\ \hline
                  &                   &              
     \end{tabular}
-    \caption{États des appareils}
+    \caption{États des types d'appareils}
 \end{table} 
+\begin{itemize}
+\item \textbf{Id\_type\_appareils} : unique, provient soit d'une base de donnée déjà créer grâce aux recherches, soit créé par l'utilisateur lors d'un type d'appareil inconnu.
+\item \textbf{Timestamp} : Horodatage de chaque valeur stocké
+\item \textbf{State} : Allumé : 1, éteint : 0.
+\end{itemize}
+\item \textbf{Identification/interprétation des types d'appareils :} Cette table regroupe les différents types d'appareils identifiés, les points d'intérêt associés et les notions nécessaires à la gestion de l'incertitude des interprétations.
+\begin{table}[h]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\begin{tabular}[c]{@{}c@{}}integer \\ Id type \\ appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}string \\ Nom type\\  appareils\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI4\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  POI5\end{tabular} & \begin{tabular}[c]{@{}c@{}}boolean\\  checked\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Alias\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer\\  Proba 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 2\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Numero\\  type \\ appareil 3\end{tabular} & \begin{tabular}[c]{@{}c@{}}integer \\ Proba 3\end{tabular} \\ \hline
+1 & chauffage & 10 & 15 & 20 & 49 & 200 & 1 & 0 &  &  &  &  &  &  \\ \hline
+2 & frigo & 139 & 3829 & 1329 & 0284 & 1209 & 1 & 0 &  &  &  &  &  &  \\ \hline
+3 & cuisinière & 17 & 8364 & 1893 & 1360 & 1361 & 1 & 0  &  &  &  &  &  &  \\ \hline
+10000 & unknown & 1073 & 13 & 324 & 2486 & 1846 & 0 & 1 & 2 & 30 & 1 & 27 & 3 & 25 \\ \hline
+10001 & TV & 328 & 2 & 2487 & 23 & 427 & 0 & 0 & 3 & 29 & 1 & 27 & 2 & 22 \\ \hline
+ &  &  &  &  &  &  &  &  &  &  &  &  &  & 
+\end{tabular}
+}
+\caption{Identification/interprétation des types d'appareils}
+\end{table} 
+\begin{itemize}
+\item \textbf{Id} : unique lié à chaque type d'appareil.
+\item \textbf{Nom type d'appareil} : nom défini par nos recherches ou par l'utilisateur dans le cas de type d'appareil inconnu.
+\item \textbf{$POI_n$} : points d'intérêts nécessaires à l'identification des appareils à partir des données de puissance.
+\item \textbf{checked} : à 0 quand l'appareil de ce type n'a jamais été détecté. Passe à 1 quand un appareil de ce type est détecté. Permet la séparation des données produites par la recherche et celle qui sont utilisé. Le scénario apporte plus d'information à ce sujet.
+\item \textbf{Alias} permet de renvoyé à un autre type d'appareil dans le cas de plusieurs POI pour le même type d'appareil.
+\item \textbf{Champs suivants} ils sont détaillés dans le scénario.
+\end{itemize}
+\end{enumerate}
 \newpage
 \section{Scénario}
 \subsection{Initialisation}
