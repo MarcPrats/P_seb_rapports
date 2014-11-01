@@ -109,7 +109,7 @@ On cherche à séparer les données des capteurs des données liées aux types d
 \\
 \begin{itemize}
 \item \textbf{Id} : unique lié à chaque capteur.
-\item \textbf{Localisation} : Permet à l'utilisateur de renseigné une "Localisation" du capteur.
+\item \textbf{Localisation} : Permet à l'utilisateur de renseigner une "Localisation" du capteur.
 \item \textbf{Type de données} : Permet de définir si le capteur renvoie une température (T), une puissance (W) ou un débit d'eau (D).
 \end{itemize}
 \newpage
@@ -133,8 +133,8 @@ On cherche à séparer les données des capteurs des données liées aux types d
 \end{table}
 \begin{itemize}
 \item \textbf{Id} : unique lié à chaque capteur.
-\item \textbf{Timestamp} : Horodatage de chaque valeur stocké
-\item \textbf{Valeur} : Stocke les valeurs, l'unité est donné par correspondance avec la table \textbf{identification des capteurs}
+\item \textbf{Timestamp} : Horodatage de chaque valeur stockée
+\item \textbf{Valeur} : Stocke les valeurs, l'unité est donnée par correspondance avec la table \textbf{identification des capteurs}
 \end{itemize}
 \item \textbf{États des types d'appareils : } Cette table regroupe les différents états des types d'appareils au cours du temps.\\
 
@@ -156,8 +156,8 @@ On cherche à séparer les données des capteurs des données liées aux types d
     \caption{États des types d'appareils}
 \end{table} 
 \begin{itemize}
-\item \textbf{Id\_type\_appareils} : unique, provient soit d'une base de donnée déjà créer grâce aux recherches, soit créé par l'utilisateur lors d'un type d'appareil inconnu.
-\item \textbf{Timestamp} : Horodatage de chaque valeur stocké
+\item \textbf{Id\_type\_appareils} : unique, provient soit d'une base de données déjà créée grâce aux recherches, soit créée par l'utilisateur lors d'un type d'appareil inconnu.
+\item \textbf{Timestamp} : Horodatage de chaque valeur stockée.
 \item \textbf{State} : Allumé : 1, éteint : 0.
 \end{itemize}
 \item \textbf{Identification/interprétation des types d'appareils :} Cette table regroupe les différents types d'appareils identifiés, les points d'intérêt associés et les notions nécessaires à la gestion de l'incertitude des interprétations.
@@ -181,15 +181,15 @@ On cherche à séparer les données des capteurs des données liées aux types d
 \item \textbf{Id} : unique lié à chaque type d'appareil.
 \item \textbf{Nom type d'appareil} : nom défini par nos recherches ou par l'utilisateur dans le cas de type d'appareil inconnu.
 \item \textbf{$POI_n$} : points d'intérêts nécessaires à l'identification des appareils à partir des données de puissance.
-\item \textbf{checked} : à 0 quand l'appareil de ce type n'a jamais été détecté. Passe à 1 quand un appareil de ce type est détecté. Permet la séparation des données produites par la recherche et celle qui sont utilisé. Le scénario apporte plus d'information à ce sujet.
-\item \textbf{Alias} permet de renvoyé à un autre type d'appareil dans le cas de plusieurs POI pour le même type d'appareil.
+\item \textbf{checked} : à 0 quand l'appareil de ce type n'a jamais été détecté. Passe à 1 quand un appareil de ce type est détecté. Permet la séparation des données produites par la recherche et celles qui sont utilisées. Le scénario apporte plus d'informations à ce sujet.
+\item \textbf{Alias} permet de renvoyer à un autre type d'appareil dans le cas de plusieurs POI pour le même type d'appareil.
 \item \textbf{Champs suivants} ils sont détaillés dans le scénario.
 \end{itemize}
 \end{enumerate}
 \newpage
 \section{Scénario}
 \subsection{Initialisation}
-Au démarrage de la Box la base de donnée est vide. La Box se met en route en détectant les capteurs environnants, ce qui remplit la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{ valeurs des capteurs}. Parallèlement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les types d'appareils déjà connus par nos recherches, le champ \textbf{Checked} est à 0. \\
+Au démarrage de la Box la base de données est vide. La Box se met en route en détectant les capteurs environnants, ce qui remplit la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{ valeurs des capteurs}. Parallèlement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les types d'appareils déjà connus par nos recherches, le champ \textbf{Checked} est à 0. \\
 \begin{table}[h!]
     \centering
     \begin{tabular}{|l|l|l|}
