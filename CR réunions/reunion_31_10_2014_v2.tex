@@ -170,7 +170,7 @@ Voici les tables d'identification et d'états des appareils :
 \newpage
 \section{Scénario}
 \subsection{Initialisation}
-Au démarrage de la Box la base de donnée est vide. La Box se met en route en détectant les capteurs environnants, ce qui remplie la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{ valeurs des capteurs}. Parallèlement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les types d'appareils déjà connus par nos recherches, le champ \textbf{Checked} est à 0. \\
+Au démarrage de la Box la base de donnée est vide. La Box se met en route en détectant les capteurs environnants, ce qui remplit la table d'\textit{identification des capteurs} ainsi que les premières valeurs de la table\textit{ valeurs des capteurs}. Parallèlement, la table \textit{Identification/interprétation des types d'appareils} est remplie avec les types d'appareils déjà connus par nos recherches, le champ \textbf{Checked} est à 0. \\
 \begin{table}[h!]
     \centering
     \begin{tabular}{|l|l|l|}
@@ -227,40 +227,10 @@ Au démarrage de la Box la base de donnée est vide. La Box se met en route en d
     \caption{États des appareils}
 \end{table}
 \newpage
-\subsection{Premiers changement d'état d'appareils}
+\subsection{Premiers changements d'état d'appareils}
 L'interprétation des valeurs capteurs peut alors démarrer. Les premiers événements d'appareils sont enregistrés dans la table \textit{États des appareil} et dans la table \textit{Identification/interprétation des types d'appareils} le champ \textbf{Checked} de ces appareils passent à 1. \\
 
-\begin{table}[h!]
-    \centering
-    \begin{tabular}{|l|l|l|}
-    \hline
-    \rowcolor[HTML]{EFEFEF} 
-    string Id & string Localisation & char Type\_de\_données \\ \hline
-    j46nc4    & cuisine             & T                      \\ \hline
-    465hjs    & garage              & W                      \\ \hline
-    hfh765    & garage              & D                      \\ \hline
-              &                     &                       
-    \end{tabular}
-    \caption{Identification des capteurs}
-\end{table}
 
-\begin{table}[h!]
-\centering
-    \begin{tabular}{|l|l|l|}
-    \hline
-    \rowcolor[HTML]{EFEFEF} 
-    string Id & integer Timestamp & integer Value \\ \hline
-    j46nc4    & 1456786           & 20            \\ \hline
-    465hjs    & 1456787           & 220           \\ \hline
-    hfh765    & 1456788           & 10            \\ \hline
-    j46nc4    & 1456790           & 18            \\ \hline
-    j46nc4    & 1456792           & 24            \\ \hline
-    hfh765    & 1456795           & 11            \\ \hline
-    hfh765    & 1456798           & 12            \\ \hline
-              &                   &              
-    \end{tabular}
-    \caption{Valeurs des capteurs}
-\end{table}
 \begin{table}[h]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -328,7 +298,7 @@ L'interprétation est indécise sur le type d'un appareil. En effet, elle hésit
     \caption{États des appareils}
 \end{table} 
 
-L'utilisateur va résoudre le conflit en associant cet appareil inconnu à un chauffage. On va alors placer le champ alias de l'appareil inconnu de $-1$ à 1. Cet appareil inconnu sera désormais apparenté à un chauffage.\\
+L'utilisateur va résoudre le conflit en associant cet appareil inconnu à un chauffage. On va alors placer le champ alias de l'appareil inconnu de $-1$ à 1. Cet appareil inconnu sera désormais apparenté à un chauffage représenté par l'entier 1.\\
 
 \begin{table}[h]
 \resizebox{\textwidth}{!}{%
