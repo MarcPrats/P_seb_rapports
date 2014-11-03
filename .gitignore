@@ -50,6 +50,10 @@
 *.mat
 *.asv
 
+# Images #
+*.jpg
+*.jpeg
+
 # MAC OS X and Windows generated files #
 .DS_Store
 .DS_Store?
