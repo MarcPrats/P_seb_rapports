@@ -98,8 +98,11 @@ Nos contraintes pour les données sont les suivantes :
     
     \item \textbf{Client Web : Vues, Ergonomie et Calculs : Benjamin Rambaud et Marc Prats 
     \\$\rightarrow$ Délai: 28 novembre}\\
-    Cette partie permet d'afficher toutes les informations dont l'utilisateur a besoin. Les courbes des grandeurs physiques, les notifications, les appareils présents ainsi que leur état sont présentés. L'ergonomie de l'interface est également un enjeu de cette partie.    
+    Cette partie permet d'afficher toutes les informations dont l'utilisateur a besoin. Les courbes des grandeurs physiques, les notifications, les appareils présents ainsi que leur état sont présentés. L'ergonomie de l'interface est également un enjeu de cette partie.  
 \end{itemize}
+
+\vspace{1em}
+\textbf{Remarques :} Il faut fournir une version 0 fonctionnelle et minimaliste le plus tôt possible.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -108,10 +111,25 @@ Nos contraintes pour les données sont les suivantes :
 US: User Stories
 
 \begin{enumerate}[label=\bfseries US\arabic* :]
-    \item L'utilisateur accède aux différentes courbes des différentes grandeurs physiques( température, débit d'eau, consommation électrique) .
-    \item L'utilisateur accède aux différentes notifications.
-    \item L'utilisateur accède à la visualisations des appareils et leur état.
-    \item L'utilisateur corrige l'identifiaction du capteur ou son état.
+    \item L'utilisateur doit pouvoir se connecter pour accéder aux services.
+    \item L'utilisateur doit pouvoir accéder aux différentes courbes des différentes grandeurs physiques( température, débit d'eau, consommation électrique).
+    \item L'utilisateur doit pouvoir accéder aux différentes notifications.
+    \item L'utilisateur doit pouvoir accéder à la visualisations des appareils et leur état.
+    \item L'utilisateur doit pouvoir corriger l'identification du capteur ou son état.
+\end{enumerate}
+
+\section{Tâches}
+
+\begin{enumerate}[label=\bfseries\Alph* :]
+    \item Architecture de la base de données.
+    \item Mise en place du serveur sqlite.
+    \item Script de création et déploiement de la base de données.
+    \item Module C++ de lecture/écriture dans la bdd côté ISNC.
+    \item Définir l'aspect de l'interface.
+    \item Coder l'affichage des courbes. (lister les courbes)
+    \item Coder l'affichage des notifications. 
+    \item Coder l'affichage des appareils et leurs états.
+    \item Coder la correction utilisateur.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
