@@ -54,64 +54,75 @@
 \setlength{\topmargin}{-1.5cm} % Taille de l'ent\^ete
 
 \title{PR307 Smart-EcoBox : \\ Planning GLRT}
-
-\usepackage{natbib}
-%\usepackage{graphicx}
-
+\author{}
 
 \begin{document}
 \maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Choix des technologies}
+
 Nos contraintes pour les données sont les suivantes :
-\begin{itemize}
-\item La transmission des données est synchrone (les données vont être transmises successivement).
-\item Les données sont triées, opérations de jointures sur les tables $\rightarrow$ Besoin de base de données relationnelles.
-\item Les technologies doivent consommer le moins de ressources possibles pour fonctionner sur un dispositif tel qu'un Rasperry Pi.\\
+\begin{itemize}[label=$\bullet$]
+    \item La transmission des données est synchrone (les données vont être transmises successivement).
+    \item Les données sont triées, opérations de jointures sur les tables $\rightarrow$ Besoin de base de données relationnelles.
+    \item Les technologies doivent consommer le moins de ressources possibles pour fonctionner sur un dispositif tel qu'un Rasperry Pi.
 \end{itemize}   
-\textbf{Propositions de technologies}:\\
-\begin{itemize}
-\item \textbf{Base de données SQLite : }Cette technologie légère et relationnelle peut être contenue dans un seul fichier.\\ 
-\item \textbf{Serveur Nginx: }Ces serveur demande peu de resources et s'adaptent aux bases relationnelles.\\
-\item \textbf{Langages PHP: }Ce langage natif est caractéristique du domaine de développement Web et s'adapte au serveur énoncé précédemment.\\
-\item \textbf{JavaScript, Angular JS, JQuery : } Ces technologies vont permettre de réaliser le code client où seront affichés les différentes courbes des grandeurs physiques, les différents appareils en route et les différentes notifications par rapport aux données reçues du serveur web.\\
-\item \textbf{C++ :} Ce langage utilisé par l'équipe ISNC, permet d'insérer les données issues du récepteur/interprète dans la base de données.
 
+   \subsection*{Propositions de technologies :}
+   
+\begin{itemize}[label=$\bullet$]
+    \setlength\itemsep{1em}
+    \item \textbf{Base de données SQLite : }Cette technologie légère et relationnelle peut être contenue dans un seul fichier. 
+    \item \textbf{Serveur Nginx : }Ce serveur demande peu de resources et s'adapte aux bases relationnelles.
+    \item \textbf{Langages PHP : }Ce langage natif est caractéristique du domaine de développement Web et s'adapte au serveur énoncé précédemment.
+    \item \textbf{JavaScript, Angular JS, JQuery : } Ces technologies vont permettre de réaliser le code client où seront affichés les différentes courbes des grandeurs physiques, les différents appareils en route et les différentes notifications par rapport aux données reçues du serveur web.
+    \item \textbf{C++ :} Comme l'équipe ISNC l'utilise, l'interaction entre le récepteur/interprète et la base de données se fera dans ce langage . 
 \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Description Planning GLRT}
-\begin{itemize}
-\item \textbf{ Lien entre le récepteur/interprète et la base de données : Karim Toufique
-\\ $\rightarrow$ Délai: 14 novembre}\\
-Insertion des données de l'interprète/récepteur dans la base de données.\\ 
-\item \textbf{Lien entre la base de données et le client web via le serveur : Karim Toufique 
-\\$\rightarrow$ Délai: 21 novembre}\\
-Organisation des réponses pouvant être effectuées par le serveur pour le client. Cela a pour but de transmettre les données fournies par la base de données au client. De même, le serveur doit répondre aux requêtes de modifications du client.\\ 
 
-\item \textbf{Client Web : Vues, Ergonomie et Calculs : Benjamin Rambaud et Marc Prats 
-\\$\rightarrow$ Délai: 28 novembre}\\
-Cette partie permet d'afficher toutes les informations dont l'utilisateur a besoin. Les courbes des grandeurs physiques, les notifications, les appareils présents ainsi que leur état sont présentés. L'ergonomie de l'interface est également un enjeu de cette partie.\\    
+\begin{itemize}[label=$\bullet$]
+    \setlength\itemsep{1em}
+    
+    \item \textbf{ Lien entre le récepteur/interprète et la base de données : Karim Toufique
+    \\ $\rightarrow$ Délai: 14 novembre}\\
+    Insertion des données de l'interprète/récepteur dans la base de données. 
+    
+    \item \textbf{Lien entre la base de données et le client web via le serveur : Karim Toufique 
+    \\$\rightarrow$ Délai: 21 novembre}\\
+    Organisation des réponses pouvant être effectuées par le serveur pour le client. Cela a pour but de transmettre les données fournies par la base de données au client. De même, le serveur doit répondre aux requêtes de modifications du client.
+    
+    \item \textbf{Client Web : Vues, Ergonomie et Calculs : Benjamin Rambaud et Marc Prats 
+    \\$\rightarrow$ Délai: 28 novembre}\\
+    Cette partie permet d'afficher toutes les informations dont l'utilisateur a besoin. Les courbes des grandeurs physiques, les notifications, les appareils présents ainsi que leur état sont présentés. L'ergonomie de l'interface est également un enjeu de cette partie.    
 \end{itemize}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Backlog Produit}
+
 US: User Stories
-\begin{itemize}
-\item US1 : L'utilisateur accède aux différentes courbes des différentes grandeurs physiques( température, \item débit d'eau, consommation électrique) .
-\item US2 : L'utilisateur accède aux différentes notifications.
-\item US3 : L'utilisateur accède à la visualisations des appareils et leur état.
-\item US4 : L'utilisateur corrige l'identifiaction du capteur ou son état. 
 
-\end{itemize}
+\begin{enumerate}[label=\bfseries US\arabic* :]
+    \item L'utilisateur accède aux différentes courbes des différentes grandeurs physiques( température, débit d'eau, consommation électrique) .
+    \item L'utilisateur accède aux différentes notifications.
+    \item L'utilisateur accède à la visualisations des appareils et leur état.
+    \item L'utilisateur corrige l'identifiaction du capteur ou son état.
+\end{enumerate}
 
-\section{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\section{Références}
-\begin{itemize}
-\item http://www.sqlite.org/
-\item http://nginx.org/ 
-\item http://www.wikivs.com/wiki/lighttpd\_vs\_nginx
-\end{itemize}
-
+\begin{thebibliography}{10}
+    \bibitem{sqlite}
+    Site officiel de sqlite : \emph{http://www.sqlite.org/}
+    \bibitem{nginx}
+    Site officiel de nginx : \emph{http://www.nginx.org/}
+    \bibitem{wiki}
+    Comparaison lighttpd VS nginx :  \emph{http://www.wikivs.com/wiki/lighttpd\_vs\_nginx}
+\end{thebibliography}
 
 \end{document}
