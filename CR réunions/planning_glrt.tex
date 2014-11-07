@@ -1,0 +1,117 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{enumitem}
+%\frenchbsetup{StandardLists=true}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{moreverb}
+\usepackage{epsfig}
+\usepackage{textcomp}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{booktabs}
+
+    \usepackage{xcolor}
+      %%%%%%%%%%%%%%%%  inclure la source %%%%%%%%%%%%%%%%%%%%
+  \newcommand*\styleC{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+  \newcommand*\styleD{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+
+      \makeatletter
+      % on fixe le langage utilisé
+      \lstset{language=matlab, breaklines=true}
+      \edef\Motscle{emph={\lst@keywords}}
+      \expandafter\lstset\expandafter{%
+       \Motscle}
+      \makeatother
+
+
+      \definecolor{Vvert}{rgb}{0.133,0.545,0.133}
+
+      \lstset{emphstyle=\color{blue}, % les mots réservés de matlab en bleu
+      basicstyle=\styleC,
+      keywordstyle=\cmtt,
+      commentstyle=\color{Vvert}\styleD, % commentaire en gris
+      numberstyle=\tiny\color{red},
+      numbers=left,
+      numbersep=10pt,
+      lineskip=0.7pt,
+      showstringspaces=false}
+      %  % inclure le fichier source
+      \newcommand{\FSource}[1]{%
+      \lstinputlisting[texcl=true]{#1}
+      }
+
+\setlength{\textwidth}{16cm} % Largeur du texte
+\setlength{\textheight}{24cm} % Hauteur du texte
+\setlength{\evensidemargin}{-0.2cm} % Taille des marges pour les pages paires
+\setlength{\oddsidemargin}{-0.2cm} % Taille des marges pour les pages impaires
+\setlength{\topmargin}{-1.5cm} % Taille de l'ent\^ete
+
+\title{PR307 Smart-EcoBox : \\ Planning GLRT}
+
+\usepackage{natbib}
+%\usepackage{graphicx}
+
+
+\begin{document}
+\maketitle
+\section{Choix des technologies}
+Nos contraintes pour les données sont les suivantes :
+\begin{itemize}
+\item La transmission des données est synchrone (les données vont être transmises successivement).
+\item Les données sont triées, opérations de jointures sur les tables $\rightarrow$ Besoin de base de données relationnelles.
+\item Les technologies doivent consommer le moins de ressources possibles pour fonctionner sur un dispositif tel qu'un Rasperry Pi.\\
+\end{itemize}   
+\textbf{Propositions de technologies}:\\
+\begin{itemize}
+\item \textbf{Base de données SQLite : }Cette technologie légère et relationnelle peut être contenue dans un seul fichier.\\ 
+\item \textbf{Serveur Nginx: }Ces serveur demande peu de resources et s'adaptent aux bases relationnelles.\\
+\item \textbf{Langages PHP: }Ce langage natif est caractéristique du domaine de développement Web et s'adapte au serveur énoncé précédemment.\\
+\item \textbf{JavaScript, Angular JS, JQuery : } Ces technologies vont permettre de réaliser le code client où seront affichés les différentes courbes des grandeurs physiques, les différents appareils en route et les différentes notifications par rapport aux données reçues du serveur web.\\
+\item \textbf{C++ :} Ce langage utilisé par l'équipe ISNC, permet d'insérer les données issues du récepteur/interprète dans la base de données.
+
+\end{itemize}
+\section{Description Planning GLRT}
+\begin{itemize}
+\item \textbf{ Lien entre le récepteur/interprète et la base de données : Karim Toufique
+\\ $\rightarrow$ Délai: 14 novembre}\\
+Insertion des données de l'interprète/récepteur dans la base de données.\\ 
+\item \textbf{Lien entre la base de données et le client web via le serveur : Karim Toufique 
+\\$\rightarrow$ Délai: 21 novembre}\\
+Organisation des réponses pouvant être effectuées par le serveur pour le client. Cela a pour but de transmettre les données fournies par la base de données au client. De même, le serveur doit répondre aux requêtes de modifications du client.\\ 
+
+\item \textbf{Client Web : Vues, Ergonomie et Calculs : Benjamin Rambaud et Marc Prats 
+\\$\rightarrow$ Délai: 28 novembre}\\
+Cette partie permet d'afficher toutes les informations dont l'utilisateur a besoin. Les courbes des grandeurs physiques, les notifications, les appareils présents ainsi que leur état sont présentés. L'ergonomie de l'interface est également un enjeu de cette partie.\\    
+\end{itemize}
+
+
+
+\section{Backlog Produit}
+US: User Stories
+\begin{itemize}
+\item US1 : L'utilisateur accède aux différentes courbes des différentes grandeurs physiques( température, \item débit d'eau, consommation électrique) .
+\item US2 : L'utilisateur accède aux différentes notifications.
+\item US3 : L'utilisateur accède à la visualisations des appareils et leur état.
+\item US4 : L'utilisateur corrige l'identifiaction du capteur ou son état. 
+
+\end{itemize}
+
+\section{}
+
+
+\section{Références}
+\begin{itemize}
+\item http://www.sqlite.org/
+\item http://nginx.org/ 
+\item http://www.wikivs.com/wiki/lighttpd\_vs\_nginx
+\end{itemize}
+
+
+\end{document}
