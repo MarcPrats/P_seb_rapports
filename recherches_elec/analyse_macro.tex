@@ -129,6 +129,29 @@ Nous obtenons alors un spectrogramme avec l'allure suivante :
 \end{center}
 \end{figure}
 
+Dans la thèse de M. El Guedri, le seuillage du spectrogramme $\rho_y[k,\nu]$ est réalisé en 2 régions $L_{H_0}$, motifs spectraux du chauffage, et $L_{H_1}$, bruit de fond de la courbe de charge. Son détecteur de motifs s'appuie sur les variations du moment d'ordre 2 du signal dans le domaine-temps fréquence.
+\\
+\\
+On suppose 2 hypothèses :\\
+\textit{- $H_0$ : Signal aléatoire stationnaire, de puissance moyenne finie, éventuellement augmenté d'un signal déterministe, sa densité de probabilité marginale $p_0$ est connue mais de paramètres inconnus.\\
+- $H_1$ : Signal stationnaire par morceaux de densité de probabilité inconnue.}
+\\
+\\
+Le problème peut se réécrire comme suit : 
+Si $\rho_y[k,\nu] \ge \eta_{P_{fa}}[\nu]$ alors on retient $H_0$.
+Avec $\eta_{P_{fa}}[\nu]$ le seuil de détection fixé pour une fréquence donnée en fonction de la probabilité de fausse alarme choisie. On l'obtient par l'équation :
+
+\begin{equation}
+\int_{\eta_{P_{fa}}[\nu]}^\infty p_0(u)\, \mathrm du
+\label{moneq}
+\end{equation}
+
+Pour résoudre cette équation il faut tenir compte du modèle statistique du spectrogramme :\\
+\textit{
+- $H_0^*$ : Signal aléatoire stationnaire b, gaussien centré de variance $\sigma^2$, éventuellement augmenté d'un signal déterministe d.\\
+- $H_1^*$ : rejet de $H_0^*$.}
+
+
 \section{Extraction des motifs fréquents}
 L'idée ensuite est de réaliser une recherche de motifs rectangulaires, qui apparaissent entourés en vert sur la figure suivante.
 
