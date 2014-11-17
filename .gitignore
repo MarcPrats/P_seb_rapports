@@ -53,6 +53,7 @@
 # Images #
 *.jpg
 *.jpeg
+*.png
 
 # MAC OS X and Windows generated files #
 .DS_Store
