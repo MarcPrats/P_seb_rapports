@@ -1,0 +1,158 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{enumitem}
+%\frenchbsetup{StandardLists=true}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{moreverb}
+\usepackage{epsfig}
+\usepackage{textcomp}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{booktabs}
+
+    \usepackage{xcolor}
+      %%%%%%%%%%%%%%%%  inclure la source %%%%%%%%%%%%%%%%%%%%
+  \newcommand*\styleC{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+  \newcommand*\styleD{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+
+      \makeatletter
+      % on fixe le langage utilisé
+      \lstset{language=matlab, breaklines=true}
+      \edef\Motscle{emph={\lst@keywords}}
+      \expandafter\lstset\expandafter{%
+       \Motscle}
+      \makeatother
+
+
+      \definecolor{Vvert}{rgb}{0.133,0.545,0.133}
+
+      \lstset{emphstyle=\color{blue}, % les mots réservés de matlab en bleu
+      basicstyle=\styleC,
+      keywordstyle=\cmtt,
+      commentstyle=\color{Vvert}\styleD, % commentaire en gris
+      numberstyle=\tiny\color{red},
+      numbers=left,
+      numbersep=10pt,
+      lineskip=0.7pt,
+      showstringspaces=false}
+      %  % inclure le fichier source
+      \newcommand{\FSource}[1]{%
+      \lstinputlisting[texcl=true]{#1}
+      }
+% add subtitle command
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+\setlength{\textwidth}{16cm} % Largeur du texte
+\setlength{\textheight}{24cm} % Hauteur du texte
+\setlength{\evensidemargin}{-0.2cm} % Taille des marges pour les pages paires
+\setlength{\oddsidemargin}{-0.2cm} % Taille des marges pour les pages impaires
+\setlength{\topmargin}{-1.5cm} % Taille de l'ent\^ete
+
+\title{PR307 Smart-EcoBox : \\ GLRT}
+\subtitle{ScrumBoard-like Client}
+\author{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Nous allons présenter ici les tâches à effectuer pour le développement du client. 
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Organisation du groupe}
+
+% Découpage et Organisation des fichiers
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Courbes}
+
+Faire les fenêtres détaillées des courbes des capteurs qui contiendront les courbes en détails :
+
+\begin{itemize}[label=$\bullet$]
+\setlength\itemsep{1em}
+    \item Affichage des courbes (Toutes les courbes, Température, Consommation électrique, débit d'eau)
+    
+    \item Laisser à l'utilisateur le choix de la courbe à afficher si plusieurs capteurs de même type (sur l'affichage minimaliste aka \textbf{Menu} et sur le \textbf{modal}).
+    
+    Exemple : si plusieurs capteurs de température, l'utilisateur doit pouvoir 
+    \begin{itemize}[label=$\circ$]
+    \item sur le \textbf{menu} : 1 seule allure de courbe est disponible, l'utilisateur peut choisir celle à afficher.
+    \item sur le \textbf{modal} : l'utilisateur a le choix entre \textit{afficher toutes les courbes} et \textit{afficher une courbe précise}.
+    \end{itemize}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Notifications}
+
+\begin{itemize}[label=$\bullet$]
+\setlength\itemsep{1em}
+    \item Nombre de notif limité sur le \textbf{Menu}
+    
+    \item Afficher toute les notifs si on clique sur \textbf{Notifications}
+    
+    \item Faire liste des notifications avec l'aide des ISNCs.
+        \begin{itemize}[label=$\circ$]
+            \item \textsc{appareil} allumée/éteint
+        	\item proba1 appareil1 - proba2 appareil2 - proba3 appareil3 allumée/éteint
+        	\item Personnalisation des notifications 
+        	
+        	exemple : Un capteur de température est situé dans la chambre de bébé, l'utilisateur souhaite être notifié si la température est en dessous de 18°C ou au dessus de 20°C.
+        \end{itemize}
+        
+    \item L'utilisateur doit pouvoir corriger les notifications 
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Compte/Configuration}
+
+\begin{itemize}[label=$\bullet$]
+\setlength\itemsep{1em}
+\item Créer un espace \textbf{paramètres du compte} ( édition du profil, changement du mot de passe )
+
+\item Espace utilisateur lui permettant d'ajouter des capteurs manuellement
+    \begin{itemize}[label=$\circ$]
+        \item localisation
+        \item type de données (T,P,D)
+        \item personnalisation des notifications vis à vis des valeurs retournées par le capteur
+    \end{itemize}
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Autres}
+
+\begin{itemize}[label=$\bullet$]
+\setlength\itemsep{1em}
+\item Adapter à toutes les tailles d'écran
+
+\item Rajouter des icônes de font awesome à côté de 
+    \begin{itemize}[label=$\circ$]
+        \item chaque type d'appareil
+        \item chaque titre de courbes
+        \item notifications
+    \end{itemize}
+
+\item Changer couleur du type d'appareil (notif + liste type d'appareils)
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{thebibliography}{10}
+%     \bibitem{sqlite}
+%     Site officiel de sqlite : \emph{http://www.sqlite.org/}
+%     \bibitem{nginx}
+%     Site officiel de nginx : \emph{http://www.nginx.org/}
+%     \bibitem{wiki}
+%     Comparaison lighttpd VS nginx :  \emph{http://www.wikivs.com/wiki/lighttpd\_vs\_nginx}
+% \end{thebibliography}
+
+\end{document}
