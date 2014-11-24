@@ -208,7 +208,7 @@ Pour résoudre cette équation il faut tenir compte du modèle statistique du sp
 
 \begin{frame}
 La fenêtre d'analyse utilisée est rectangulaire.\\
-Alors d'après le théorème central limite, chaque coefficient du spectrogramme du signal $d$ suit une loi du $\chi_2$ à $l$ degrés de libertés.\\
+Alors d'après le théorème central limite, chaque coefficient du spectrogramme du signal $b$ suit une loi du $\chi_2$ à $l$ degrés de libertés.\\
 Par conséquent, chaque coefficient du spectrogramme suit une loi Gamma $\Gamma(l/2,\sigma^2/2,0).$ \\
 \vspace{0.25cm}
 Un signal déterministe vient s'additionner au bruit blanc gaussien observé, alors les coefficients de la TFCT suivent les lois du $\chi_2$ décentrés du même degré de liberté $l$ et dont les paramètres de décentrage sont définis par la relation suivante :
@@ -217,7 +217,7 @@ Un signal déterministe vient s'additionner au bruit blanc gaussien observé, al
 \delta = l \frac{\rho_d[k,\nu]}{\rho_b[k,\nu]}
 \label{eq2}
 \end{equation}
-où $\rho_d[k,\nu]$ et $\rho_b[k,\nu]$ sont respectivement les coefficients du spectroframme du signal $d$ et $b$.
+où $\rho_d[k,\nu]$ et $\rho_b[k,\nu]$ sont respectivement les coefficients du spectrogramme du signal $d$ et $b$.
 
 Le spectrogramme est donc modélisé par un mélange de lois du $\chi_2$ centrés et décentrés. Les paramètres des lois décentrés sont fonction du SNR.
 \end{frame}
@@ -247,6 +247,12 @@ Le critère d'arrêt est la stabilité des deux ensembles recherchés. On obtien
 
 \section{Classification des appareils d'une maison}
 \begin{frame}{Classification des appareils d'une maison}
+\begin{itemize}
+	\item Chauffage
+	\item Chauffe-eau : la détection d'un chauffe eau-semble \textit{a priori} faisable, elle est basée sur un test de Page-Hinkey.
+	\item Gros appareil de maison
+	\item Appareils de cuisine
+\end{itemize}
 \end{frame}
 
 \subsection{Gros appareils d'une maison}
