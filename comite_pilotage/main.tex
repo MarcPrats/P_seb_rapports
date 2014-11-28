@@ -1,0 +1,398 @@
+\documentclass{beamer}
+
+\usepackage[french]{babel}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Warsaw}
+% \usecolortheme{beaver}
+\setbeamertemplate{navigation symbols}{%
+}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setcounter{tocdepth}{2}
+\title[Comité de Pilotage : Smart-EcoBox]{Comité de Pilotage :\\
+Smart-EcoBox}
+\author{Antoine BOUCHAIN \\
+Mathias DE CACQUERAY VALMENIER \\
+Melinda GOZLAN \\
+Xavier LETURC \\
+Marc PRATS \\
+Benjamin RAMBAUD \\
+Karim TOUFIQUE \\}
+\institute{\textsc{ENSEIRB-MATMECA}}
+%\date{14 novembre 2014}
+\logo{\includegraphics[height=7mm]{../../smartee_logo.pdf}\includegraphics[height=7mm]{../../Logo_ENSEIRB.pdf}}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+%--- Next Frame ---%
+
+
+%\begin{frame}{Présentation du projet Technique, composition d’équipe, objectifs globaux}
+%  \begin{itemize}
+%    \item Créer un interface permettant à l’utilisateur de visionner ses consommations et de le corriger
+%    \item ds
+%  \end{itemize}
+%\end{frame}
+\begin{frame}{Présentation du projet Technique, composition d’équipe, objectifs globaux}
+   \begin{columns}[c]
+  \begin{column}{8cm}
+ \begin{figure}[h!]
+ \centering
+ 	\includegraphics[scale=0.9]{../figures/orga.pdf} 
+ 	\caption{Répartition des taches}
+ 	\label{figd3}
+ \end{figure}
+  \end{column}
+  \begin{column}{3.7cm}
+  \vspace{-50pt}
+ \begin{exampleblock}{Trois équipes :} % Bloc normal
+  \begin{itemize}
+  \item \textbf{Recherche} classification
+  \item \textbf{Développement} signal
+  \item \textbf{Développement} IHM
+  \end{itemize}
+  \end{exampleblock}
+  \end{column}
+  \end{columns}
+ \end{frame}
+%--- Next Frame ---
+
+\begin{frame}[c]{Situation actuelle avec planning en cours}
+Gantt
+\end{frame}
+%--- Next Frame ---%
+
+\begin{frame}{Le reste à faire. Stratégie pour l’atteindre}
+  \begin{itemize}
+    \item Mise au point du serveur Web \textsc{C, Sqlite, Php}
+    \item Mise en place du client et de son interaction avec le serveur \textsc{Lighttp}
+    \item Mise en service de la reconnaissance des trames \textsc{C++}
+    \item Fin de la recherche algorithmique \textsc{Matlab}
+  \end{itemize}
+\end{frame}
+%--- Next Frame ---%
+
+\begin{frame}{Revue des risques et actions}
+ \begin{alertblock}{Risques} % Bloc normal
+  \begin{itemize}
+  \item Interaction du client Web avec le serveur non finie à temps
+  \end{itemize}
+  \end{alertblock}
+ \vspace{10pt}
+ \begin{exampleblock}{Actions} % Bloc exampled
+  \begin{itemize}
+  \item Réduire l'interface à l'affichage des données 
+  \end{itemize}
+  \end{exampleblock}
+\end{frame}
+\begin{frame}{Bilan financier (en heures)}
+  \begin{itemize}
+  \item Travail effectué : prévu/réalisé  
+  \end{itemize}
+\end{frame}
+%--- Next Frame ---%
+% \section{Description de la mission}
+% \subsection{Banques de filtres}
+% \begin{frame}{Qu'est ce qu'une banque de filtres ?}
+%  \begin{columns}[c]
+
+%  \begin{column}{7cm}
+%  \begin{figure}
+%  \includegraphics[scale=0.4]{../figures/fig_ana_synt_fb.pdf}
+%  \label{fig_ana_synth_fb}
+%  \caption{Description d'une banque de filtre}
+%  \end{figure}
+%  \end{column}
+
+%  \begin{column}{5cm}
+%  \begin{block}{Description}
+%  \begin{itemize}
+%  \item AFB : Analysis Filter Bank
+%  \item SFB : Synthesis Filter Bank
+%  \item $X(z)$ : signal d'entrée
+%  \item $\tilde{X}(z)$ : signal de sortie
+%  \item $M$ : nombre de canaux ou utilisateurs
+%  \end{itemize}
+%  \end{block}
+%  \end{column}
+%  \end{columns}
+%  \end{frame}
+ 
+ 
+%  % NEW FRAME%
+%  \begin{frame}{Traitement obtenu grâce à une banque de filtres} 
+%   \begin{columns}[c]
+%    \begin{column}{5cm}
+%    \begin{figure}
+% 	\label{figd2a}
+%   	\includegraphics[width=150pt]{../figures/ana_synth_fb.pdf}
+%  	\label{fig_ana_synth_fb}
+%  	\caption{sur le signal global}
+%  \end{figure}
+%  \end{column}
+%  \begin{column}{5cm}
+%    \begin{figure}
+%  \label{figd2b}
+% \includegraphics[width=150pt]{../figures/ana_channel_fb.pdf}
+% \caption{sur les signaux de chaque canal}
+%    \end{figure}
+%  \end{column}
+%  \end{columns}
+%  \end{frame}
+ 
+ 
+ 
+%  \begin{frame}{Type de banques de filtres}
+%  \textbf{ Types de banques de filtres}
+%   \begin{columns}[c]
+%  \begin{column}{5cm}
+%  \begin{block}{Par résultats obtenus} % Bloc normal
+%  \begin{itemize}
+%  \item \textbf{Uniforme} : chaque utilisateur a la même bande passante
+%  \item \textbf{Non Uniforme} : chaque utilisateur peut avoir une largeur de bande différente
+%  \end{itemize}
+%  \end{block}
+%  \end{column}
+%  \begin{column}{5cm}
+% \begin{block}{Par type de filtre passe bas utilisé} % Bloc normal
+%  \begin{itemize}
+%  \item \textbf{Filtre FIR} : utilisation d'un filtre à réponse impulsionnelle finie
+%  \item \textbf{Filtre IIR} : utilisation d'un filtre à réponse impulsionnelle infinie
+%  \end{itemize}
+%  \end{block}
+%  \end{column}
+%  \end{columns}
+%  \end{frame}
+ 
+ 
+ 
+% \subsection{Banques de filtres uniformes}
+% \begin{frame}{Approche basique}
+%   \begin{columns}[c]
+%  \begin{column}{5cm}
+%  \vspace{-20pt}
+% \begin{figure}[h!]
+% \centering
+% 	\includegraphics[scale=0.55]{../figures/fig_afb_uni_basic.pdf}
+% 	\caption{Représentation d'une banque de filtres basique}
+% 	\label{figd3}
+% \end{figure}
+%  \end{column}
+%  \begin{column}{5cm}
+% \begin{exampleblock}{Avantage :} % Bloc normal
+%  \begin{itemize}
+%  \item Simple à réaliser
+%  \end{itemize}
+%  \end{exampleblock}
+% \vspace{10pt}
+% \begin{alertblock}{Inconvénient :} % Bloc normal
+%  \begin{itemize}
+%  \item Importante complexité calculatoire
+%  \end{itemize}
+%  \end{alertblock}
+%  \end{column}
+%  \end{columns}
+% \end{frame}
+
+
+
+
+% \subsubsection{Méthode polyphase}
+% \begin{frame}{Approche polyphase}
+%   \begin{columns}[c]
+%  \begin{column}{5cm}
+% \begin{figure}[h!]
+% \centering
+% 	\includegraphics[scale=0.55]{../figures/fig_afb_poly_decimator.pdf} 
+% 	\caption{Représentation d'une banque de filtre basique}
+% 	\label{figd3}
+% \end{figure}
+%  \end{column}
+%  \begin{column}{5cm}
+%  \vspace{-50pt}
+% \begin{exampleblock}{Avantages :} % Bloc normal
+%  \begin{itemize}
+%  \item Faible complexité calculatoire
+%  \item Tire avantage de l'algorithme \textsc{Fft} : peu de multiplieurs requis
+%  \end{itemize}
+%  \end{exampleblock}
+% \vspace{10pt}
+% \begin{alertblock}{Inconvénient :} % Bloc normal
+%  \begin{itemize}
+%  \item Plus compliqué que l'approche basique
+%  \end{itemize}
+%  \end{alertblock}
+%  \end{column}
+%  \end{columns}
+% \end{frame}
+% \subsection{Banques de filtres uniformes IIR}
+% \begin{frame}{Structure IIR polyphase}
+%   \begin{columns}[c]
+%    \begin{column}{5cm}
+%    \begin{figure}
+% 	\label{figd2a}
+%   	\includegraphics[width=150pt]{../figures/fig_filter_iir_poly.pdf}
+%  	\label{fig_ana_synth_fb}
+%  	\caption{créée grâce au logiciel du Pr Harris}
+%  \end{figure}
+%  \end{column}
+
+%  \begin{column}{5cm}
+%    \begin{figure}
+%  \label{figd2b}
+% \includegraphics[width=150pt]{../figures/fig_filter_poly.pdf}
+% \caption{utilisée dans les banques de filtres.}
+%    \end{figure}
+%  \end{column}
+%  \end{columns}
+% \end{frame}
+
+
+
+% \section{Résultats de la mission}
+% \subsection{Avantages des structures IIR polyphases}
+% \subsubsection{Nombre de coefficients}
+% \begin{frame}[t]{Nombre de coefficients}
+% \vspace{-30pt}
+%   \begin{columns}[c]
+%    \begin{column}{5cm}
+%    \begin{figure}
+% 	\label{figd2a}
+%   	\includegraphics[width=170pt]{../figures/fig_freq_phase_100.pdf}
+%  	\label{fig_ana_synth_fb}
+%  	\caption{Réponse fréquentielle et en phase pour un filtre IIR équivalent à un filtre FIR de 100 coefficients}
+%  \end{figure}
+%  \end{column}
+
+%  \begin{column}{5cm}
+%    \begin{figure}
+%  \label{figd2b}
+% \includegraphics[width=150pt]{../figures/fig_carac_IIR_attenuation.pdf}
+% \caption{Effets de la variation du nombre de coefficients et de l'importance de l'atténuation hors bande}
+%    \end{figure}
+%  \end{column}
+%  \end{columns}
+% \end{frame}
+% \subsubsection{Gain en complexité d’une structure IIR sur une structure FIR}
+% \begin{frame}{Gain en complexité}
+%   \begin{columns}[c]
+%    \begin{column}{6cm}
+%    \begin{figure}
+% 	\label{figd2a}
+%   	\includegraphics[width=180pt]{../figures/fig_complex_time.pdf}
+%  	\label{fig_ana_synth_fb}
+%  	\caption{Comparaison de complexité entre banques de filtres FIR et IIR}
+%  \end{figure}
+%  \end{column}
+
+%  \begin{column}{5cm}
+%   \begin{block}{Avantages}
+%   \begin{itemize}
+%   \item Moins de coefficients par branche
+%   \item Complexité moindre
+%   \item Moins d'additionneurs et multiplieurs requis
+%   \end{itemize}
+%   \end{block}
+%  \end{column}
+%  \end{columns}
+% \end{frame}
+% \subsection{Performances des banques de filtres IIR par rapport aux banques de filtres FIR}
+% \subsubsection{Modulation QPSK}
+% \begin{frame}[t]{Nombre de coefficients}
+% Taux d'erreurs binaires en fonction du rapport signal à bruit : théorique; pratique FIR polyphase; IIR polyphase pour un temps symbole de :
+% \vspace{-30pt}
+%   \begin{columns}[c]
+%    \begin{column}{5cm}
+%    \begin{figure}
+% 	\label{figd2a}
+%   	\includegraphics[width=150pt]{../figures/fig_ber_comp_1Ts.pdf}
+%  	\label{fig_ana_synth_fb}
+%  	\caption{$T_s=\frac{1}{F_s}$}
+%  \end{figure}
+%  \end{column}
+
+%  \begin{column}{5cm}
+%    \begin{figure}
+%  \label{figd2b}
+% \includegraphics[width=170pt]{../figures/fig_ber_comp_2Ts.pdf}
+% \caption{$T_s=\frac{2}{F_s}$}
+%    \end{figure}
+%  \end{column}
+%  \end{columns}
+% \end{frame}
+% \subsubsection{Effet de la bande de garde}
+% \begin{frame}[t]{Effet de la bande de garde}
+% \vspace{-30pt}
+%   \begin{columns}[c]
+%    \begin{column}{5cm}
+%    \begin{figure}
+% 	\label{figd2a}
+%   	\includegraphics[width=150pt]{../figures/fig_3D_BER_Ts.pdf}
+%  	\label{fig_ana_synth_fb}
+%  	\caption{Taux d'erreur binaire en fonction du temps symbole et du SNR pour une banque de filtres FIR et une banque de filtres IIR}
+%  \end{figure}
+%  \end{column}
+
+%  \begin{column}{5cm}
+%    \begin{figure}
+%  \label{figd2b}
+% \includegraphics[width=170pt]{../figures/fig_3D_BER_Ts_comp.pdf}
+% \caption{Comparaison des résultats avec les valeurs théoriques du BER}
+%    \end{figure}
+%  \end{column}
+%  \end{columns}
+% \end{frame}
+% \subsubsection{Effet de la largeur des pics}
+% \begin{frame}[t]{Effet de la largeur des pics}
+% \vspace{-30pt}
+%   \begin{columns}[c]
+%    \begin{column}{5cm}
+%    \begin{figure}
+% 	\label{figd2a}
+%   	\includegraphics[width=150pt]{../figures/fig_comparison_ber_nbcoefs_40dB.pdf}
+%  	\label{fig_ana_synth_fb}
+%  	\caption{BER versus nombre de coefficients par branche d'un filtre IIR polyphase avec atténuation hors bande de $40dB$}
+%  \end{figure}
+%  \end{column}
+
+%  \begin{column}{5cm}
+%    \begin{figure}
+%  \label{figd2b}
+% \includegraphics[width=170pt]{../figures/fig_ori_filters_synth_FIR_IIR.pdf}
+% \caption{avant banque de filtres d'analyse, après banque de filtres de synthèse}
+%    \end{figure}
+%  \end{column}
+%  \end{columns}
+% \end{frame}
+
+
+
+
+
+
+
+
+
+% \begin{frame}[c]{Conclusion}
+% \begin{itemize}
+% \item Réduction des performances par les filtres IIR polyphase
+% \item Choix du filtre primordial
+% \item[]
+% \item Découverte du monde de la recherche
+% \item Amélioration de l'anglais
+% \item Découverte d'une capitale européenne
+% \end{itemize}
+% \end{frame}
+%--- Next Frame ---%
+
+
+
+
+
+
+\end{document}

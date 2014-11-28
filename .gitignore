@@ -1,65 +1,36 @@
 #
-#  gitignore
-#  various git config file
-#                   
-#  Created by Mathias de Cacqueray Valmenier on 09/06/2014.
-#  Copyright (c) 2014 Mathias de Cacqueray Valmenier. All rights reserved.
-#  Updated on 21/10/2014
+#
+# .gitignore
+#
+#
+# Created by Mathias de Cacqueray Valmenier on 25/11/2014.
+#
+# Copyright (c) 2014 Mathias de Cacqueray Valmenier. All rights reserved.
 
+#Ignoring every files
+*
 
-# Executables #
+#Except
+#Matlab
+!*.m
 
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
+#C / C++
+!*.c
+!*.cpp
+!*.h
 
-# Compressed Sources #
+# Bash
+!*.sh
 
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
+# LaTeX
+!*.tex
 
-# Logs and Databases #
+#Plain text
+!*.md
+!*.txt
 
-*.log
-*.sql
-*.sqlite
+#Git files
+!.gitignore
 
-# LaTeX Generated Files #
-*.idx
-*.aux
-*.pdf
-*.toc
-*.fls
-*.fdb_latexmk
-*.out
-*.nav
-*.snm
-*.vrb
-*.dvi
-
-# Matlab Generated Files #
-*.mat
-*.asv
-
-# Images #
-*.jpg
-*.jpeg
-*.png
-
-# MAC OS X and Windows generated files #
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Various
+!*.plot
