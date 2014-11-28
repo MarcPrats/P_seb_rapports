@@ -10,21 +10,19 @@
 }
 \setbeamertemplate{blocks}[rounded][shadow=false]
 \setcounter{tocdepth}{2}
-\title[Smart-EcoBox]{Comité de Pilotage :\\
+\title[Comité de Pilotage : Smart-EcoBox]{Comité de Pilotage :\\
 Smart-EcoBox}
-\author{Mathias de Cacqueray-Valmenier \\ ADD EVERYONE}
+\author{Antoine BOUCHAIN \\
+Mathias DE CACQUERAY VALMENIER \\
+Melinda GOZLAN \\
+Xavier LETURC \\
+Marc PRATS \\
+Benjamin RAMBAUD \\
+Karim TOUFIQUE \\}
 \institute{\textsc{ENSEIRB-MATMECA}}
 %\date{14 novembre 2014}
-\logo{\includegraphics[height=7mm]{../../Logo_ENSEIRB.pdf}}
+\logo{\includegraphics[height=7mm]{../../smartee_logo.pdf}\includegraphics[height=7mm]{../../Logo_ENSEIRB.pdf}}
 
-\AtBeginSection[]
-{
-  \begin{frame}
-  \frametitle{Sommaire}
-  \tableofcontents[currentsection, hideothersubsections]
-  \end{frame}
-  %--- Next Frame ---%
-}
 
 \begin{document}
 
@@ -34,79 +32,68 @@ Smart-EcoBox}
 %--- Next Frame ---%
 
 
-\begin{frame}{Introduction}
+%\begin{frame}{Présentation du projet Technique, composition d’équipe, objectifs globaux}
+%  \begin{itemize}
+%    \item Créer un interface permettant à l’utilisateur de visionner ses consommations et de le corriger
+%    \item ds
+%  \end{itemize}
+%\end{frame}
+\begin{frame}{Présentation du projet Technique, composition d’équipe, objectifs globaux}
+   \begin{columns}[c]
+  \begin{column}{8cm}
+ \begin{figure}[h!]
+ \centering
+ 	\includegraphics[scale=0.9]{../figures/orga.pdf} 
+ 	\caption{Répartition des taches}
+ 	\label{figd3}
+ \end{figure}
+  \end{column}
+  \begin{column}{3.7cm}
+  \vspace{-50pt}
+ \begin{exampleblock}{Trois équipes :} % Bloc normal
   \begin{itemize}
-    \item Stage industriel du \textbf{2 Juin 2014} au \textbf{5 septembre 2014}
-    \item Centre de \textbf{Londres}
-    \item Université de Westminster
-    \item Laboratoire de \textbf{Recherche}
+  \item \textbf{Recherche} classification
+  \item \textbf{Développement} signal
+  \item \textbf{Développement} IHM
   \end{itemize}
-\end{frame}
-%--- Next Frame ---%
-\begin{frame}
- \tableofcontents
-\end{frame}
+  \end{exampleblock}
+  \end{column}
+  \end{columns}
+ \end{frame}
 %--- Next Frame ---
 
-\section{Présentation de l'Université de Westminster}
-\subsection{Présentation de l'Université}
-\begin{frame}
-  \frametitle{University Of Westminster}
-  L'université :
+\begin{frame}[c]{Situation actuelle avec planning en cours}
+Gantt
+\end{frame}
+%--- Next Frame ---%
+
+\begin{frame}{Le reste à faire. Stratégie pour l’atteindre}
   \begin{itemize}
-    \item Université de Recherche Publique
-    \item \textbf{4} campus
-    \item \textbf{6} facultés
-    \item \textbf{£170.4M} de Chiffres d'Affaires en 2012-2013.
-  \end{itemize}
-  Le laboratoire ADVRG :
-  \begin{itemize}
-    \item Campus Fritzrovia : New Cavendish Street, Greater London.
-    \item Faculty of Science and Technology
-    \item \textbf{ADVRG} : "Applied DSP and VLSI Research Group"
-    \item \textbf{VLSI} : "Very Large System Integration"
-    \item Objectifs :
-    \begin{itemize}
-      \item Implémentation \textbf{très basse consommation}.
-      \item Systèmes plus \textbf{rapides} et à \textbf{complexité moindre}.
-    \end{itemize}
+    \item Mise au point du serveur Web \textsc{C, Sqlite, Php}
+    \item Mise en place du client et de son interaction avec le serveur \textsc{Lighttp}
+    \item Mise en service de la reconnaissance des trames \textsc{C++}
+    \item Fin de la recherche algorithmique \textsc{Matlab}
   \end{itemize}
 \end{frame}
 %--- Next Frame ---%
 
-\subsection{Organistion du travail}
-\begin{frame}[c]{Journée Type}
+\begin{frame}{Revue des risques et actions}
+ \begin{alertblock}{Risques} % Bloc normal
   \begin{itemize}
-    \item Horaire : \textbf{9h - 18h}
-    \item \textbf{Open space} avec 8 étudiants en thèse.
-    \item \textbf{Cosmopolite}
-    \item Contacts par \textbf{email} avec encadrant chaque jour.
-    \item \textbf{Reporting} : Bilan à chaque fin de semaine avec le maitre de stage (par email)
+  \item Interaction du client Web avec le serveur non finie à temps
   \end{itemize}
+  \end{alertblock}
+ \vspace{10pt}
+ \begin{exampleblock}{Actions} % Bloc exampled
+  \begin{itemize}
+  \item Réduire l'interface à l'affichage des données 
+  \end{itemize}
+  \end{exampleblock}
 \end{frame}
-
-\begin{frame}{Outils de travail}
+\begin{frame}{Bilan financier (en heures)}
   \begin{itemize}
-    \item Codage des algorithmes en \textsc{Matlab}.
-    \item[]
-    \item Sauvergarde, partage avec les encadrants avec \textsc{Git}.
-    \item[]
-    \item Ecritures des rapports et présentation en \LaTeX.
+  \item Travail effectué : prévu/réalisé  
   \end{itemize}
-\end{frame}
-%--- Next Frame ---%
-
-\section{Objectif de la mission technique}
-\begin{frame}{Objectifs}
-  \begin{itemize}
-    \item Réaliser un simulateur \textsc{Matlab} de banques de filtres.
-    \item Comparer les performances de différentes banques de filtres.
-    \item Publier un article sur ces recherches.
-  \end{itemize}
-  Sujet du stage :\\
-  \begin{center}
-    \textit{"Réduction de complexité pour les banques de filtres uniformes"}
-  \end{center}
 \end{frame}
 %--- Next Frame ---%
 % \section{Description de la mission}
