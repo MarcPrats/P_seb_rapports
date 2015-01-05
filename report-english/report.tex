@@ -1,0 +1,178 @@
+\documentclass[10pt, english]{article}
+\usepackage[top=3.6cm, bottom=3.6cm, left=1.75cm, right=1.75cm]{geometry}
+\geometry{a4paper}
+\usepackage[T1]{fontenc}
+\usepackage[utf8,latin1]{inputenc}
+\usepackage[english]{babel}
+\usepackage{layout}
+\usepackage{titlesec}
+\usepackage{lastpage}
+\usepackage{caption}
+\usepackage{eurosym}
+\usepackage{amsmath,amssymb} % packages pour les environnements et symboles mathématiques
+\usepackage{graphicx} % packages graphique (pour inclure des images)
+\usepackage{subfigure}
+\usepackage{float}
+\usepackage{listings} % package pour lire 
+\usepackage{lscape}	% Package pour les paysages
+\usepackage{setspace}
+\renewcommand{\figurename}{\vspace{-10pt}\textbf{\bsc{Figure}}}
+\renewcommand{\thefigure}{\textbf{\arabic{figure}}}
+\renewcommand{\thesubfigure}{\textbf{(\alph{subfigure})}}
+
+
+
+\topmargin=0pt
+\headheight=0pt
+\headsep=0pt
+\marginparsep=0pt
+\marginparwidth=0pt
+\footskip=30pt
+\marginparpush=0pt
+\textheight=670pt
+
+\titleformat*{\section}{\large \bf}
+\titleformat*{\subsection}{\normalsize \bf}
+
+\let\originalparagraph\paragraph
+\renewcommand{\paragraph}[1]{\originalparagraph{#1.}}
+
+\title{\Large{\bf{Smartee\\ Smart, Eco-friendly \& Economic Box\\ Project 2}}}
+
+\author{
+  \normalsize{Antoine BOUCHAIN} \\
+ \small{\texttt{abouchain@enseirb-matmeca.fr}}
+  \and
+  \normalsize{Mathias DE CACQUERAY VALMENIER}\\
+ \small{\texttt{mdecacquerayvalmenie@enseirb-matmeca.fr}}
+    \and
+    \normalsize{Melinda GOZLAN}\\
+ \small{\texttt{mgozlan@enseirb-matmeca.fr}}
+  \and
+  \normalsize{Xavier LETURC}\\
+  \small{\texttt{xleturc@enseirb-matmeca.fr}}
+    \and
+    \normalsize{Marc PRATS-ESCRIBANO}\\
+  \small{\texttt{mpratsescribano@enseirb-matmeca.fr}}
+  \and
+  \normalsize{Benjamin RAMBAUD}\\
+ \small{\texttt{brambaud@enseirb-matmeca.fr}}
+  \and
+  \normalsize{Karim TOUFIQUE}\\
+  \small{\texttt{ktoufique@enseirb-matmeca.fr}}
+}
+
+\date{}
+
+\captionsetup{labelsep=period, font=small, labelfont=bf}
+
+\makeatletter
+\renewcommand{\@oddfoot}{\hfil \thepage\ of \pageref{LastPage} \hfil}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     NOTES     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ABSTRACT
+% The abstract should summarize the contents of the report and should contain at most 150 words. It should be set in 9-point font size and should be inset 1.0 cm from the right and left margins. There should be two blank (10-point) lines before and after the abstract.
+
+
+% REPORT PREPARATION
+% These guidelines include complete descriptions of the fonts, spacing, and related information for producing your reports. Please follow them and if you have any questions, direct them to Laurent Réveillère.
+
+% PRINTING AREA
+% The printing area is 175 mm $\times$ 225 mm. The text should be justified to occupy the full line width, so that the right margin is not ragged, with words hyphenated as appropriate. Please fill pages so that the length of the text is no less than 210 mm. Please do not place any additional blank lines between paragraphs.
+
+% FOOTNOTES
+% Use footnotes sparingly (or not at all!) and place them at the bottom of the page on which they are referenced. Use Times 9-point type, single-spaced. To help your readers, avoid using footnotes altogether and include necessary peripheral observations in the text (within parentheses, if you prefer, as in this sentence). Footnotes should appear at the bottom of the normal text area, with a line of about 5cm in Word set immediately above them.
+
+% FIGURES AND PHOTOGRAPHS
+% Check that in line drawings, lines are not interrupted and have constant width. Grids and details within the figures must be clearly readable and may not be written one on top of the other. Figures should be numbered and should have a caption which should always be positioned under the figures, in contrast to the caption belonging to a table, which should always appear above the table. The final sentence of a caption, be it for a table or a figure, should end without a period. Please center the captions between the margins and set them in 9-point type.
+
+% TABLES
+% Table captions should always be positioned above the tables. The final sentence of a table caption should end without a period.
+
+% CITATIONS
+% List and number all bibliographical references in 9-point Times, single-spaced, at the end of your paper. When referenced in the text, enclose the citation number in square brackets, for example \cite{document1}. Where appropriate, include the name(s) of editors of referenced books. Please do not insert a pagebreak before the list of references if the page is not completely filled. An example is given at the end of this information sheet.
+% to make a document appear in bibliography when not cited in the document : \nocite{document_to_add}
+
+% LAYOUT, TYPEFACE AND FONT SIZES, AND NUMBERING
+%Use 10-point type for the name(s) of the author(s) and 9-point type for the email(s) and the abstract. For the main text, please use 10-point type and single-line spacing. We recommend using Computer Modern Roman (CM) fonts, Times, or one of the similar typefaces widely used in photo-typesetting. (In these typefaces the letters have serifs, i.e., short end- strokes at the head and the foot of letters.) Italic type may be used to emphasize words in running text. Bold type and underlining should be avoided.
+
+% HEADINGS
+% Headings should be capitalized (i.e., nouns, verbs, and all other words except articles, prepositions, and conjunctions should be set with an initial capital) and should, with the exception of the title, be aligned to the left. Words joined by a hyphen are subject to a special rule. If the first word can stand alone, the second word should be capitalized. The font sizes are given in Table 1.
+
+% PAGE NUMBERING AND RUNNING HEADS
+% Number your pages, in pencil, at the bottom of the pages (for example, 1/8, 2/8; or 1 of 8, 2 of 8; and so forth). Please, do not set running heads.
+
+% BIBLIOGRAPHY
+% to update bibliography, compile 1 time with BibTeX then 2 times with LaTeX
+% to cite precisely a page : \cite[p.~xxx]{document_to_cite}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\vspace{-20pt}
+\begin{center}
+Supervisors:\\
+\vspace{5pt}
+\begin{minipage}[c]{150pt}
+\begin{center}
+  \normalsize{Guillaume FERR\'{E}}\\
+  \small{\texttt{guillaume.ferre@ims-bordeaux.fr}}
+\end{center}
+\end{minipage}
+\hspace{20pt}
+\begin{minipage}[c]{150pt}
+\begin{center}
+  \normalsize{Jean-R\'{e}my FALLERI}\\
+  \small{\texttt{falleri@labri.fr}}
+\end{center}
+\end{minipage}
+\end{center}
+
+
+% abstract
+
+
+\vspace{10pt}
+
+\begin{abstract}
+\noindent The aim of this document is to introduce the Smart-Eco Box project. The smart-eco box called Smartee is a box able to connect to the user's sensors to help him to regulate his energy consumption. The most challenging element of our box is to display in a website the consumption of the devices and to be able to detect the type of device on or off.
+This project was divided in two main teams: one carrying of signal processing and the other one of the website conception. The signal processing dealt with the signals from its emission by the sensors to the analysis of the information transmitted as the devices detection and the website design is a user-friendly interface which aimed to foward the informations from the signal processing.
+
+\end{abstract}
+\vspace{10pt}
+
+
+% document
+
+\section{Context of the Project}
+
+
+\section{Research}
+
+\subsection{Macroscopic analysis of load curve}
+%Antoine
+
+\subsection{Microscopic analysis of load curve}
+%Xavier
+
+\section{Signal Processing Algorithm}
+
+\section{Website}
+
+%Karim,Ben et Marc
+
+\section{Conclusion}
+
+\bibliography{Bibliography}
+
+\end{document}  
