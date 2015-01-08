@@ -1,0 +1,122 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{enumitem}
+%\frenchbsetup{StandardLists=true}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{moreverb}
+\usepackage{epsfig}
+\usepackage{textcomp}
+
+
+    \usepackage{xcolor}
+      %%%%%%%%%%%%%%%%  inclure la source %%%%%%%%%%%%%%%%%%%%
+  \newcommand*\styleC{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+  \newcommand*\styleD{\fontsize{9}{10pt}\usefont{T1}{cmtt}{m}{n}\selectfont }
+
+      \makeatletter
+      % on fixe le langage utilisé
+      \lstset{language=matlab, breaklines=true}
+      \edef\Motscle{emph={\lst@keywords}}
+      \expandafter\lstset\expandafter{%
+       \Motscle}
+      \makeatother
+
+
+      \definecolor{Vvert}{rgb}{0.133,0.545,0.133}
+
+      \lstset{emphstyle=\color{blue}, % les mots réservés de matlab en bleu
+      basicstyle=\styleC,
+      keywordstyle=\cmtt,
+      commentstyle=\color{Vvert}\styleD, % commentaire en gris
+      numberstyle=\tiny\color{red},
+      numbers=left,
+      numbersep=10pt,
+      lineskip=0.7pt,
+      showstringspaces=false}
+      %  % inclure le fichier source
+      \newcommand{\FSource}[1]{%
+      \lstinputlisting[texcl=true]{#1}
+      }
+
+\setlength{\textwidth}{16cm} % Largeur du texte
+\setlength{\textheight}{24cm} % Hauteur du texte
+\setlength{\evensidemargin}{-0.2cm} % Taille des marges pour les pages paires
+\setlength{\oddsidemargin}{-0.2cm} % Taille des marges pour les pages impaires
+\setlength{\topmargin}{-1.5cm} % Taille de l'ent\^ete
+
+\title{PR307 Smart-EcoBox : \\
+Spécifications pour la partie signal}
+\author{
+BOUCHAIN Antoine <abouchain@enseirb-matmeca.fr> \\
+DE CACQUERAY VALMENIER Mathias <mdecacquerayvalmenie@enseirb-matmeca.fr> \\
+GOZLAN Melinda <mgozlan@enseirb-matmeca.fr>\\
+LETURC Xavier <xleturc@enseirb-matmeca.fr> \\
+PRATS ESCRIBANO Marc <mpratsescribano@enseirb-matmeca.fr> \\
+RAMBAUD Benjamin <brambaud@enseirb-matmeca.fr> \\
+TOUFIQUE Karim <ktoufique@enseirb-matmeca.fr> \\ }
+
+
+\begin{document}
+\maketitle
+
+\begin{figure}[ht]
+\begin{center}
+\noindent \includegraphics[scale = 0.25]{../../Logo_ENSEIRB.pdf}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\noindent \includegraphics[scale = 0.25]{../../smartee_logo.pdf}
+\end{center}
+\end{figure}
+
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Récupération des données}
+
+Nous récupérons les données en provenance des capteurs sous forme de trames via trois drivers possibles:
+\begin{itemize}
+\item UHD utilisé par Ettus Research USRP 
+\item RTL présent dans certains tuners TNT USB
+\item TEST  pour relancer des samples déjà enregistrés\\
+\end{itemize}
+
+Les fabricants fournissent des codes permettent d'enregistrer des samples dans des fichiers.
+On peut ainsi récupérer dans un buffer des samples.
+Nous choisissons de traiter 4096 par 4096 samples qui seront ensuite traités dans la partie "création de burst" de nos codes.\\
+
+L'avantage de ce mode de fonctionnement permet d'introduire un quelconque autre driver sans à avoir à modifier le code implémenté pour la création de burst et l'interprétation également.
+
+\section{Détection de burst}
+
+Pour pouvoir détecter le burst parmi les 4096 samples pour la suite de nos traitements, nous calculons l'énergie sur la durée totale du buffer puis nous la comparons à un seuil égal à 3*$\sigma$ avec $\sigma$ représentant la variance du bruit.\\ Pour fixer la valeur de $\sigma$ nous calculons la moyenne de l'énergie sur 50 buffers successifs.\\ 
+Si l'énergie d'un buffer est supérieure à ce seuil, nous gardons ce buffer contenant de l'information sinon nous le rejetons et nous réitérons l'opération.\\
+
+Pour traiter le cas où une partie du burst est présente au début ou à la fin du buffer. Nous concaténons toujours le buffer suivant et précédent  au buffer consécutif où de l'information a été détectée.
+Le burst est donc composé de bruit, de signal d'information + bruit et de bruit .
+
+
+ 
+\end{document}
+
+
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[scale = 0.4]{./fig/fig1.jpg}
+%\caption{figure}
+%\label{Figure}
+%\end{center}
+%\end{figure}
