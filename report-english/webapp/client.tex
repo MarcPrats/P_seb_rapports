@@ -1,2 +1,45 @@
-\subsection{Client}
-    \subsubsection{Structure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       Client                                  %
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Client} % Interface Client
+
+This section presents the design of the web interface, especially the structure and implementation of the main features. This interface has been built with the framework AngularJS 1.3.
+
+\subsubsection{Structure}
+    % parler MVC avec Angular
+    
+    
+\subsubsection{Configuration Pages}
+    
+    \paragraph{Starting} % configuration à l'allumage
+    
+    When the user start the box the first time, he need to subscribe 
+    When the user turn on his device for the first time, he need to register by providing his data : name, email, password, city, and his EDF subscription. Then, the system automatically displays the different sensors detected thanks to the signal processing algorithm. The user have to set up the system by providing the name, location and type of each sensors. % (a color-based recognition could be used)
+    
+    \paragraph{Current Usage} % pendant l'utilisation
+    
+    \subparagraph{"My Account" Page:} 
+    The user can access to his personal information and change them. This includes his name, password, email, city and his EDF subscription. Similarly, the profile appears on the homepage.
+    
+    \subparagraph{"My Sensors" Page:}
+    This page is used to list the different sensors. Each sensor can be renamed by the user, may also indicate a location specified by the user (eg children's room) and specifies a type of sensor that is recognized by a color code. The SNR (Signal-to-Noise Ratio) is also shown in the form of bars to show the state of a sensor (like mobile phone signal bars). He can edit the sensor information using the "edit" button.
+    
+\subsubsection{Homepage}
+
+The homepage provides quick access to the general condition of the system.
+So the main information relating to the operation of the system and an overview of the data sent by the sensors is found on this page.
+
+
+    \paragraph{Electric Consumption}
+    \paragraph{Temperature}
+    \paragraph{Notifications}
+    \paragraph{List of Devices} % Liste des types d’appareils enregistrés
+
+\subsubsection{Electric Consumption}
+
+    \paragraph{Curve Page}
+    
+    \paragraph{Estimated Electricity Bill}
+
+\subsubsection{Temperature}
