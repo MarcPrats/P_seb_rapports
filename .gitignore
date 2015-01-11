@@ -23,7 +23,7 @@
 !*.sh
 
 # LaTeX
-!*.tex
+#!*.tex
 
 #Plain text
 !*.md
