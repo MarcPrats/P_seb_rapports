@@ -2,16 +2,67 @@
 %       Server                                  %
 %                                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Server}
+\subsection{Server \& Database}
 
-% pourquoi avoir choisi Raspberry Pi ?
-%   box doit être petite (cad pas un gros pc etc..)
-%   peu cher -> correspond au souhait du client d'avoir une box abordable
-%   comme ça a peu de ressources, si ça passe dessus peu importe les ressources dispo dans le future
-%
 % doit tourner sur Raspberry Pi 
 %   -> serveur léger -> lighttpd
 %   -> db -> sqlite
 %
 %   php
 %   ¿ interface C/C++ pour le signal ?
+%%
+%%%
+%%
+%
+% la partie Serveur Web + Base de données étant deployée sur la rasberrypi qui a peu de ressources, les technos utilisées dans cette partie doivent consommer peu de ressources d'où le choix de SQLite et Lighttpd
+%
+% Ensuite faut dire en quoi SQLITE et Lighttpd sont légers, par exemple SQLite fonctionne sans serveur mais juste en lecture écriture de fichiers, et chercher pour lighttpd des arguments aussi.
+%
+% Ensuite vu que le serveur ne fait que servir les données, il faut que toute la génération des vues se fasse du coté client d'où le choix d'AngularJS ...
+
+The Web server and the database are the links between the signal processing algorithms and the web application. For this project, they are deployed on the single-board computer \textit{Raspberry Pi}. Since it has low ressources, the technologies used for the server and the database have to consume few resources. That is why SQLite and Lighttpd were chosen respectively for the database and the server.
+
+\subsubsection{Database}
+
+    % en quoi sqlite est léger
+    %   http://www.sqlite.org/limits.html
+    %   http://sqlite.org/mostdeployed.html
+    % simplicité : il n'y a aucune manipulation à faire, le fichier sqlite est créé automatiquement à la volée, toute la base est stockée dans un fichier unique qu'il est facile d'échanger. 
+    % http://en.wikipedia.org/wiki/SQLite
+    \paragraph{SQLite Database}
+    
+    SQLite is a standalone relational database management system. In contrast to other database management systems, it is not implemented as a separate process that a client program running in another process accesses. Rather, it is part of the using program. SQLite is a popular choice as embedded database for local/client storage in application software such as web browsers. It is one of the most widely deployed database engine, as it is used today by several widespread browsers, operating systems, and embedded systems, among others. 
+    
+    
+    % Structure de la base
+    % description des tables etc..
+    \paragraph{Structure}
+    
+    This paragraph introduces the different tables of the database. It has been built to be easily reshaped depending the research results and to deal with the big data issue. % ce n'est pas vraiment big data...
+    
+    \begin{itemize} % ¿ list ou manage ?
+    \item Sensors identification: list all sensors connected to the system.
+    \item Locations: list all sensors locations.
+    \item Data types: list the different data types handled by the system
+    \item Sensors values: list the different sensors values recorded over time.
+    \item Devices types identification: list the different devices types identificated.
+    \item Devices status: list all devices status.
+    \end{itemize}
+    
+    % ajouter schéma conceptuel de la base.
+    
+\subsubsection{Server}
+
+    % le serveur ne fait que servir les données
+    With the chosen architecture, the Web server only sends the data to the client which deals with their processing.
+    
+    % en quoi lightpd est léger
+    % cf references de http://en.wikipedia.org/wiki/Lighttpd
+    \paragraph{Lighttpd Server}
+    Lighttpd is a secure, fast, compliant, and flexible web-server that has been optimized for high-performance environments. It has a very low memory footprint compared to other webservers and takes care of cpu-load.
+
+
+
+
+
+
