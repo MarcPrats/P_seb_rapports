@@ -4,4 +4,17 @@
 %
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Signal Processing Algorithm}
+\section{Sensors Data Processing}
+Our box needs information of Temperature, Electric consumption... All this data are easily retrieved from sensors already in the market. For this project two sensors had been chosen : the Electric consumption Chacon's Ecowatt 850 and the DIO TX-35 for temperature. Both those sensors send information at a rate of one samples every two seconds.\\
+This sensors use the IHM band at 433 MHz. The particularity of this band is that it is completely free of use. There is no communication rules, hence, each constructor, each sensor use a different way to communicate. Both sensors are using 2-FSK modulation : 2 frequency shift keying modulation. \\
+On this job, two people were assigned at first, they principal work was to understand and enhance code already produce in \textsc{C++} last year. Eventually, all the reception chain was rewritten for low consumption. Improvement is describe in the next section.
+\subsection{Burst Retrievement}
+Originally, signal with information was separated from noise on a per sample basis. It was a comparison between the lowest value of instantaneous power and each sample value. It is not a correct approach, because power should be calculated on multiple samples.\\
+To enhance this part, and reduce consumption, we started working on average power on 4096 samples. Result were enhance using this technique, also it reduce power consumption, because comparison is done only every 4096 samples.
+\subsection{Demodulation}
+Last year, modulation and demodulation were automated, it is not needed anymore. Because of the presence of only two sensors, which both are using 2-FSK modulation.
+\subsection{MAC information decoding}
+After the signal is demodulated, it is possible to know from which sensor the information is coming. Number of bits is usually used.
+From observations it is possible to reverse engineer the sensor coding solution. It is always different, and not logical. For instance, in the EcoWatt sensor, it was determine than a "1" bit was coded by \texttt{110} and a zero bit by \texttt{111}. Also how is coded the main information : consumption or temperature is not trivial. Linear regression are used to determine which bits are coding it, and how.
+\subsection{Database Sending}
+When all those operations are done, a timestamp with the unique ID and the data of the sensor is sended to the database.
