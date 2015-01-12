@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Web application                   
+%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Web Application}
+% On a l'architecture suivante :
+% Client Web <-> Serveur Web <-> Base de données
+
+This section introduce the design of the web application. It has been built using the following architecture:
+
+    \begin{figure}[!h] % montrer sur le schéma que le server ne fait que servir les données et que c'est le client qui doit en faire le traitement : http://fr.slideshare.net/scothis/aoa-mwa slide 19
+        \centering
+        \begin{tikzpicture}[node distance=1.5cm]
+    
+        %%%%% verticale 
+        % \node (client) [process, fill=green!10] {Client};
+        % \node (server) [process, below of=client, fill=red!10] {Server};
+        % \node (db) [process, below of=server, fill=blue!10] {Database};
+
+        % \draw [arrow] (client) -- (server);
+        % \draw [arrow] (server) -- (client);
+        % \draw [arrow] (server) -- (db);
+        % \draw [arrow] (db) -- (server);
+        
+        %%%% horizontale
+        \node (client) [process, fill=green!10] {Client};
+        \node (server) [process, right of=client, xshift=3cm, fill=red!10] {Server};
+        \node (db) [process, right of=server, xshift=3cm , fill=blue!10] {Database};
+
+        \draw [arrow] (client) -- (server);
+        \draw [arrow] (server) -- (client);
+        \draw [arrow] (server) -- (db);
+        \draw [arrow] (db) -- (server);
+        \end{tikzpicture}
+    \end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       Server              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{webapp/server.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       Client              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{webapp/client.tex}

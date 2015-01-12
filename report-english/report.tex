@@ -7,6 +7,7 @@
 \usepackage{layout}
 \usepackage{titlesec}
 \usepackage{lastpage}
+\usepackage{eurosym}
 \usepackage{caption}
 \usepackage{eurosym}
 \usepackage{amsmath,amssymb} % packages pour les environnements et symboles mathématiques
@@ -20,6 +21,13 @@
 %%\renewcommand{\thefigure}{\textbf{\arabic{figure}}}
 %%\renewcommand{\thesubfigure}{\textbf{(\alph{subfigure})}}
 
+%% créer les figure en latex
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+%%
 
 
 \topmargin=0pt
@@ -154,99 +162,43 @@ This project was divided in two main teams: one carrying of signal processing an
 
 % document
 
-\section{Introduction}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%        Context of the Project           %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{context/context.tex}
 
-The recent crisis and decrease in purchasing power are leading people to save in every way they can. Today, 80\% of households are willing to reduce their energy consumption, especially by decreasing their light and heating use. Moreover, people are aware of environmental concerns. Therefore, householders   having reliable and precise information about the electric consumption is crucial.
-\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%        Research                         %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{signal/research/research.tex}
 
-While the first part of this report will describe the general context of the project, the second one will give a
-description of all the algorithms that were implemented to identify the electric devices and the third one will
-describe the Website that has been created.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%        Signal Processing Algorithm      %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Signal Processing Algorithm}
+\input{signal/signalProcessingAlgorithm/signalProcessingAlgorithm.tex}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%        Web application                  %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{webapp/webapp.tex}
 
-
-\section{Context of the Project}
-
-Dire que nous pas chere vu que un seul sensor pour le courant
-
-Afin de mieux gerer conso electrique, interessant de disposer d element precis concernant les moments d utilisations ou non des differents appareils. Neanmoins, The only element which provides information about the electrical consumption is the load curve. The load curve represents => figure + expliquer ce qu est load curve => superposition de tous les appareils electriques.
-C est pour ca qu on fournit une box qui permet d identifier, de maniere non intrusive, les differents appareils., et les display de maniere friendly sur une interface web accessible depuis n importe quel support.
-
-\section{Identification of Electical Devices}
-
-2 approches principales, l'une basee sur etude macro cdc et l'autre analyse micro.
-
-\subsection{Macroscopic analysis of load curve}
-%Antoine
-
-\subsection{Microscopic analysis of load curve}
-%Xavier
-The sampling frequency used in the case of a microscopic analysis of the load curve is between 5 and 10k$Hz$. Such a frequency allows to access to the transient response of devices. That high sampling frequency enables to avoid a difficulty encountered in macroscopic analysis, which flows from the fact that an appliance is generally switched on while other appliance are already in use. 
-\\
-
-An important point to notice is that the transient response is linked with the physical role of the device. Studies have then been conducted to isolate characteristic parameters of the appliance from the transient response. Here is an example of a transient response :
-\\
-% Figure
-
-
-
-
-
-[1] address the problem of classification of transient signals which are modelled as a Smooth transition autoregressive model. Figure x shows some abrupt transitions on the transient signal, which are called breakpoints. Let $K$ denote the number of breakpoints, and $\underline{\tau} = [\tau_1,...,\tau_K]$ denote the sequence of the $K$ breakpoints. By convention, $[\tau_0;\tau_{K+1}]$ represents the observation interval of the signal. 
-\\
-
- Therefore, the signal is modelled as a linear combination of regression function $\{m_k\}_{k\in{1,K+1}}$.~$m_k$ is the regression model of the signal over the segment $[\tau_{k-1};\tau_{k}]$. Then, the signal is expressed as
-
-\begin{equation}
-\forall t\in [\tau_0;\tau_{K+1}],m(t)= \sum_{k=1}^{K+1}p_k(t)m_k(t)
-\end{equation}
-
-where $p_k(t)$ is the weight function of the $k^{th}$ regression model which can be expressed as follow
-\begin{equation}
-\forall k\in [1,K+1], p_k(t)= \pi_{\eta_{k-1}}(t-\tau_{k-1})-\pi_{\eta_{k}}(t-\tau_{k})
-\end{equation}
-
-$\pi_{\eta_{k}}$ is the transition function of the $k^{th}$ breakpoint, which depends on a vector of parameter $\eta_{k}$. In the model described in [1], $\pi_{\eta_{k}}$ is a sigmoide function, whose expression is 
-\begin{equation}
-\pi_{\eta_{k}} = \frac{1}{1+exp(\frac{t}{\lambda_k})}
-\end{equation}
-
-The only element in $\eta_{k}$ is then $\lambda_k$, which is a scale parameter. Let $\underline{\lambda}$ denote the concatenation of all the scale parameters $\underline{\lambda} = [\lambda_1,...,\lambda_K]$.
-\\
-
- Regression model are considered in [1] as polynomial 
-
-\begin{equation}
-m_k(t)= \sum_{q=0}^{Q_k} \beta^{(q)} _kt^q
-\end{equation}
-
-$\beta^{(q)} _k$ is the $q^{th}$ order regression coefficient of the $k^{th}$ regression model, and $Q_k$ is the order of $m_k(t)$. POUR YO : j'aimerais dire un truc style let beta denote the concatenation of ... et la meme chose pour Q (former des vecteurs concatenant les differentes valeurs de ces deux parametres) mais j'ai deja utilise cette tournure au moins une fois. Tu aurais des idees ? :D
-\\
-
-A common model for the observed signal is 
-
-
-\begin{equation}
-s(t)=m(t) + \epsilon (t)
-\end{equation}
-
-$\epsilon (t)$ is an additive white Gaussian noise whose variance is $\sigma^2$. The different parameters which have to be evaluated are then :
-\begin{equation}
-\theta=\{\underline{\lambda},\underline{\tau},\underline{\beta},\underline{Q},\sigma ^2,K\}
-\end{equation}
-\\
-
-The approach presented in [1] is a Bayesian one. The $a$ $posteriori$ probability density function of $\theta$ is obtained thanks to Bayes formula. The algorithm used to sample the distibution is a Reversible Jump Markov chain Monte Carlo (RJMCMC). The algorithm consisted in a main loop. Each time th algorithm
-
-
-\section{Signal Processing Algorithm}
-
-\section{Website}
-
-%Karim,Ben et Marc
-
-\section{Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%       Conclusion                        %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{conclusion/conclusion.tex}
+>>>>>>> 1a9ce4e0ad079359377db140c1d350771844658b
 
 \bibliography{Bibliography}
 
