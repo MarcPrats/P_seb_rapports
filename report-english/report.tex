@@ -15,7 +15,7 @@
 \usepackage{subfig}
 \usepackage{float}
 \usepackage{listings} % package pour lire 
-\usepackage{lscape} % Package pour les paysages
+\usepackage{lscape}	% Package pour les paysages
 \usepackage{setspace}
 %%\renewcommand{\figurename}{\vspace{-10pt}\textbf{\bsc{Figure}}}
 %%\renewcommand{\thefigure}{\textbf{\arabic{figure}}}
@@ -78,86 +78,6 @@
 \renewcommand{\@oddfoot}{\hfil \thepage\ of \pageref{LastPage} \hfil}
 \makeatother
 
-\begin{document}
-
-\maketitle
-
-\vspace{-20pt}
-\begin{center}
-Supervisors:\\
-\vspace{5pt}
-\begin{minipage}[c]{150pt}
-\begin{center}
-  \normalsize{Guillaume FERR\'{E}}\\
-  \small{\texttt{guillaume.ferre@ims-bordeaux.fr}}
-\end{center}
-\end{minipage}
-\hspace{20pt}
-\begin{minipage}[c]{150pt}
-\begin{center}
-  \normalsize{Jean-R\'{e}my FALLERI}\\
-  \small{\texttt{falleri@labri.fr}}
-\end{center}
-\end{minipage}
-\end{center}
-
-
-% abstract
-
-
-\vspace{10pt}
-
-\begin{abstract}
-\noindent The aim of this document is to introduce the Smart-Eco Box project. The smart-eco box called Smartee is a box able to connect to the user's sensors to help him to regulate his energy consumption. The most challenging element of our box is to display in a website the consumption of the devices and to be able to detect the type of device on or off.
-This project was divided in two main teams: one carrying of signal processing and the other one of the website conception. The signal processing dealt with the signals from its emission by the sensors to the analysis of the information transmitted as the devices detection and the website design is a user-friendly interface which aimed to foward the informations from the signal processing.
-
-\end{abstract}
-\vspace{10pt}
-
-
-% document
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                               %
-%%%%        Context of the Project           %%%%
-%                                               %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{context/context.tex}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                               %
-%%%%        Signal Processing Algorithm      %%%%
-%                                               %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{Signal Processing Algorithm}
-\input{signal/signalProcessingAlgorithm/signalProcessingAlgorithm.tex}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                               %
-%%%%        Research                         %%%%
-%                                               %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{signal/research/research.tex}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                               %
-%%%%        Web application                  %%%%
-%                                               %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{webapp/webapp.tex}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                               %
-%%%%       Conclusion                        %%%%
-%                                               %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{conclusion/conclusion.tex}
-
-\bibliography{Bibliography}
-
-\end{document}  
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     NOTES     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -202,3 +122,82 @@ This project was divided in two main teams: one carrying of signal processing an
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\vspace{-20pt}
+\begin{center}
+Supervisors:\\
+\vspace{5pt}
+\begin{minipage}[c]{150pt}
+\begin{center}
+  \normalsize{Guillaume FERR\'{E}}\\
+  \small{\texttt{guillaume.ferre@ims-bordeaux.fr}}
+\end{center}
+\end{minipage}
+\hspace{20pt}
+\begin{minipage}[c]{150pt}
+\begin{center}
+  \normalsize{Jean-R\'{e}my FALLERI}\\
+  \small{\texttt{falleri@labri.fr}}
+\end{center}
+\end{minipage}
+\end{center}
+
+
+% abstract
+
+
+\vspace{10pt}
+
+\begin{abstract}
+\noindent The aim of this document is to introduce the Smart-Eco Box project. The smart-eco box called Smartee is a box able to connect to the user's sensors to help him to regulate his energy consumption. The most challenging element of our box is to display in a website the consumption of the devices and to be able to detect the type of device on or off.
+This project was divided in two main teams: one carrying of signal processing and the other one of the website conception. The signal processing dealt with the signals from its emission by the sensors to the analysis of the information transmitted as the devices detection and the website design is a user-friendly interface which aimed to foward the informations from the signal processing.
+
+\end{abstract}
+\vspace{10pt}
+
+
+% document
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%        Context of the Project           %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{context/context.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%        Research                         %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{signal/research/research.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%        Signal Processing Algorithm      %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Signal Processing Algorithm}
+\input{signal/signalProcessingAlgorithm/signalProcessingAlgorithm.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%        Web application                  %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{webapp/webapp.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                               %
+%%%%       Conclusion                        %%%%
+%                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{conclusion/conclusion.tex}
+
+\bibliography{Bibliography}
+
+\end{document}  
