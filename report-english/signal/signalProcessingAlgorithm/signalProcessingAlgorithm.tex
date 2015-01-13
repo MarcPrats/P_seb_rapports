@@ -4,4 +4,24 @@
 %
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Signal Processing Algorithm}
+\section{Sensors Data Processing}
+Our box needs information on Temperature, Electric consumption, Water consumption. It is possible to use cheap wireless sensors available on the market. For this project two sensors had been chosen : the Electric consumption Chacon's Ecowatt 850 and the DIO TX-35 for temperature. They are using the Industrial Scientific and Medical band, at 433MHz and 868MHz. Those bands are free of use, there is no communication rules hence each constructor, each sensor use a different way to communicate. Our sensors are using 2-FSK (2 frequency shift keying) modulation and OOK modulation (On Off Keying). \\
+On this job, two people were assigned at first, they principal work was to understand and enhance code already produce in \textsc{C++} last year. Eventually, all the reception chain was rewritten with low consumption improvement. They are describe in this paragraphs.
+\subsection{Burst Retrievement}
+Originally, signal with information was separated from noise on a per sample basis (\ref{equsensorburst1}). Then it was compared to $3Power_{instant}$, which is a $99\%$ probability of signal presence.
+\vspace{-7pt}
+\begin{align} \label{equsensorburst1}
+Power_{instant} = arg\min_{i\in burst}(|samples(i)|^2)
+\end{align}
+But this is Theoretically false, Power must be calculated on multiple samples, and the threshold needs to be computed on a same length. Therefore, it was decided to work on N samples.
+\begin{align} \label{equsensorburst2}
+threshold = arg\min_{N \in signal}\left(\sum_{i\in N}|samples(i)|^2\right)
+\end{align}
+It is now theoretically true and consume less power because there is less treatment per samples. With this structure, saving previous buffer is needed to avoid lost of data. Ping-pong buffers are used, they avoid memory movement, thus reducing consumption even more.
+\subsection{Demodulation}
+Last year, modulation and demodulation were automated, they were completely rewritten, but still used because of there efficiency.
+\subsection{MAC information decoding}
+After the signal is demodulated, it is possible to know from which sensor the information is coming. Number of bits decoded is usually used.
+From observations it is possible to reverse engineer the sensor coding solution. It is always different, and not logical. For instance, in the EcoWatt sensor, it was determine that a "1" bit was coded by \texttt{110} and a zero bit by \texttt{111}. Also how is coded the main information of consumption or temperature is not trivial. Linear regression are used to determine which bits are coding it, and how.
+\subsection{Database Sending}
+When all those operations are done, a time stamp with a unique ID associated to the sensor and the data is sent to computer's science's database. They will be show on this webapp and processed by the research team.
