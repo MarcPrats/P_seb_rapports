@@ -5,7 +5,32 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Team Management}
-Team Management was an important part of this project. Because it gather people from two minor of the Telecommunication department, weekly schedules for both minors were different. Communication needed to be perfect throughout the project. Since the first day, tools were chosen to make it easier. Git for code sharing, publishing, reviewing, testing. Azendoo for discussion about aspects of the project. Team meeting every week to assure that no problem could raise due to communication at any step. Also each part of the project meet at multiple occasion with the client to check if our proposal was matching there demands. To develop as close as possible with clients, a testing version of the webapp was made available online.\\\\
+
+Team Management was an important part of this project. Because it gather people from two minor of the Telecommunication department, weekly schedules for both minors were different. Communication needed to be guaranteed throughout the project. Since the first day, tools were chosen to make it easier. Git for code sharing, publishing, reviewing, testing. Azendoo for discussion about aspects of the project. Team meeting every week to assure that no problem could raise due to communication at any step. Also each part of the project meet at multiple occasion with the client to check if our proposal was matching there expectations. To develop as close as possible with clients, a testing version of the webapp was made available online.\\
 
 \section{Conclusion}
-To sum up this project, it was a great opportunity to test our capacity to collaborate with people not working on same . On the signal processing part, there is steel work to do, the microscopic detection has just been started, while the macroscopic application can be developed with more levels and a bigger data base.
+
+To sum up this project, it was a great opportunity to test our capacity to collaborate with people not working on the same . On the signal processing part, there is still work to do, the microscopic detection has just been started, while the macroscopic application can be developed with more levels and a bigger data base.
+
+% partir du principe que l'on devait utiliser un système possèdant peu de ressource contrairement à ce qui a été fait l'année passée.
+%
+% db :
+%   pour le moment en local sur raspberry
+%   simple
+%   un SGBD léger
+%   tables pensées pour être maléables
+%   TODO :  rajouter table Utilisateur ¿ toujours pas fait ?
+%           ¿ script pour s'occuper des insert côté isnc ?
+%
+% server :
+%   pour le moment en local sur raspberry
+%   simple (ne fait qu'envoyer les données au client)
+%   léger
+%   TODO : ¿ rien vu qu'il ne fait rien ? 
+%
+% client :
+%   s'occupe du traitement des data
+%   dev avec maintenance et reprise de code par d'autres en tête
+%   TODO : quelques pages non finis mais commencés. Fix quelques bugs par çi par là
+
+The web application was design to run on a low ressources system contrary to what has been done last year. Indeed, the chosen database management system is light, easy to use and maintain. The database was design to be easily reshaped depending on the research results. The chosen web-server is light, compliant and simple since it only sends the data to the client dealing with the data processing. The Web interface was design to be easily maintainable and to enable is reusability. Nevertheless, there is still unfinished webpages and unfixed bugs. Finally, the implementation of the box's intelligence started further to the research and the opportunities proposed by the web interface.
