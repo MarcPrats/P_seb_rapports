@@ -8,7 +8,7 @@
 % On a l'architecture suivante :
 % Client Web <-> Serveur Web <-> Base de données
 
-This section introduce the design of the web application. It has been built using the following architecture:
+The main purpose of the computer science team was to develop a sustainable web application that could enable the user to foresee his energy consumption and handle it.  This section introduce the design of this app in wich a database, a server and a web client are the main components. It has been built using the following architecture:
 
     \begin{figure}[!h] % montrer sur le schéma que le server ne fait que servir les données et que c'est le client qui doit en faire le traitement : http://fr.slideshare.net/scothis/aoa-mwa slide 19
         \centering
@@ -35,6 +35,9 @@ This section introduce the design of the web application. It has been built usin
         \draw [arrow] (db) -- (server);
         \end{tikzpicture}
     \end{figure}
+% 
+% le but de l'appli : pouvoir gérer sa conso et sa facture
+% le but de l'equipe de dev : maintenable et reprise.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
