@@ -20,10 +20,10 @@ An important point is that the transient response is linked with the physical ro
 \end{figure}
 
 
-[2] address the problem of classification of transient signals which are modelled as a Smooth transition autoregressive model. Figure \ref{fig:transient_response} shows some abrupt transitions on the transient signal, which are called breakpoints. Let $K$ denote the number of breakpoints, and $\underline{\tau} = [\tau_1,...,\tau_K]$ denote the sequence of the $K$ breakpoints. By convention, $[\tau_0;\tau_{K+1}]$ represents the observation interval of the signal. 
+[2] address the problem of classification of transient signals which are modeled as a Smooth transition autoregressive model. Figure \ref{fig:transient_response} shows some abrupt transitions on the transient signal, which are called breakpoints. Let $K$ denote the number of breakpoints, and $\underline{\tau} = [\tau_1,...,\tau_K]$ denote the sequence of the $K$ breakpoints. By convention, $[\tau_0;\tau_{K+1}]$ represents the observation interval of the signal. 
 \\
 
- Therefore, the signal is modelled as a linear combination of regression functions $\{m_k\}_{k\in{1,K+1}}$.~$m_k$ is the regression model of the signal over the segment $[\tau_{k-1};\tau_{k}]$. Then, the signal is expressed as
+ Therefore, the signal is modeled as a linear combination of regression functions $\{m_k\}_{k\in{1,K+1}}$.~$m_k$ is the regression model of the signal over the segment $[\tau_{k-1};\tau_{k}]$. Then, the signal is expressed as
 
 \begin{equation}
 \forall t\in [\tau_0;\tau_{K+1}],m(t)= \sum_{k=1}^{K+1}p_k(t)m_k(t)
@@ -48,7 +48,7 @@ The only element in $\eta_{k}$ is then $\lambda_k$, which is a scale parameter. 
 m_k(t)= \sum_{q=0}^{Q_k} \beta^{(q)} _kt^q
 \end{equation}
 
-$\beta^{(q)} _k$ is the $q^{th}$ order regression coefficient of the $k^{th}$ regression model, and $Q_k$ is the order of $m_k(t)$. As it was the case for $\lambda$, $\beta$ regroups all the $\beta_k$ coefficients and $Q$ all the $Q_k$ coefficients.
+$\beta^{(q)} _k$ is the $q^{th}$ order regression coefficient of the $k^{th}$ regression model, and $Q_k$ is the order of $m_k(t)$. As it was the case for $\lambda$, $\beta$ regroups all the $\underline{\beta}_k$ coefficients and $Q$ all the $\underline{Q}_k$ coefficients.
 \\
 
 A common model for the observed signal is 
