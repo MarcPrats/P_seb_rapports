@@ -27,7 +27,7 @@ Several steps of consumption were defined: 100, 500 and 750W which mean small co
 
 Therefore, a second algorithm was developed that analyzes the signature load curve of each device. Every devices have a specific and unique load curve when they turn on. If a data base were created with these signatures, they could be used to determine which device has just turn on. Spotting when the devices turn off is simple as it corresponds to negative values of the differentiate function.
 
-An example will help make the description clearer. A heater power consumption load curve is basically a square repetition. This shape is due to the periodicity of the device. By detecting such a wave form in the load curve, then we can detect heater consumption and estimate the consumption of this device. We obtain the following result shown on the figure \ref{fig2}.
+An example will help make the description clearer. A heater power consumption load curve is basically a square repetition. This shape is due to the periodicity of the device. By detecting such a wave form in the load curve, then we can detect heater consumption and estimate the consumption of this device. These results are shown on the figure \ref{fig2}.
 
 
 Non periodical devices are processed in the same way, such as a dishwasher or a washing machine. But at the moment, only the dishwasher has been implemented.
