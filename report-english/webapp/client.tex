@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Client} % Interface Client
 
-This subsection introduce the design of the web interface, especially the structure and implementation of the main features.
+This subsection introduces the design of the web interface, especially the structure and the implementation of the main features.
 % expliquer l'utilité de l'interface
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -14,11 +14,11 @@ This subsection introduce the design of the web interface, especially the struct
     % n3-chart : n3-chart makes creating beautiful charts for AngularJS application easy and semantic. It is built on top of D3.js library.
     %
     % schéma du site
-    Since the server has to be light and only provide the data, this interface has been built with the framework AngularJS 1.3. Indeed, it enables efficient and easily maintainable client-side data processing. In addition, it is based on the Model-View-Controller architectural pattern (MVC) that allows easy maintenance of the code \textbf{(ajouter d'autres points positif)}. The curves have been built with n3-chart. It makes creating beautiful charts for AngularJS application easy and semantic and it is built on top of D3.js library.
+    Given that the server has to be light and has only to provide the data, this interface has been built with the framework AngularJS 1.3. Indeed, it enables efficient and easily maintainable client-side data processing. In addition, it is based on the Model-View-Controller architectural pattern (MVC) that allows easy maintenance of the code \textbf{(ajouter d'autres points positif)}. The curves have been built with the n3-chart library. It makes creating beautiful charts for AngularJS application easy and semantic and it is built on top of D3.js library.
     
-    The interface has four main pages reachable via the navigation bar: Homepage, Power Consumption page, Temperature page, Configuration page. Let us add the login page to access the web app and the page to set up and configure the box.
+    The interface has four main pages reachable via the navigation bar: Homepage, Power Consumption page, Temperature page and the Configuration page. Besides, the login page to access the web app and the page to set up and configure the box are designed.
      
-    \begin{figure}[!h]
+    \begin{figure}[!h] 
         \centering
         % pour changer la couleur
         %%  cf main.tex à \tikzstyle pour tout le document
@@ -53,7 +53,7 @@ The homepage includes four main blocks:%, - one for electric consumption and one
     \paragraph{Temperature}
     This block provides acces to two main information: inside and outside temperatures.
     \paragraph{Notifications}
-    This block allows the user to monitor changes of sensor statuses and registered types of device statuses. The system notifies the user when a status changes.
+    This block enables the user to monitor changes of sensor statuses and registered types of device statuses.The system notifies the user when a status changes.
     %State sensor
     %State registered devices
     \paragraph{List of Devices} % Liste des types d’appareils enregistrés
@@ -68,7 +68,7 @@ The homepage includes four main blocks:%, - one for electric consumption and one
     %   courbe de conso
     %   courbe de coût associé
     %   coût cumulé sur la période.
-    The user can access the evolution of his domestic power consumption thanks to three pieces of information: the power consumption curve, the matched cost curve and the accumulated cost.
+    The user can access the evolution of his domestic power consumption thanks to three elements of information: the power consumption curve, the matched cost curve and the accumulated cost.
     
     \paragraph{Estimated Electricity Bill}
     An estimated electricity bill can be viewed on this page. It is inspired by a real electricity bill and allows the user to know an estimate depending on his behaviour.
@@ -83,7 +83,7 @@ The homepage includes four main blocks:%, - one for electric consumption and one
     
     \paragraph{Setting up and Configuring} % configuration à l'allumage
     
-    When the user turns on his box for the first time, he needs to register by providing his data: name, email, password, city, and his EDF subscription. Then, the system automatically displays the different sensors detected thanks to the signal processing algorithm. The user has to set up the system by providing the name, location and type of each sensor. % (a color-based recognition could be used)
+    When the user turns on his box for the first time, he needs to register by providing his personal data: name, email, password, city, and his EDF subscription. Then, the system automatically displays the different sensors detected thanks to the signal processing algorithm. The user has to set up the system by providing the name, the location and the type of each sensor. % (a color-based recognition could be used)
     
     \paragraph{Current Usage} % pendant l'utilisation
     
@@ -91,4 +91,4 @@ The homepage includes four main blocks:%, - one for electric consumption and one
     The user can access his personal information and change it. This includes his name, password, email, city and his EDF subscription. Similarly, the profile appears on the homepage.
     
     \subparagraph{"My Sensors" Page:}
-    This page is used to list the different sensors. Each sensor can be renamed by the user, may also indicate a location specified by the user (eg children's room) and specifies a type of sensor that is recognized by a color code. The SNR (Signal-to-Noise Ratio) is also shown in the form of bars to show the state of a sensor (like mobile phone signal bars). He can edit the sensor information using the "Edit" button.
+    This page is used to list the different sensors. Each sensor can be renamed by the user, may indicate a location specified by the user (eg children's room) and also specifies a type of sensor that is recognized by a color code. Besides, the SNR (Signal-to-Noise Ratio) is indicated as the form of bars to show the state of a sensor (like mobile phone signal bars). Finally, the user can edit the sensor information using the "Edit" button.
