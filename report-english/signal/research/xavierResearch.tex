@@ -12,11 +12,16 @@ An important point is that the transient response is linked with the physical ro
 \\
 % Figure
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{figures/transient_response.png}
+\caption{Transient response}
+\label{fig:boxDescription}
+\end{figure}
 
 
 
-
-[1] address the problem of classification of transient signals which are modelled as a Smooth transition autoregressive model. Figure x shows some abrupt transitions on the transient signal, which are called breakpoints. Let $K$ denote the number of breakpoints, and $\underline{\tau} = [\tau_1,...,\tau_K]$ denote the sequence of the $K$ breakpoints. By convention, $[\tau_0;\tau_{K+1}]$ represents the observation interval of the signal. 
+[2] address the problem of classification of transient signals which are modelled as a Smooth transition autoregressive model. Figure x shows some abrupt transitions on the transient signal, which are called breakpoints. Let $K$ denote the number of breakpoints, and $\underline{\tau} = [\tau_1,...,\tau_K]$ denote the sequence of the $K$ breakpoints. By convention, $[\tau_0;\tau_{K+1}]$ represents the observation interval of the signal. 
 \\
 
  Therefore, the signal is modelled as a linear combination of regression functions $\{m_k\}_{k\in{1,K+1}}$.~$m_k$ is the regression model of the signal over the segment $[\tau_{k-1};\tau_{k}]$. Then, the signal is expressed as
@@ -38,7 +43,7 @@ $\pi_{\eta_{k}}$ is the transition function of the $k^{th}$ breakpoint, which de
 The only element in $\eta_{k}$ is then $\lambda_k$, which is a scale parameter. Let $\underline{\lambda}$ denote the concatenation of all the scale parameters $\underline{\lambda} = [\lambda_1,...,\lambda_K]$.
 \\
 
- Regression model are considered in [1] as polynomial 
+ Regression model are considered in [2] as polynomial 
 
 \begin{equation}
 m_k(t)= \sum_{q=0}^{Q_k} \beta^{(q)} _kt^q
@@ -61,7 +66,7 @@ $\epsilon (t)$ is an additive white Gaussian noise whose variance is $\sigma^2$.
 \\
 
 
-The approach presented in [1] is a Bayesian one. The $posterior$ probability density function of $\theta$ is obtained thanks to the Bayes formula. The algorithm used to sample the distibution is a Reversible Jump Markov chain Monte Carlo (RJMCMC). The algorithm consists in a main loop which is repeated a high number of time. The higher the number of iterations, the more accurate the algorithm. A new set of values is purposed for $\theta$ during each iteration. The different kind of movements that can be purposed concerning $\theta$ are :
+The approach presented in [2] is a Bayesian one. The $posterior$ probability density function of $\theta$ is obtained thanks to the Bayes formula. The algorithm used to sample the distibution is a Reversible Jump Markov chain Monte Carlo (RJMCMC). The algorithm consists in a main loop which is repeated a high number of time. The higher the number of iterations, the more accurate the algorithm. A new set of values is purposed for $\theta$ during each iteration. The different kind of movements that can be purposed concerning $\theta$ are :
 \begin{itemize}
 \item Birth of a transition
 \item Death of a transition
