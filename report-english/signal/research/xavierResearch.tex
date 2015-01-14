@@ -15,12 +15,12 @@ An important point is that the transient response is linked with the physical ro
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{figures/transient_response.png}
-\caption{Transient response}
+\caption{Transient response of a vacuum cleaner}
 \label{fig:transient_response}
 \end{figure}
 
 
-[2] address the problem of classification of transient signals which are modelled as a Smooth transition autoregressive model. Figure x shows some abrupt transitions on the transient signal, which are called breakpoints. Let $K$ denote the number of breakpoints, and $\underline{\tau} = [\tau_1,...,\tau_K]$ denote the sequence of the $K$ breakpoints. By convention, $[\tau_0;\tau_{K+1}]$ represents the observation interval of the signal. 
+[2] address the problem of classification of transient signals which are modelled as a Smooth transition autoregressive model. Figure \ref{fig:transient_response} shows some abrupt transitions on the transient signal, which are called breakpoints. Let $K$ denote the number of breakpoints, and $\underline{\tau} = [\tau_1,...,\tau_K]$ denote the sequence of the $K$ breakpoints. By convention, $[\tau_0;\tau_{K+1}]$ represents the observation interval of the signal. 
 \\
 
  Therefore, the signal is modelled as a linear combination of regression functions $\{m_k\}_{k\in{1,K+1}}$.~$m_k$ is the regression model of the signal over the segment $[\tau_{k-1};\tau_{k}]$. Then, the signal is expressed as
