@@ -8,11 +8,11 @@
 
 \subsection{Context}
 
-As global resources levels decrease, controlling domestic energy consumption has become crucial in the last few years. Everyear, energetic resources related bills increase. On average, French households paid 3210\euro\ \cite{context}. This represents an increase of more than 40\euro\ compared to 2012. New technologies appeared in the last decades to help reduce these bills, such as solar panels. Still, these solutions remain too expensive and not efficient enough during winter season.\\
+As global resources levels decrease, controlling domestic energy consumption has become crucial in the last few years. Everyear, energetic resources related bills increase. On average, French households paid 3210\euro\ in 2013 \cite{context}. This represents an increase of more than 40\euro\ compared to 2012. New technologies appeared in the last decades to help reduce these bills, such as solar panels. Still, these solutions remain too expensive and not efficient enough during winter season.\\
 
 %ref pour les 3210\euro : page 31 http://www.statistiques.developpement-durable.gouv.fr/fileadmin/documents/Produits_editoriaux/Publications/References/2014/references-bilan-energie2013-ed-2014-t.pdf
 
-In this context, the global objective of the project is to work on the design of a "box" called Smartee that can minimize the energy consumption of a building and maximize comfort. The Smart-Eco Box project started in a new growing market, known as Smart Energy Boxes. Although many sensors are already on the market, they are usually heterogeneous (i.e. non-standardized) which complicates their use in a system such as the one we would like to develop.\\
+In this context, the global objective of the project is to work on the design of a "box" called Smartee that can minimize the energy consumption of a building and maximize comfort. The Smart Eco-Box project started in a new growing market, known as Smart Energy Boxes. Although many sensors are already on the market, they are usually heterogeneous (i.e. non-standardized) which complicates their use in a system such as the one developed in Smartee.\\
 
 Therefore, the members of the project designed a wireless communication system including the box and its associated sensors. This system has the objective to provide an intelligent and efficient supervised management of energy consumption in a building through a web application. Besides, the box has to identify an electrical device in its vicinity.\\
 
@@ -29,7 +29,7 @@ Therefore, the members of the project designed a wireless communication system i
 %   comme ça a peu de ressources, si ça passe dessus peu importe les ressources dispo dans le future
 
 
-The \textbf{Smart Eco-Box} project is aimed toward helping people control their energy consumption and therefore reduce their energy bills. With this system, the user is able to foresee and handle what he consumes through his mobile device with the help of sensors he set up in his home. The main computer processing is gathered in a small and cheap computer called Raspberry Pi to respect the client's needs.
+The \textbf{Smart Eco-Box} project aims toward helping people control their energy consumption and therefore reduce their energy bills. With this system, the user is able to foresee and handle what he consumes through his mobile device with help of sensors he set up in his home. The main computer processing is gathered in a small and cheap computer called Raspberry Pi to respect the client's needs.
 
 %La gestion des équipements de la maison par l’intermédiaire de terminaux tels que tablettes ou téléphones permettra de simplifier la vie de l’utilisateur au quotidien.
 
@@ -40,6 +40,6 @@ The \textbf{Smart Eco-Box} project is aimed toward helping people control their 
 \label{fig:boxDescription}
 \end{figure}
 
-As seen in the figure \ref{fig:boxDescription}, the Raspberry Pi called "BOX" gathers the main algorithms that interact with the data received from the sensors. First, the sensors send the data they detected to the box. Then, an algorithm decodes this data and stores it in a database. Meanwhile, another algorithm detects which device is turned on using the previous data and stores it too in the database. Finally, a web application enables the user to manage all this information, in other words his energy consumption.
+As seen in the figure \ref{fig:boxDescription}, the Raspberry Pi called "BOX" gathers the main algorithms that interact with the data received from the sensors. First, the sensors send the detected data to the box. Then, an algorithm decodes this data and stores it in a database. Meanwhile, another algorithm detects which device is turned on using the previous data and stores it too in the database. Finally, a web application enables the user to manage all this information, in other words his energy consumption.
 
 %Once plugged in, the Smartee initialization detects sensors in the environment. Then a processing phase allows the box to work without any need for input by the client. This software allowed to detect bursts and initiated bursts processing received by a provided Universal Software Radio Peripheral (USRP). Finally data are stored in a database. The place's energy consumption is displayed on the website.

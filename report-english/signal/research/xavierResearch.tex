@@ -3,9 +3,9 @@
 %   Xavier                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Microscopic analysis of the load curve}
+\subsection{Microscopic Analysis of the Load Curve}
 %Xavier
-The sampling frequency used in the case of a microscopic analysis of the load curve is between 5 and 10k$Hz$. Such a frequency is required to access the transient responses of the devices. Using such a high sampling frequency is a way to avoid a difficulty encountered in macroscopic analysis coming from the fact that an appliance is generally switched on while other appliances are already in use. 
+The sampling frequency used in the case of a microscopic analysis of the load curve is between 5 and 10k$Hz$. Such a frequency is required to access the transient responses of the devices. Using such a high sampling frequency is a way to avoid a difficulty encountered in macroscopic analysis coming from the fact that an appliance is generally switched on while other appliances are already in use.
 \\
 
 An important point is that the transient response is linked with the physical role of the device. Studies have then been conducted to isolate characteristic parameters of the appliance from the transient response. Here is an example of a transient response :
@@ -20,7 +20,7 @@ An important point is that the transient response is linked with the physical ro
 \end{figure}
 
 
-\cite{research2} address the problem of classification of transient signals which are modeled as a Smooth transition autoregressive model. Figure \ref{fig:transient_response} shows some abrupt transitions on the transient signal, which are called breakpoints. Let $K$ denote the number of breakpoints, and $\underline{\tau} = [\tau_1,...,\tau_K]$ denote the sequence of the $K$ breakpoints. By convention, $[\tau_0;\tau_{K+1}]$ represents the observation interval of the signal. 
+\cite{research2} address the problem of classification of transient signals which are modeled as a Smooth transition autoregressive model. Figure \ref{fig:transient_response} shows some abrupt transitions on the transient signal, which are called breakpoints. Let $K$ denote the number of breakpoints, and $\underline{\tau} = [\tau_1,...,\tau_K]$ denote the sequence of the $K$ breakpoints. By convention, $[\tau_0;\tau_{K+1}]$ represents the observation interval of the signal.
 \\
 
  Therefore, the signal is modeled as a linear combination of regression functions $\{m_k\}_{k\in{1,K+1}}$.~$m_k$ is the regression model of the signal over the segment $[\tau_{k-1};\tau_{k}]$. Then, the signal is expressed as
@@ -34,7 +34,7 @@ where $p_k(t)$ is the weight function of the $k^{th}$ regression model which can
 \forall k\in [1,K+1], p_k(t)= \pi_{\eta_{k-1}}(t-\tau_{k-1})-\pi_{\eta_{k}}(t-\tau_{k})
 \end{equation}
 
-$\pi_{\eta_{k}}$ is the transition function of the $k^{th}$ breakpoint, which depends on a vector of parameter $\eta_{k}$. In the model described in [1], $\pi_{\eta_{k}}$ is a sigmoide function, whose expression is 
+$\pi_{\eta_{k}}$ is the transition function of the $k^{th}$ breakpoint, which depends on a vector of parameter $\eta_{k}$. In the model described in [1], $\pi_{\eta_{k}}$ is a sigmoide function, whose expression is
 \begin{equation}
 \pi_{\eta_{k}} = \frac{1}{1+exp(\frac{t}{\lambda_k})}
 \end{equation}
@@ -42,7 +42,7 @@ $\pi_{\eta_{k}}$ is the transition function of the $k^{th}$ breakpoint, which de
 The only element in $\eta_{k}$ is then $\lambda_k$, which is a scale parameter. Let $\underline{\lambda}$ denote the concatenation of all the scale parameters $\underline{\lambda} = [\lambda_1,...,\lambda_K]$.
 \\
 
- Regression model are considered in \cite{research2} as polynomial 
+ Regression model are considered in \cite{research2} as polynomial
 
 \begin{equation}
 m_k(t)= \sum_{q=0}^{Q_k} \beta^{(q)} _kt^q
@@ -51,7 +51,7 @@ m_k(t)= \sum_{q=0}^{Q_k} \beta^{(q)} _kt^q
 $\beta^{(q)} _k$ is the $q^{th}$ order regression coefficient of the $k^{th}$ regression model, and $Q_k$ is the order of $m_k(t)$. As it was the case for $\lambda$, $\beta$ regroups all the $\underline{\beta}_k$ coefficients and $Q$ all the $\underline{Q}_k$ coefficients.
 \\
 
-A common model for the observed signal is 
+A common model for the observed signal is
 
 
 \begin{equation}
@@ -73,8 +73,7 @@ The approach presented in \cite{research2} is a Bayesian one. The $posterior$ pr
 \item Fusion of two existings transitions
 \item Update of a transition
 \end{itemize}
-The movement is then accepted or rejected with a certain probability, which depends on Hasting-Green-Metropolis ratio. 
+The movement is then accepted or rejected with a certain probability, which depends on Hasting-Green-Metropolis ratio.
 \\
 
 The classification of electrical devices is then done thanks to $\theta$. Since that study was more a theoretical than a practical work, it has not been implemented yet on the box, but is functionnal for very basics signals.
-
