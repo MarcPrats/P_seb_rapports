@@ -1,0 +1,322 @@
+\documentclass{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{Darmstadt}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+
+\title[Your Short Title]{Présentation analyse macroscopique par spectrogramme}
+\author{Antoine Bouchain}
+\date{24 Novembre 2014}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+%\begin{frame}{Outline}
+%  \tableofcontents
+%\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Plan}
+
+\begin{itemize}
+  \item Détection d'un chauffage dans une courbe de charge générale.
+  \item Retour sur le seuillage.
+  \item Classification des appareils d'une maison.
+\end{itemize}
+
+\vskip 1cm
+
+\begin{block}{Note}
+Etude basée sur la thèse de M. El Guedri : "Détection, classification et estimation des usages dans les secteurs résidentiels et tertiaires."
+\end{block}
+
+\end{frame}
+
+\section{Détection d'un chauffage}
+
+\begin{frame}{Détection d'un chauffage}
+\end{frame}
+
+\subsection{Interprétation du Spectrogramme}
+
+\begin{frame}{Interprétation du Spectrogramme}
+\begin{itemize}
+	\item Le spectrogramme d'une courbe de charge présentant un chauffage laisse apparaitre des raies horizontales et équidistantes significatives, comme illustré figure 1 et 2.
+	\item Ces raies couvrent l'ensemble du spectre, ce qui n'est pas le cas pour les autres appareils.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.2]{./../../../fig/cdc_chauffage.jpg}
+\caption{Courbe de Charge du chauffage}
+\label{Figure1}
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.2]{./../../../fig/spectro_chauffage.jpg}
+\caption{Spectrogramme du chauffage}
+\label{Figure2}
+\end{center}
+\end{figure}
+
+\end{frame}
+
+\subsection{Seuillage de la carte temps-fréquence}
+
+\begin{frame}{Seuillage de la carte temps-fréquence}
+Considérons une portion de signal présentant 3 utilisations du chauffage : à 23h20, 1h et 2h30.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.3]{./../../../fig/cdc_spectro_chauffage.jpg}
+\caption{Courbe de charge et spectrogramme considérés}
+\label{Figure3}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+Chaque point $S(x,y)$ du spectrogramme de la figure 2 est seuillé, arbitrairement, de la manière suivante :
+\begin{itemize}
+	\item Si $S(x,y) \le 40 dB$ alors $S(x,y) = -10 dB$
+	\item Sinon $S(x,y) = 1 dB$
+\end{itemize}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.3]{./../../../fig/spectro_seuil.jpg}
+\caption{Spectrogramme du chauffage avec seuil à 40 dB}
+\label{Figure4}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection{Extraction des motifs fréquents}
+\begin{frame}{Extraction des motifs fréquents}
+L'idée ensuite est de réaliser une recherche de motifs rectangulaires.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/spectro_seuil_2.jpg}
+\caption{Spectrogramme avec motifs repérés}
+\label{Figure5}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+	\item Ces motifs seront recherchés à des fréquences spécifiques. 			\item Nous en choisissons 20 idéalement reparties entre 0.025 et 0.25.
+	\item Pour chaque fréquence $f_i, 1\le i \le 20$, on compte le nombre d'occurrence de 1 sur une fenêtre temporelle donnée (de longueur $N_f = 256$ points et de largeur 2).
+	\item Si ce nombre d'occurrence apparait sur toute toute la durée de la fenêtre, c'est que nous avons affaire à une raie qui pourrait être un chauffage.
+	\item On obtient alors une séries de rectangles qui caractérisent la présence ou non des raies spécifiques du chauffage.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/spectro_motifs.jpg}
+\caption{Spectrogramme avec motifs rectangulaires}
+\label{Figure6}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection{Détermination du domaine temporel}
+\begin{frame}{Détermination du domaine temporel}
+\begin{itemize}
+	\item Nous faisons alors une somme de chaque rectangle.
+	\item Si la somme est strictement inférieure au nombre de fréquences d'intérêt, 20, il n'y a pas de chauffage en marche.
+	\item Sinon nous supposons le chauffage en marche et affectons une valeur arbitraire de 750 W à la courbe estimée de consommation.
+	\item Nous effectuons également un recadrement temporel pour correspondre à la courbe de charge initiale de la figure 3.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/conso_chauffage.jpg}
+\caption{Estimation de la consommation du chauffage.}
+\label{Figure7}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection{Conclusion sur la détection du chauffage}
+\begin{frame}{Conclusion}
+\begin{itemize}
+	\item La méthode présentée nécessite de nombreux calculs pour un résultat non optimal. Nous voyons clairement que la courbe d'estimation du chauffage considère une utilisation plus longue de celui-ci, par rapport à la véritable consommation.
+	\item Nous allons essayer de nous intéresser maintenant à une méthode d'avantage basée sur l'aspect temporel en s'intéressant aux différentes valeurs d'oscillation de la courbe de charge.
+\end{itemize}
+\end{frame}
+
+\section{Retour sur le seuillage}
+\begin{frame}{Retour sur le seuillage}
+\end{frame}
+\subsection{Segmentation du spectrogramme}
+\begin{frame}{Principe}
+Dans la thèse de M. El Guedri, le seuillage du spectrogramme $\rho_y[k,\nu]$ est réalisé en 2 régions $L_{H_0}$, motifs spectraux du chauffage, et $L_{H_1}$, bruit de fond de la courbe de charge. Son détecteur de motifs s'appuie sur les variations du moment d'ordre 2 du signal dans le domaine-temps fréquence.
+
+On suppose 2 hypothèses :
+\begin{itemize}
+	\item \textit{$H_0$ : Signal aléatoire stationnaire, de puissance moyenne finie, éventuellement augmenté d'un signal déterministe, sa densité de probabilité marginale $p_0$ est connue mais de paramètres inconnus.}
+	\item \textit{$H_1$ : Signal stationnaire par morceaux de densité de probabilité inconnue.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Le problème peut se réécrire comme suit : \\
+Si $\rho_y[k,\nu] \ge \eta_{P_{fa}}[\nu]$ alors on retient $H_0$.
+Avec $\eta_{P_{fa}}[\nu]$ le seuil de détection fixé pour une fréquence donnée en fonction de la probabilité de fausse alarme choisie. \\
+On l'obtient par l'équation :
+
+\begin{equation}
+\int_{\eta_{P_{fa}}[\nu]}^\infty p_0(u)\, \mathrm du
+\label{eq1}
+\end{equation}
+
+Pour résoudre cette équation il faut tenir compte du modèle statistique du spectrogramme :
+\begin{itemize}
+	\item \textit{$H_0^*$ : Signal aléatoire stationnaire b, gaussien centré de variance $\sigma^2$, éventuellement augmenté d'un signal déterministe d.}
+	\item \textit{$H_1^*$ : rejet de $H_0^*$.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+La fenêtre d'analyse utilisée est rectangulaire.\\
+Alors d'après le théorème central limite, chaque coefficient du spectrogramme du signal $b$ suit une loi du $\chi_2$ à $l$ degrés de libertés.\\
+Par conséquent, chaque coefficient du spectrogramme suit une loi Gamma $\Gamma(l/2,\sigma^2/2,0).$ \\
+\vspace{0.25cm}
+Un signal déterministe vient s'additionner au bruit blanc gaussien observé, alors les coefficients de la TFCT suivent les lois du $\chi_2$ décentrés du même degré de liberté $l$ et dont les paramètres de décentrage sont définis par la relation suivante :
+
+\begin{equation}
+\delta = l \frac{\rho_d[k,\nu]}{\rho_b[k,\nu]}
+\label{eq2}
+\end{equation}
+où $\rho_d[k,\nu]$ et $\rho_b[k,\nu]$ sont respectivement les coefficients du spectrogramme du signal $d$ et $b$.
+
+Le spectrogramme est donc modélisé par un mélange de lois du $\chi_2$ centrés et décentrés. Les paramètres des lois décentrés sont fonction du SNR.
+\end{frame}
+
+\subsection{Algorithme de détection de non stationnarité du spectrograme}
+\begin{frame}{Algorithme}
+Le test de détection dans le plan temps-fréquence repose sur la connaissance de la moyenne des éléments de $L_{H0}[\nu]$ que l'on cherche. C'est pourquoi la construction des deux espaces d'observation $L_{H0}$ et $L_{H1}$ est réalisée itérativement. 
+\end{frame}
+
+\begin{frame}
+\begin{block}{Algorithme}
+Pour chaque fréquence, $\nu$, $L_{H0}[\nu]$ est initialisé par les $p$ \% coefficients de plus faible intensité, $p$ ici est de 80 \%. En effet, les amplitudes des coefficients ont de plus faibles intensités sous $H_0$ que sous $H_1$. \\
+A chaque itération, le seuil de détection $\eta_{P_{fa}}[\nu]$ est actualisé en fonction de la moyenne de l'ensemble des observations de $L_{H0}[\nu]$ à l'itération précédente et les deux espaces d'observations sont actualisés. \\
+Le critère d'arrêt est la stabilité des deux ensembles recherchés. On obtient alors une carte temps-fréquence où les éléments de $L_{H1}$ sont colorés et ceux de $L_{H0}$ sont à 0.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/algo_seuil.jpg}
+\caption{Schéma général de la détection du chauffage dans le domaine temps-fréquence.}
+\label{Figure8}
+\end{center}
+\end{figure}
+\end{frame}
+
+\section{Classification des appareils d'une maison}
+\begin{frame}{Classification des appareils d'une maison}
+\begin{itemize}
+	\item Chauffage
+	\item Chauffe-eau : la détection d'un chauffe eau-semble \textit{a priori} faisable, elle est basée sur un test de Page-Hinkey.
+	\item Gros appareil de maison
+	\item Appareils de cuisine
+\end{itemize}
+\end{frame}
+
+\subsection{Gros appareils d'une maison}
+\begin{frame}{Gros appareils d'une maison}
+Lave-linge : tambour, résistance de chauffage et pompe.\\
+\vspace{0.25cm}
+Le signal observé est un mélange de deux signaux élémentaires : des régulations rapides (de l'ordre d'une minute) et de faible amplitude ($\simeq$ 100 W) et des créneaux d'amplitude élevée ($\ge$ 2000 W) qui correspondent aux chauffage.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.25]{./../../../fig/lavelinge.jpg}
+\caption{Courbe de charge d'un lave-linge}
+\label{Figure9}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+Lave-vaisselle : résistance de chauffage et pompe.\\
+\vspace{0.25cm}
+Le signal observé est un mélange de deux familles de signaux : un signal de faible amplitude ($\simeq$ 200 W) qui correspond à la puissance appelée par le moteur et un signal de forte amplitude ($\ge$ 2000 W) qui correspond à la puissance appelée par la résistance du chauffage de l'eau.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/lavevaisselle.jpg}
+\caption{Courbe de charge d'un lave-vaisselle}
+\label{Figure10}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+Sèche-linge : résistance de chauffage, tambour et pompe.\\
+\vspace{0.25cm}
+Le signal observé est un mélange d'un créneau (A1 = 200W) et d'un créneau quasi-périodique (A2 = 100 W), qui correspondent respectivement à la résistance et au moteur. Sur la fin, on observe un créneau quasi-périodique, de faible amplitude, qui correspondrait à la puissance appelée par la pompe.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.35]{./../../../fig/sechelinge.jpg}
+\caption{Courbe de charge d'un sèche-linge}
+\label{Figure11}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection{Les appareils de cuisson}
+\begin{frame}{Les appareils de cuisson}
+La plaque de cuisson, elle, présente un caractère de décroissance exponentielle.\\
+Le four se caractérise par un simple créneau, puisque c'est une résistance.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/four.jpg}
+\caption{Courbe de charge d'une plaque de cuisson et d'un four}
+\label{Figure12}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+Le four micro-onde se caractérise par une résistance et un moteur. La durée de fonctionnement est proche de celle d'un chauffage. On a néanmoins, la présence d'un pic de puissance avant le créneau du chauffage et du moteur.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/microonde.jpg}
+\caption{Courbe de charge d'un micro-onde.}
+\label{Figure12}
+\end{center}
+\end{figure}
+\end{frame}
+
+\end{document}

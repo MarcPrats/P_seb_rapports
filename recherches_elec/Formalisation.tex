@@ -1,0 +1,418 @@
+\documentclass{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{Darmstadt}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+
+\title[Your Short Title]{Formalisation de la détection d'appareils électroménagers}
+\author{Antoine Bouchain}
+\date{23 Décembre 2014}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+%\begin{frame}{Outline}
+%  \tableofcontents
+%\end{frame}
+
+\begin{frame}{Plan}
+
+\begin{itemize}
+  \item Détection de fonctionnements périodiques On/Off
+  \begin{itemize}
+  	\item Détection du chauffage par taux d'accroissement.
+  	\item Détection du chauffage par spectrogramme.
+  \end{itemize}
+  \item Détection de fonctionnements apériodiques On/Off.
+  \begin{itemize}
+  	\item Détection du lave-linge.
+  	\item Détection du lave-vaisselle.
+  	\item Détection du sèche-linge. 
+  \end{itemize}
+  \item Détection de fonctionnements ponctuels On/Off.
+  \begin{itemize}
+  	\item Détection d'appareils de cuisson (plaque, four).
+  	\item Détection d'un micro-onde.
+  \end{itemize}
+\end{itemize}
+
+\begin{block}{Note}
+Etude basée sur la thèse de M. El Guedri : "Détection, classification et estimation des usages dans les secteurs résidentiels et tertiaires."
+\end{block}
+
+\end{frame}
+
+\section{Fonctionnement périodique On/Off}
+
+\begin{frame}{Fonctionnement périodique On/Off}
+\end{frame}
+
+\subsection{Détection par taux d'accroissement}
+
+\begin{frame}{Détection par taux d'accroissement}
+On définit le taux d'accroissement comme : $x_{ta}(t) = x(t+1) - x(t)$, $t \le N$, si $N$ est la longueur du signal considéré $x$.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.32]{./../../../fig/taux_acc.png}
+\caption{Courbe de charge et Taux d'accroissement}
+\label{Figure1}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+La figure précédente montre la présence de 3 utilisations de chauffage. On suppose qu'un chauffage a une consommation électrique d'au moins 750 W. De plus, un chauffage électrique a une courbe de charge en forme de créneaux, on va donc chercher à détecter ces créneaux. Le taux d'accroissement d'un créneau est une alternance de points positifs puis négatifs. Tous ces points sont de longueur variable.
+\end{frame}
+
+\begin{frame}{Algorithme}
+Etape 0 :\\
+Supposons qu'en $t = t_0$, la courbe de charge, $x$ dépasse 750 W. On va chercher sur les $c$ prochains points si $x(t), t_0 \le t \le t_0 + c $ devient inférieur à -750W.\\
+\vspace{0.5 cm}
+Etape 1:\\
+\begin{itemize}
+	\item S'il existe $t_1$ tel que $x(t_1) \le$ -750W alors on va chercher sur les $c$ points suivant si $x(t), t_1 \le t \le t_1 + c $ devient supérieur à 750W. On repart alors à l'étape 0 et ainsi de suite ...
+	\item Sinon l'algorithme s'arrête car il n'y a plus de créneau, le chauffage s'est arrêté.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Résultats de simulation}
+Nous avons également ajouté à l'algorithme de détection de chauffage par taux d'accroissement une simple détection d'appareil par franchissement de seuils fixés à 100 et 500W.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.32]{./../../../fig/detection.png}
+\caption{Message de détection des appareils}
+\label{Figure2}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.32]{./../../../fig/chauff_simule.png}
+\caption{Courbe de charge synthétique d'un chauffage}
+\label{Figure3}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.32]{./../../../fig/chauff_simule2.png}
+\caption{Estimation de la consommation d'un chauffage sur signal synthétique}
+\label{Figure4}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.32]{./../../../fig/conso_chauffage_2.png}
+\caption{Estimation de la consommation d'un chauffage}
+\label{Figure5}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection{Détection par spectrogramme}
+
+\begin{frame}{Détection par spectrogramme}
+\begin{itemize}
+	\item Le spectrogramme d'une courbe de charge présentant un chauffage laisse apparaitre des raies horizontales et équidistantes significatives, comme illustré figure 1 et 2.
+	\item Ces raies couvrent l'ensemble du spectre, ce qui n'est pas le cas pour les autres appareils.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.18]{./../../../fig/cdc_chauffage.jpg}
+\caption{Courbe de Charge du chauffage}
+\label{Figure6}
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.18]{./../../../fig/spectro_chauffage.jpg}
+\caption{Spectrogramme du chauffage}
+\label{Figure7}
+\end{center}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Seuillage de la carte temps-fréquence}
+Considérons une portion de signal présentant 3 utilisations du chauffage : à 23h20, 1h et 2h30.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.3]{./../../../fig/cdc_spectro_chauffage.jpg}
+\caption{Courbe de charge et spectrogramme considérés}
+\label{Figure8}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+On effectue un seuillage du spectrogramme $S(x,y)$ pour différencier le signal chauffage du bruit de fond. On suppose 2 hypothèses :
+\begin{itemize}
+	\item \textit{$H_0$ : Signal aléatoire stationnaire, de puissance moyenne finie, éventuellement augmenté d'un signal déterministe, sa densité de probabilité marginale $p_0$ est connue mais de paramètres inconnus. (Signal de bruit)}
+	\item \textit{$H_1$ : Signal stationnaire par morceaux de densité de probabilité inconnue. (Signal de chauffage)}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Le problème peut se réécrire comme suit : \\
+Si $\rho_y[k,\nu] \ge \eta_{P_{fa}}[\nu]$ alors on retient $H_0$.
+Avec $\eta_{P_{fa}}[\nu]$ le seuil de détection fixé pour une fréquence donnée en fonction de la probabilité de fausse alarme choisie. \\
+On l'obtient par l'équation :
+
+\begin{equation}
+\int_{\eta_{P_{fa}}[\nu]}^\infty p_0(u)\, \mathrm du
+\label{eq1}
+\end{equation}
+
+Pour résoudre cette équation il faut tenir compte du modèle statistique du spectrogramme :
+\begin{itemize}
+	\item \textit{$H_0^*$ : Signal aléatoire stationnaire b, gaussien centré de variance $\sigma^2$, éventuellement augmenté d'un signal déterministe d.}
+	\item \textit{$H_1^*$ : rejet de $H_0^*$.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+La fenêtre d'analyse utilisée est rectangulaire.\\
+Alors d'après le théorème central limite, chaque coefficient du spectrogramme du signal $b$ suit une loi du $\chi_2$ à $l$ degrés de libertés (DSP : $|$ $|^2$). Par conséquent, chaque coefficient du spectrogramme suit une loi Gamma $\Gamma(l/2,\sigma^2/2,0).$ \\
+\vspace{0.25cm}
+Un signal déterministe vient s'additionner au bruit blanc gaussien observé, alors les coefficients de la TFCT suivent les lois du $\chi_2$ décentrés du même degré de liberté $l$ et dont les paramètres de décentrage sont définis par la relation suivante :
+
+\begin{equation}
+\delta = l \frac{\rho_d[k,\nu]}{\rho_b[k,\nu]}
+\label{eq2}
+\end{equation}
+où $\rho_d[k,\nu]$ et $\rho_b[k,\nu]$ sont respectivement les coefficients du spectrogramme du signal $d$ et $b$.
+
+Le spectrogramme est donc modélisé par un mélange de lois du $\chi_2$ centrés et décentrés. Les paramètres des lois décentrés sont fonction du SNR.
+\end{frame}
+
+\begin{frame}{Algorithme de détection de non stationnarité du spectrograme}
+Le test de détection dans le plan temps-fréquence repose sur la connaissance de la moyenne des éléments de $L_{H0}[\nu]$ que l'on cherche. C'est pourquoi la construction des deux espaces d'observation $L_{H0}$ et $L_{H1}$ est réalisée itérativement. 
+\end{frame}
+
+\begin{frame}
+\begin{block}{Algorithme}
+Pour chaque fréquence, $\nu$, $L_{H0}[\nu]$ est initialisé par les $p$ \% coefficients de plus faible intensité, $p$ ici est de 80 \%. En effet, les amplitudes des coefficients ont de plus faibles intensités sous $H_0$ que sous $H_1$. \\
+A chaque itération, le seuil de détection $\eta_{P_{fa}}[\nu]$ est actualisé en fonction de la moyenne de l'ensemble des observations de $L_{H0}[\nu]$ à l'itération précédente et les deux espaces d'observations sont actualisés. \\
+Le critère d'arrêt est la stabilité des deux ensembles recherchés. On obtient alors une carte temps-fréquence où les éléments de $L_{H1}$ sont à 1 et ceux de $L_{H0}$ sont à -10.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.3]{./../../../fig/spectro_seuil.jpg}
+\caption{Spectrogramme du chauffage avec seuil}
+\label{Figure9}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Extraction des motifs fréquents}
+L'idée ensuite est de réaliser une recherche de motifs rectangulaires.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.35]{./../../../fig/spectro_seuil_2.jpg}
+\caption{Spectrogramme avec motifs repérés}
+\label{Figure10}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+	\item Ces motifs seront recherchés à des fréquences spécifiques. 			\item Nous en choisissons 20 idéalement reparties entre 0.025 et 0.25.
+	\item Pour chaque fréquence $f_i, 1\le i \le 20$, on compte le nombre d'occurrence de 1 sur une fenêtre temporelle donnée (de longueur $N_f = 256$ points et de largeur 2).
+	\item Si ce nombre d'occurrence apparait sur toute toute la durée de la fenêtre, c'est que nous avons affaire à une raie qui pourrait être un chauffage.
+	\item On obtient alors une séries de rectangles qui caractérisent la présence ou non des raies spécifiques du chauffage.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/spectro_motif.jpg}
+\caption{Spectrogramme avec motifs rectangulaires}
+\label{Figure11}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Détermination du domaine temporel}
+\begin{itemize}
+	\item Nous faisons alors une somme de chaque rectangle.
+	\item Si la somme est strictement inférieure au nombre de fréquences d'intérêt, 20, il n'y a pas de chauffage en marche.
+	\item Sinon nous supposons le chauffage en marche et affectons une valeur arbitraire de 750 W à la courbe estimée de consommation.
+	\item Nous effectuons également un recadrement temporel pour correspondre à la courbe de charge initiale de la figure 3.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/conso_chauffage.jpg}
+\caption{Estimation de la consommation du chauffage.}
+\label{Figure12}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection{Conclusion sur la détection du chauffage}
+\begin{frame}{Conclusion sur la détection du chauffage}
+\begin{itemize}
+	\item La méthode basée sur le taux d'accroissement est plus simple à mettre en œuvre et est plus précise en terme d'estimation de durée d'utilisation que celle basée sur le spectrogramme.
+	\item Dans les deux cas, nous ne pouvons détecter l'utilisation de deux chauffage en même temps.
+\end{itemize}
+\end{frame}
+
+\section{Fonctionnement apériodique On/Off}
+
+\begin{frame}{Fonctionnement apériodique On/Off}
+\end{frame}
+
+\subsection{Détection d'un lave-linge}
+\begin{frame}{Détection d'un lave-linge}
+Lave-linge : tambour, résistance de chauffage et pompe.\\
+\vspace{0.25cm}
+Le signal observé est un mélange de deux signaux élémentaires : des régulations rapides (de l'ordre d'une minute) et de faible amplitude ($\simeq$ 100 W) et des créneaux d'amplitude élevée ($\ge$ 2000 W) qui correspondent aux chauffage.
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.5]{./../../../fig/lavelinge.png}
+\caption{Courbe de charge d'un lave-linge}
+\label{Figure13}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection{Détection d'un lave-vaisselle}
+\begin{frame}{Détection d'un lave-vaisselle}
+Lave-vaisselle : résistance de chauffage et pompe.\\
+\vspace{0.25cm}
+Le signal observé est un mélange de deux familles de signaux : un signal de faible amplitude ($\simeq$ 200 W) qui correspond à la puissance appelée par le moteur et un signal de forte amplitude ($\ge$ 2000 W) qui correspond à la puissance appelée par la résistance du chauffage de l'eau.
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/lavevaisselle.png}
+\caption{Courbe de charge synthétique d'un lave-vaisselle}
+\label{Figure14}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/lavevaisselle_simule.png}
+\caption{Courbe de charge d'un lave-vaisselle}
+\label{Figure15}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+Nous réalisons de la même manière que pour le chauffage, la détection simultanée de créneau d'amplitude  200 et 2000W. Si nous détectons plus de 2 créneaux de chaque amplitude différente alors nous considérons qu'un lave-vaisselle est effectivement en marche.
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/lavevaisselle_simule2.png}
+\caption{Estimation de la consommation d'un lave-vaisselle sur un signal synthétique}
+\label{Figure16}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection{Détection d'un sèche-linge}
+\begin{frame}{Détection d'un sèche-linge}
+Sèche-linge : résistance de chauffage, tambour et pompe.\\
+\vspace{0.25cm}
+Le signal observé est un mélange d'un créneau (A1 = 200W) et d'un créneau quasi-périodique (A2 = 100 W), qui correspondent respectivement à la résistance et au moteur. Sur la fin, on observe un créneau quasi-périodique, de faible amplitude, qui correspondrait à la puissance appelée par la pompe.
+\end{frame}
+
+\begin{frame}
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.32]{./../../../fig/sechelinge.png}
+\caption{Courbe de charge d'un sèche-linge}
+\label{Figure17}
+\end{center}
+\end{figure}
+\end{frame}
+
+\section{Fonctionnement ponctuel On/Off}
+
+\begin{frame}{Fonctionnement ponctuel On/Off}
+\end{frame}
+
+\subsection{Appareils de cuisson}
+\begin{frame}{Appareils de cuisson : plaque et four}
+La plaque de cuisson, elle, présente un caractère de décroissance exponentielle.\\
+Le four se caractérise par un simple créneau, puisque c'est une résistance.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.32]{./../../../fig/four.jpg}
+\caption{Courbe de charge d'une plaque de cuisson et d'un four}
+\label{Figure18}
+\end{center}
+\end{figure}
+\end{frame}
+
+\subsection{Micro-onde}
+\begin{frame}{Micro-onde}
+Le four micro-onde se caractérise par une résistance et un moteur. La durée de fonctionnement est proche de celle d'un chauffage. On a néanmoins, la présence d'un pic de puissance avant le créneau du chauffage et du moteur.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.3]{./../../../fig/microonde.jpg}
+\caption{Courbe de charge d'un micro-onde.}
+\label{Figure19}
+\end{center}
+\end{figure}
+\end{frame}
+
+%\begin{frame}
+%Some text goes here
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[scale = 0.4]{./../../../fig/microonde.jpg}
+%\caption{Courbe de charge d'un micro-onde.}
+%\label{Figure1}
+%\end{center}
+%\end{figure}
+%\end{frame}
+
+\end{document}

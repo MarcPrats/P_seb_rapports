@@ -1,0 +1,122 @@
+\documentclass{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{Darmstadt}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+
+\title[Your Short Title]{Présentation analyse macroscopique par taux d'accroissement}
+\author{Antoine Bouchain}
+\date{15 Décembre 2014}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+%\begin{frame}{Outline}
+%  \tableofcontents
+%\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Plan}
+
+\begin{itemize}
+  \item Détection d'un chauffage dans une courbe de charge générale.
+  \item Avantages et inconvénients de la méthode.
+\end{itemize}
+
+\vskip 1cm
+
+\end{frame}
+
+\section{Détection d'un chauffage}
+
+\begin{frame}{Détection d'un chauffage}
+\end{frame}
+
+\subsection{Interprétation du taux d'accroissement}
+
+\begin{frame}{Interprétation du taux d'accroissement}
+On définit le taux d'accroissement comme : $x_{ta}(t) = x(t+1) - x(t)$, $t \le N$, si $N$ est la longueur du signal considéré $x$.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/taux_acc.png}
+\caption{Courbe de charge et Taux d'accroissement}
+\label{Figure1}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+La figure précédente montre la présence de 3 utilisations de chauffage. On suppose qu'un chauffage a une consommation électrique d'au moins 750 W. De plus, un chauffage électrique a une courbe de charge en forme de créneaux, on va donc chercher à détecter ces créneaux. Le taux d'accroissement d'un créneau est une alternance de points positifs puis négatifs. Tous ces points sont de longueur variable.
+\end{frame}
+
+\subsection{Algorithmes}
+\begin{frame}
+Etape 0 :\\
+Supposons qu'en $t = t_0$, la courbe de charge, $x$ dépasse 750 W. On va chercher sur les $c$ prochains points si $x(t), t_0 \le t \le t_0 + c $ devient inférieur à -750W.\\
+\vspace{0.5 cm}
+Etape 1:\\
+\begin{itemize}
+	\item S'il existe $t_1$ tel que $x(t_1) \le$ -750W alors on va chercher sur les $c$ points suivant si $x(t), t_1 \le t \le t_1 + c $ devient supérieur à 750W. On repart alors à l'étape 0 et ainsi de suite ...
+	\item Sinon l'algorithme s'arrête car il n'y a plus de créneau, le chauffage s'est arrêté.
+\end{itemize}
+\end{frame}
+
+\subsection{Résultats}
+\begin{frame}
+Nous avons également ajouté à l'algorithme de détection de chauffage par taux d'accroissement une simple détection d'appareil par franchissement de seuils fixés à 100 et 500W.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale = 0.4]{./../../../fig/detection.png}
+\caption{Message de détection des appareils}
+\label{Figure2}
+\end{center}
+\end{figure}
+\end{frame}
+
+\section{Avantages et Inconvénients}
+
+\begin{frame}{Avantages et Inconvénients}
+\end{frame}
+
+\begin{frame}
+\textbf{Avantages :} \\
+\begin{itemize}
+	\item Algorithme très peu gourmand en complexité calculatoire.
+\end{itemize}
+\textbf{Inconvénients :} \\
+\begin{itemize}
+	\item Dépendance de seuils (Puissance et $c$).
+	\item On ne peut pas détecter 2 utilisations de chauffage en même temps.
+\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%Some text goes here
+%\begin{figure}[!h]
+%\begin{center}
+%\includegraphics[scale = 0.4]{./../../../fig/microonde.jpg}
+%\caption{Courbe de charge d'un micro-onde.}
+%\label{Figure1}
+%\end{center}
+%\end{figure}
+%\end{frame}
+
+\end{document}
