@@ -19,7 +19,7 @@ This subsection introduces the design of the web interface, especially the struc
     % n3-chart : n3-chart makes creating beautiful charts for AngularJS application easy and semantic. It is built on top of D3.js library.
     %
     % schéma du site
-    Given that the server has to be light and has only to provide the data, this interface has been built with the framework AngularJS 1.3. Indeed, it enables efficient and easily maintainable client-side data processing. In addition, it is based on the Model-View-Controller architectural pattern (MVC) that allows easy maintenance of the code. The curves have been built with the n3-chart library. It makes creating beautiful charts for AngularJS application easy and semantic and it is built on top of D3.js library.
+    Given that the server has to be light and has only to provide the data, this interface has been built with the framework AngularJS 1.3. Indeed, it enables efficient and easily maintainable client-side data processing. In addition, it is based on the Model-View-Controller architectural pattern (MVC) that allows easy maintenance of the code. The curves have been built with the n3-chart library. It makes creating charts for AngularJS application easy and semantic and it is built on top of D3.js library.
     
     The interface has four main pages reachable via the navigation bar: Homepage, Power Consumption page, Temperature page and the Configuration page. Besides, the login page to access the web app and the page to set up and configure the box are designed.
      
@@ -54,11 +54,11 @@ The homepage provides quick access to the general state of the system.
 The main information related to the system's operation and an overview of the data sent by the sensors can be found on this page.
 The homepage includes four main blocks:%, - one for electric consumption and one for temperature, one for notifications and one for the states of registered devices - where the most important data will be indicated.
     \paragraph{Power Consumption} 
-    This block provides acces to two types of information: the instantaneous and accumulated power consumptions of the house. An icon related to the theme of meteorology indicates the evolution of these data. % TODO Button to switch and see the cost
+    This block provides access to two types of information: the instantaneous and accumulated power consumption. An icon related to the theme of meteorology indicates the evolution of these data. % TODO Button to switch and see the cost
     \paragraph{Temperature}
-    This block provides acces to two main information: inside and outside temperatures.
+    This block provides access to two main information: inside and outside temperatures.
     \paragraph{Notifications}
-    This block enables the user to monitor changes of sensor statuses and registered types of device statuses.The system notifies the user when a status changes.
+    This block enables the user to monitor changes of sensor statuses and registered types of device statuses. The system notifies the user when a status changes.
     %State sensor
     %State registered devices
     \paragraph{List of Devices} % Liste des types d’appareils enregistrés
@@ -76,7 +76,7 @@ The homepage includes four main blocks:%, - one for electric consumption and one
     The user can access the evolution of his domestic power consumption thanks to three elements of information: the power consumption curve, the matched cost curve and the accumulated cost.
     
     \paragraph{Estimated Electricity Bill}
-    An estimated electricity bill can be viewed on this page. It is inspired by a real electricity bill and allows the user to know an estimate depending on his behaviour.
+    An estimated electricity bill can be viewed on this page. It is inspired by a real electricity bill and allows the user to know an estimate depending on his behavior.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Temperature}
     % suivre evolution de la temperature au sein sa maison
@@ -88,12 +88,12 @@ The homepage includes four main blocks:%, - one for electric consumption and one
     
     \paragraph{Setting up and Configuring} % configuration à l'allumage
     
-    When the user turns on his box for the first time, he needs to register by providing his personal data: name, email, password, city, and his EDF subscription. Then, the system automatically displays the different sensors detected thanks to the signal processing algorithm. The user has to set up the system by providing the name, the location and the type of each sensor. % (a color-based recognition could be used)
+    When the user turns on his box for the first time, he needs to register by providing his personal data: name, email, password, city and his EDF subscription. Then, the system automatically displays the different sensors detected thanks to the signal processing algorithm. The user has to set up the system by providing the name, the location and the type of each sensor. % (a color-based recognition could be used)
     
     \paragraph{Current Usage} % pendant l'utilisation
     
     \subparagraph{"My Account" Page:} 
-    The user can access his personal information and change it. This includes his name, password, email, city and his EDF subscription. Similarly, the profile appears on the homepage.
+    The user can access his personal information and change them. This includes his name, password, email, city and his EDF subscription. Similarly, the profile appears on the homepage.
     
     \subparagraph{"My Sensors" Page:}
-    This page is used to list the different sensors. Each sensor can be renamed by the user, may indicate a location specified by the user (eg children's room) and also specifies a type of sensor that is recognized by a color code. Besides, the SNR (Signal-to-Noise Ratio) is indicated as the form of bars to show the state of a sensor (like mobile phone signal bars). Finally, the user can edit the sensor information using the "Edit" button.
+    This page is used to list the different sensors. Each sensor can be renamed by the user, may indicate a location specified by the user (e.g. children's room) and also specifies a type of sensor that is recognized by a color code. Besides, the SNR (Signal-to-Noise Ratio) is indicated as the form of bars to show the state of a sensor (like mobile phone signal bars). Finally, users can edit the sensor information using the "Edit" button.
