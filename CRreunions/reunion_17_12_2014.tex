@@ -1,0 +1,103 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{enumitem}
+%\frenchbsetup{StandardLists=true}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{moreverb}
+\usepackage{epsfig}
+\usepackage{textcomp}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{booktabs}
+
+     
+
+\setlength{\textwidth}{16cm} % Largeur du texte
+\setlength{\textheight}{24cm} % Hauteur du texte
+\setlength{\evensidemargin}{-0.2cm} % Taille des marges pour les pages paires
+\setlength{\oddsidemargin}{-0.2cm} % Taille des marges pour les pages impaires
+\setlength{\topmargin}{-1.5cm} % Taille de l'ent\^ete
+
+\title{PR307 Smart-EcoBox : \\ CR Réunion}
+\author{}
+\date{17 décembre 2014}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+Un point important a été rajouté au projet concernant la partie informatique. En effet, il est maintenant nécessaire de prendre en compte la notion de coût et de prévision de coût. Ainsi, l'interface client va être modifiée en conséquence. De plus, la page d'accueil devra être une vue instantanée de ce qui se passe en terme de notifications, consommation électrique, température et de l'état des types d'appareils. La notion de prévision de coût amène la construction d'une facture énergétique prévisionnelle.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Configuration à l'allumage}
+
+Lorsque l'utilisateur allumera son appareil pour la première fois, le système demandera à l'utilisateur de s'inscrire en fournissant ses données : nom, mail, mot de passe, ville où il habite et l'abonnement EDF auquel il est souscrit. Puis, le système affichera automatiquement les différents capteurs présents. L'utilisateur devra configurer le système en entrant le nom, la localisation et le type de chaque capteur (reconnaissance par couleur).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Accueil}
+
+La page d'accueil comportera des blocs dont deux principaux - un pour la consommation électrique et un pour la température où les données les plus importantes seront indiquées. Une image indiquant l'évolution de ces grandeurs sera présente. Elle sera liée au thème de la météorologie. D'autre part, le bloc des notifications aura une taille égale aux autres blocs d'informations.\\
+
+Devra être affiché :
+\begin{itemize}[label=$\bullet$]
+\item Bloc "\textbf{Température}" : les températures extérieure et intérieure.
+\item Bloc "\textbf{Consommation électrique}" : les consommations instantanée et cumulée. Un bouton devra permettre de basculer avec le coût.
+\item Bloc "\textbf{Notifications}".
+\item Bloc "\textbf{Liste des types d'appareils enregistrés}".
+\end{itemize}
+
+Il faut étudier la possibilité d'un système de "Drag \& Drop" pour permettre à l'utilisateur d'organiser les différents élèments présents comme il le souhaite.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Consommation électrique}
+
+La consommation électrique sera présente sous forme de compteur sur la page principale et sous forme de courbe sur un onglet annexe. Ses consommations en temps réel et cumulée seront affichées avec le coût en euros associé.
+
+Sur la page "Consommation électrique" sera affiché la courbe de consommation, une courbe correspondant au coût associé (éventuellement) ainsi que le coût cumulé sur le mois.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Température}
+
+Les températures intérieure et extérieure seront indiquées dans le bloc de température.
+
+Sur la page "Température", les courbes de température des différents capteurs seront représentées. L'utilisateur doit avoir le choix d'afficher toutes les courbes ou une en particulier.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Facture}
+
+Une facture de consommation électrique estimée pourra être prévisualisée sur une page annexe. Celle-ci sera inspirée d'une véritable facture EDF.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Configuration}
+
+\subsection{Mon Compte}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+L'utilisateur aura accès à ses informations personnelles et pourra ainsi les changer. Cela comprend son nom, son mot de passe, son mail, l'abonnement EDF auquel il est souscrit, sa ville. De même, son profil figurera sur la page d'accueil.
+
+\subsection{Mes Capteurs}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Une page sera attribuée pour lister les différents capteurs. Chaque capteur pourra être renommé par l'utilisateur, pourra indiquer une localisation indiquée également par l'utilisateur (ex : chambre enfant) et précisera un type de capteur qui sera reconnu par un code de couleur. Le SNR ( Signal-to-Noise Ratio ) sera également représenté sous la forme de barres pour montrer l'état d'un capteur. Il pourra s'il le souhaite modifier les informations des capteurs via un bouton "Éditer".
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Explication du Cloud}
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{cloud}
+    \caption{Architecture}
+    \label{fig:p2_1_vlc_vod}
+    \end{figure}
+
+Les Eco-Box des différents utilisateurs pourront envoyer leurs données et communiquer avec un groupe de serveurs externes appelé "Cloud". Le serveur principal de l'entreprise pourra se connecter à ce "Cloud" et pourra collecter les différentes données des Eco-Box ainsi que communiquer avec elles pour leur envoyer d'éventuelles mises à jour.
+
+
+\end{document}
