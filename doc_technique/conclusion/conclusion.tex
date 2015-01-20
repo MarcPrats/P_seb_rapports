@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Conclusion                   
+%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Team Management}
+
+Team Management was an important part of this project. Because it gathered people from two minors of the Telecommunication department and weekly schedules for both teams were different. Communication needed to be guaranteed throughout the project. Since the first day, tools were chosen to make it easier : the Git tool for code sharing, publishing, reviewing, testing, Azendoo website for discussion about the aspects of the project and team meeting every week to assure that no problem could raise due to communication at any step. Also, several meetings were scheduled with the client to check if our proposals were matching his expectations. Besides, in order to monitor the development, a testing version of the webapp was made available online.\\
+
+\section{Conclusion}
+
+To sum up, this project was a great opportunity to test team members capacity to collaborate with people of different skills. On the signal processing part, there is still work to do, the microscopic detection has just been started, while the macroscopic application can be developed with more levels and a bigger data base.
+
+% partir du principe que l'on devait utiliser un système possèdant peu de ressource contrairement à ce qui a été fait l'année passée.
+%
+% db :
+%   pour le moment en local sur raspberry
+%   simple
+%   un SGBD léger
+%   tables pensées pour être maléables
+%   TODO :  rajouter table Utilisateur ¿ toujours pas fait ?
+%           ¿ script pour s'occuper des insert côté isnc ?
+%
+% server :
+%   pour le moment en local sur raspberry
+%   simple (ne fait qu'envoyer les données au client)
+%   léger
+%   TODO : ¿ rien vu qu'il ne fait rien ? 
+%
+% client :
+%   s'occupe du traitement des data
+%   dev avec maintenance et reprise de code par d'autres en tête
+%   TODO : quelques pages non finis mais commencés. Fix quelques bugs par çi par là
+
+The web application was designed to run on a low resources system contrary to previous work on Smart-Eco-Box. Indeed, the chosen database management system is light, easy to use and maintain. The database was designed to be easily reshaped depending on the research results. The chosen web server is light, compliant and simple since it only sends the data to the web client dealing with the data processing. The web interface was designed to be easily maintainable and to enable its reusability. Nevertheless, there are still unfinished webpages and unfixed bugs. Finally, the implementation of the box's intelligence started further to the research and the opportunities proposed by the web interface.
+
+\begin{thebibliography}{10}
+ \bibitem{context}
+ Commissariat g\'en\'eral au d\'eveloppement durable - Service de l'observation et des statistiques, \emph{Bilan \'energ\'etique de la France pour 2013}, juillet 2014.
+ %http://www.statistiques.developpement-durable.gouv.fr/fileadmin/documents/Produits_editoriaux/Publications/References/2014/references-bilan-energie2013-ed-2014-t.pdf
+ 
+ \bibitem{research1}
+    Mabrouka El Guedri, \emph{Caract\'erisation aveugle de la courbe de charge \'electrique : D\'etection, classification et estimation des usages dans les secteurs r\'esidentiel et tertiaire.}, Ecole Doctorale "Sciences et Technologies de l'Information, des T\'el\'ecommunications et des Syst\`emes", 2009.
+ 
+ \bibitem{research2}
+    Matthieu Sanquer, \textit{D\'etection et caract\'erisation de signaux transitoires. Application \`a la surveillance de courbes de charge.}, Universit\'e de Grenoble, 2013.
+\end{thebibliography}
