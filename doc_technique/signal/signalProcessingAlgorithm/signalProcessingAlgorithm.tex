@@ -18,13 +18,28 @@ But this is theoretically false, Power must be calculated on multiple samples, a
 \begin{align} \label{equsensorburst2}
 threshold = arg\min_{N \in signal}\left(\sum_{i\in N}|samples(i)|^2\right)
 \end{align}
-It is now theoretically true and consume less power because there is less treatment per samples. With this structure, saving previous buffer is needed to avoid lost of data. Ping-pong buffers are used, they avoid memory movement, thus reducing consumption even more.
+It is now theoretically true and consume less power because there is less treatment per samples. With this structure, saving previous buffer is needed to avoid lost of data. Ping-pong buffers are used, they avoid memory movement, thus reducing consumption even more.\\
+
+This part is coded in the \texttt{drivers/} folder to manage the ping pong buffer. It need the user to specify for \texttt{replay\_samples} on which central frequency he is working \texttt{--freq} and which sampling frequency \texttt{--rate}. \texttt{Replay\_samples} is well commented to help you understand how it works.
+
+Searching for threshold, defining it, determining power of buffer, creating burst, is done in \\\texttt{burst\_creation/com\_detect}. The code is well commented.
+
+The biggest problem with this structure, is that in order we are :
+\begin{enumerate}
+\item Treating each buffer
+\item Detecting Burst information in it
+\item If there is treating it, in the detection of information process
+\end{enumerate}
+This means that while you are detecting if there is really a burst in your buffer, you start treating it. You need to finish treating this burst and buffer to be able to treat the next buffer arriving. Due to the important processing time of synchronisation, this method consume to much power. It is needed that burst treatment is not launch by burst detection, but directly from the driver main file, for example using father / son pid architecture. It will prevent overflow, and the bugs happening. Like it seems like you have 3 buffers arriving, when there is really just one.
+\subsection{Synchronisation}
+For now, the software is just trying to sync every sensor we know (TX35 and Ecowatt), and try to demodulate information, and apply reverse. Here the code is well commented too.\\
+The biggest problem, is that even if it is not a TX35, it will try to decode TX35... It will be stuck along the way to prevent seg fault, and bad data, but it take cpu time compute useless information.
 
 \subsection{Demodulation}
 Last year, modulation and demodulation were automated, they were completely rewritten, but still used because of there efficiency.
 
 \subsection{MAC information decoding}
-After the signal is demodulated, it is possible to know from which sensor the information is coming. Number of bits decoded is usually used.
+After the signal is demodulated, it is possible to know from which sensor the information is coming, with synchronisation trames
 From observations it is possible to reverse engineering the sensor coding solution. It is always different, and not logical. For instance, in the EcoWatt sensor, it was determine that a "1" bit was coded by \texttt{110} and a zero bit by \texttt{111}. Also how is coded the main information of consumption or temperature is not trivial. Linear regressions are used to determine which bits are coding it, and how.
 
 \subsection{Database Sending}
