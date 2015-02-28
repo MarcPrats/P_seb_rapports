@@ -8,6 +8,13 @@
 The box needs information on temperature, electric consumption, water consumption. It is possible to use cheap wireless sensors available on the market. For this project two sensors had been chosen : the electric consumption Chacon's Ecowatt 850 and the DIO TX-35 for temperature. They are using the Industrial Scientific and Medical band, at 433MHz and 868MHz. Those bands are free of use, there is no communication rules hence each constructor, each sensor use a different way to communicate. Sensors are using 2-FSK (2 frequency shift keying) modulation and OOK modulation (On Off Keying). \\
 On this job, the principal work was to understand and enhance code already produced in \textsc{C++} last year. Eventually, all the reception chain was rewritten with low consumption improvement. They are describe in those paragraphs.
 
+For managing all the above informations, three class exist in the C++ app located in \texttt{object\_def} folder.
+\begin{itemize}
+\item BurstDemod : Storage of bits, modulation and advanced modulation. -> Can be enhance, because now we know which sensor it is before demodulation.
+\item BurstInfos : Information on current processed burst : onl dealing with samples of the burst.
+\item RxInfos : Information on the existant listenning zone of the USRP / or else hardware : central frequency, sample rate, gain antenna...
+\end{itemize}
+
 \subsection{Burst Retrievement}
 Originally, signal with information was separated from noise on a per sample basis (\ref{equsensorburst1}). Then it was compared to $3Power_{instant}$, which is a $99\%$ probability of signal presence.
 \vspace{-7pt}
@@ -24,22 +31,25 @@ This part is coded in the \texttt{drivers/} folder to manage the ping pong buffe
 
 Searching for threshold, defining it, determining power of buffer, creating burst, is done in \\\texttt{burst\_creation/com\_detect}. The code is well commented.
 
-The biggest problem with this structure, is that in order we are :
+The biggest problem with this structure, is that we are doing in this order :
 \begin{enumerate}
-\item Treating each buffer
-\item Detecting Burst information in it
-\item If there is treating it, in the detection of information process
+\item Taking one buffer
+\item Searching for information in it
+\item If information is detected, processing burst in the buffer searching for information function.
 \end{enumerate}
-This means that while you are detecting if there is really a burst in your buffer, you start treating it. You need to finish treating this burst and buffer to be able to treat the next buffer arriving. Due to the important processing time of synchronisation, this method consume to much power. It is needed that burst treatment is not launch by burst detection, but directly from the driver main file, for example using father / son pid architecture. It will prevent overflow, and the bugs happening. Like it seems like you have 3 buffers arriving, when there is really just one.
+This means that while you are detecting if there is really a burst in your buffer, you start treating it in the same process. Every buffer that arrive while you are treating the burst are lost. Due to the important processing time of synchronisation, this method generate this loss of burst - probably not relevant buffer - it can be improve by forking the process. It is needed that burst treatment is not launch by burst detection, but directly from the driver main file, for example using father / son pid architecture (fork) or thread architecture. It will prevent overflown and reduice memory bug happening when treating a burst. Eg : It seems like you have 3 buffers arriving, when there is really just one.\\
+After that part, treatment are processed in \texttt{burst\_treatment/main\_process\_samples}. Function \texttt{burst\_treatment} is assigning each burst to a sensor by using is central frequency, and synchronization. 
 \subsection{Synchronisation}
 For now, the software is just trying to sync every sensor we know (TX35 and Ecowatt), and try to demodulate information, and apply reverse. Here the code is well commented too.\\
-The biggest problem, is that even if it is not a TX35, it will try to decode TX35... It will be stuck along the way to prevent seg fault, and bad data, but it take cpu time compute useless information.
+The biggest problem, is that even if it is not a TX35, it will try to decode TX35... It will be stuck along the way to prevent memory errors, but it takes cpu time to compute useless information.
 
 \subsection{Demodulation}
-Last year, modulation and demodulation were automated, they were completely rewritten, but still used because of there efficiency.
+This is done in function \texttt{process\_unit3} located in \texttt{burst\_treatment/u1\_burst\_demod/main\_u1.cpp}\\
+Last year, modulation and demodulation were automated, they were completely rewritten, but still used in this automated way because of there efficiency. In fact, we remove the part that detects the type of modulation (OOK, 2FSK, ...) only remains the decoding part. It is usefull because it does not need to know the Time symbol ($T_s$) for example.
 
 \subsection{MAC information decoding}
-After the signal is demodulated, it is possible to know from which sensor the information is coming, with synchronisation trames
+This is done in \texttt{burst\_treatment/u2\_burst\_reverse} there is one class per sensor, and they are all under the class "Sensors".\\
+After the signal is demodulated, it is possible to know from which sensor the information is coming, with synchronization.
 From observations it is possible to reverse engineering the sensor coding solution. It is always different, and not logical. For instance, in the EcoWatt sensor, it was determine that a "1" bit was coded by \texttt{110} and a zero bit by \texttt{111}. Also how is coded the main information of consumption or temperature is not trivial. Linear regressions are used to determine which bits are coding it, and how.
 
 \subsection{Database Sending}
