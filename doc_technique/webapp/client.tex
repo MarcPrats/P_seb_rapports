@@ -74,7 +74,6 @@ The homepage includes four main blocks:%, - one for electric consumption and one
     %   courbe de coût associé
     %   coût cumulé sur la période.
     The user can access the evolution of his domestic power consumption thanks to three elements of information: the power consumption curve, the matched cost curve and the accumulated cost.
-    
     \paragraph{Estimated Electricity Bill}
     An estimated electricity bill can be viewed on this page. It is inspired by a real electricity bill and allows the user to know an estimate depending on his behavior.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -97,3 +96,9 @@ The homepage includes four main blocks:%, - one for electric consumption and one
     
     \subparagraph{"My Sensors" Page:}
     This page is used to list the different sensors. Each sensor can be renamed by the user, may indicate a location specified by the user (e.g. children's room) and also specifies a type of sensor that is recognized by a color code. Besides, the SNR (Signal-to-Noise Ratio) is indicated as the form of bars to show the state of a sensor (like mobile phone signal bars). Finally, users can edit the sensor information using the "Edit" button.
+    \subsection{Complements}
+    All the sections detailed above are reachable thanks to the routing made with the framework AngularJS. Each route gives access to one section of the web app and transmits the data coming from the server.
+    For all this curves, the n3-charts library was used with the JSON data incoming. This library allows the user to set many options and to customize his curves.
+    Moreover, the Weather Yahoo API, made in JavaScript, was used for the temperature section.
+    Finally, the framework Bootstrap is used for the responsive design of the website.
+    All these technologies have a complete documentation online that can be used by a developer wanting to work on this project.
